@@ -1,0 +1,18 @@
+@charset "utf-8"; /* 맨위에 utf-8 인코딩 표시 필수 */
+/* 서브페이지용 css */
+
+/*공통외부 css 합치기*/
+@import url(./common.css);
+
+/* 서브타이틀 */
+h2.stit {
+    font-size: 34px;
+    font-family: "Noto Sans KR", sans-serif;
+    text-shadow: 2px 2px 2px #73a2f7;
+    color: #222;
+    text-align: center;
+}
+
+
+#cont .prlogo {width: 82px;}
+#cont .prlogo img {width: 100%;}
