@@ -47,7 +47,11 @@
 html,
 body,
 h1,
-h2 {
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     padding: 0;
 }
@@ -64,7 +68,8 @@ h2 {
 }
 
 /* 상단,하단만 중앙정렬 */
-#top, #info {
+#top,
+#info {
     text-align: center;
 }
 
@@ -84,7 +89,7 @@ h2 {
 /* 타이틀 */
 #top h1 {
     margin: 20px 0;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 40px;
     color: #fff;
     text-shadow: 2px 2px 3px #222;

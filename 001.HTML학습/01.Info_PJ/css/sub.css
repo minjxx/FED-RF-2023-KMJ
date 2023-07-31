@@ -13,6 +13,42 @@ h2.stit {
     text-align: center;
 }
 
+#cont .prlogo {
+    width: 82px;
+    margin-bottom: 8px;
+}
+#cont .prlogo img {
+    width: 100%;
+}
+#cont .atit {
+    margin-bottom: 30px;
+    font-size: 30px;
+    letter-spacing: -2px;
+}
+#cont .afig {margin: 0 0 50px;}
+#cont .afig img {
+    width: 100%;
+}
 
-#cont .prlogo {width: 82px;}
-#cont .prlogo img {width: 100%;}
+#cont .afig figcaption {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+#cont .videoBox {
+    position: relative;
+    margin: 50px 0;
+    padding-top: 56%;
+    overflow: hidden;
+}
+#cont .videoBox iframe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+}
+#cont .rpt {margin:50px 0 30px;}
