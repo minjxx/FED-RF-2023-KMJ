@@ -66,6 +66,10 @@
 
             .cimg {
                 width: 100%;/* w100p */
+                /* 
+                    100%의 기준은 싸고있는 블록박스의 content영역을 말함!
+                    (보더/패딩 제외 내부영역)
+                */
             }
 
             /* 1.상단영역 */
@@ -102,6 +106,7 @@
                 /* 글자데코 : 윗줄 물결모양 */
                 text-decoration: overline;
                 text-decoration-style: wavy;
+                transition: .3s;
             }
             /* 로고이미지 */
             #gnb img {
