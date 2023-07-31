@@ -44,14 +44,24 @@
                 5. 직계자식선택자 : 오른쪽 꺽쇠 (div > a)
                 6. 종속선택자 : 요소명#아이디명 / 요소명.클래스명 (div.mymy -> div인데 클래스가 mymy)
             */
+
+            /* 요소의 초기화 
+            -기존에 기본셋팅값중 마진/패딩 초기화 */
+            html, body, h1, h2 {
+                margin: 0;
+                padding: 0;
+            }
+
             /* 레이아웃 박스 공통 디자인 */
             .bx {
                 width: 800px;
-                border: 4px double #7b8fb1;
+                /* border: 4px double #7b8fb1; */
+                border: 3px dashed #7b8fb1;
                 margin: 0 auto;
                 padding: 20px;
                 box-sizing: border-box;
                 text-align: center;
+                border-radius: 15px;
             }
 
             .cimg {
@@ -65,10 +75,11 @@
 
             /* 타이틀 */
             #top h1 {
+                margin: 10px 0;
                 font-family: 'Orbit', sans-serif;
                 font-size: 40px;
-                color: #201761;
-                text-shadow: 2px 2px 3px #999;
+                color: #fff;
+                text-shadow: 2px 2px 3px #222;
                 /* 
                     text-shadow : 글자그림자
                     값 - x축 y축 블러(경계흐림) 색
