@@ -5,6 +5,4 @@
 @import url(./common.css);
 
 /* 메인페이지용 메인영역 */
-body {background-color: lightslategrey;}
-
-#cont {background-color: #fff;}
+#cont {background-color: aliceblue;}

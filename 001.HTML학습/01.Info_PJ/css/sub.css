@@ -12,7 +12,9 @@ h2.stit {
     color: #222;
     text-align: center;
 }
-
+#cont {
+    font-family: "Nanum Gothic", sans-serif;
+}
 #cont .prlogo {
     width: 82px;
     margin-bottom: 8px;
@@ -25,7 +27,10 @@ h2.stit {
     font-size: 26px;
     letter-spacing: -2px;
 }
-#cont .afig {margin: 0 0 50px; text-align: center;}
+#cont .afig {
+    margin: 0 0 50px;
+    text-align: center;
+}
 #cont .afig img {
     max-width: 100%;
 }
@@ -46,8 +51,10 @@ h2.stit {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
 }
-#cont .rpt {margin:50px 0 30px;}
+#cont .rpt {
+    margin: 50px 0 30px;
+}
