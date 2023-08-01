@@ -22,17 +22,16 @@ h2.stit {
 }
 #cont .atit {
     margin-bottom: 30px;
-    font-size: 30px;
+    font-size: 26px;
     letter-spacing: -2px;
 }
-#cont .afig {margin: 0 0 50px;}
+#cont .afig {margin: 0 0 50px; text-align: center;}
 #cont .afig img {
-    width: 100%;
+    max-width: 100%;
 }
 
 #cont .afig figcaption {
     margin-top: 10px;
-    text-align: center;
     font-size: 14px;
     color: #999;
 }

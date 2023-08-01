@@ -152,6 +152,6 @@ span.utxt {
 /* 종속선택자로 같은 이름의 클래스인데 다른 디자인으로 변경하여 셋팅하기 */
 b.utxt {
     text-decoration: underline;
-    text-decoration-style: wavy;
+    text-decoration-style: double;
     text-decoration-color: green;
 }
