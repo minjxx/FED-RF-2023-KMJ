@@ -112,6 +112,34 @@ h2.stit {
     line-height: 1.6;
 }
 
+/* 강조 em요소 디자인변경 */
+.acont p em {
+    /* 이탤릭해제 */
+    font-style: normal;
+    /* 글자색변경 */
+    color: #408cd3;
+    /* 글자 두껍게 */
+    font-weight: bold;
+    /* 글자그림자 */
+    text-shadow: 2px 1px 1px #26343d;
+}
+
+.acont p mark {
+    display: block;
+    width: 65%;
+    text-align: center;
+    background-color: #ebebeb;
+    margin: 20px auto;
+    padding: 30px 50px;
+    font-size: 20px;
+    font-weight: bold;
+    border-top: 2px solid #999;
+    border-bottom: 2px solid #999;
+    color: cornflowerblue;
+    font-family: "Orbit", sans-serif;
+    box-sizing: border-box;
+}
+
 /* 동영상박스 */
 .videoBox {
     position: relative;
@@ -129,6 +157,12 @@ h2.stit {
     height: 100%;
     border: none;
 }
+
+/* 인용블록 영역 */
+.bqbx {
+
+}
+/**/
 
 /* 기자 이름, 이메일 */
 .rpt {
@@ -150,11 +184,11 @@ h2.stit {
     border-radius: 50%;
     text-decoration: none;
     font-size: 15px;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: "Nanum Gothic", sans-serif;
     color: #000;
 }
 .alink a:hover {
     color: #fff;
     box-shadow: 0 0px 5px 4px #a8cfef;
-    transition: .2s;
+    transition: 0.2s;
 }
