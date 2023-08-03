@@ -321,6 +321,24 @@ h2.stit {
     margin-bottom: 25px;
 }
 
+/* 한줄 말줄임표시하기 공통처리 */
+.nbx li, .nbx dd, .nbx td {
+    white-space: nowrap; /* 1.줄바꿈방지 wh*/
+    overflow: hidden; /* 2.넘치는 컨텐츠 숨기기 oh */
+    text-overflow: ellipsis; /* 3. 넘치는 글자 말줄임표시 tv */
+    /* 
+        추가) 여러줄일때 말줄임은 아래와 같음
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 라인수;
+        -webkit-box-orient: vertical;
+
+        단, 박스 높이값을 글자가 보일만큼 조절함
+        -> white-space : nowrap; 없음!!!!
+    */
+}
+
 /* 주요뉴스 ul */
 .cnews ul li::before {
     content: '🔎';
@@ -334,7 +352,22 @@ h2.stit {
     [ css 가상요소 : before, after ]
     - 모든 요소는 맨앞과 맨뒤에 가상요소를 사용할 수 있다
     - 맨앞은 before, 맨뒤는 after
+    - 필수속성 : content
+    - 이미지는 url() 사용!
 */
+
+/* 주요뉴스 li별 글자색 바꾸기 */
+.cnews li:first-child a {
+    color: red;
+}
+.cnews li:nth-child(2) a {
+    color: blue;
+}
+.cnews li:last-child a {
+    color: violet;
+}
+
+/* 분야별 뉴스 */
 .snews dt {
     border: 3px dashed #fff;
     background-color: #5bb0cd;
@@ -353,3 +386,31 @@ h2.stit {
 .snews dd::before {
     content: '🎈';
 }
+
+/* 분야별뉴스 dt별 글자색, 배경색변경하기 */
+.snews dt:first-of-type {
+    color: red;
+    background-color: lightgoldenrodyellow;
+    border-color: darkgrey;   
+}
+.snews dt:nth-of-type(2) {
+    color: blueviolet;
+    background-color: lightgoldenrodyellow;   
+}
+.snews dt:last-of-type {
+    color: green;
+    background-color: lightgoldenrodyellow;   
+}
+/* 
+[ 자식요소 선택 가상클래스 : 자식요소 종류가 같아야함! ]
+    요소:first-child -> 첫번째 자식요소
+    요소:nth-child(n) -> n번째 자식요소
+    요소:last-child -> 마지막째 자식요소
+
+[ 여러종류가 섞여 있을 경우 형제 선택하기 ]
+    요소:first-of-type -> 같은 요소 중 첫번째
+    요소:nth-of-type(n) -> 같은 요소 중 n번째
+    요소:last-of-type -> 같은 요소 중 마지막째
+
+    (단, n은 1부터)
+*/
