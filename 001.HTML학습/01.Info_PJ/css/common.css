@@ -53,10 +53,13 @@ h4,
 h5,
 h6,
 figure,
-blockquote {
+blockquote,ul,ol,dl,dd {
     margin: 0;
     padding: 0;
 }
+
+/* 리스트 블릿, 숫자 없애기 */
+ul,ol {list-style: none;}
 
 /* 레이아웃 박스 공통 디자인 */
 .bx {

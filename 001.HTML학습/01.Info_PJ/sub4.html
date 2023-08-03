@@ -178,15 +178,130 @@
             -->
 
             <!-- 주요뉴스 : ul -->
-            <article class="cnews">
+            <article class="cnews nbx">
                 <h3>주요뉴스</h3>
+                <!-- <ul style="list-style-type: square;"> -->
                 <ul>
                     <li><a href="https://n.news.naver.com/mnews/article/031/0000762445?type=journalists" target="_blank">"제발 좀 놔두세요"...편의점 업계의 외마디</a></li>
                     <li><a href="https://n.news.naver.com/mnews/article/031/0000762326?type=journalists" target="_blank">"다들 물려줄 3억원 있잖아요"…결혼자금 감세에 돈 없는 부모는 눈물</a></li>
                     <li><a href="https://n.news.naver.com/mnews/article/031/0000762360?type=journalists" target="_blank">오세훈 서울시장 "시장, 다시 하고 싶다"</a></li>
                 </ul>
             </article>
-            
+
+            <!-- 랭킹뉴스 : ol -->
+            <article class="rnews nbx">
+                <h3>랭킹뉴스</h3>
+                <!-- <ol style="list-style-type: upper-roman;" start="3" reversed> -->
+                <ol>
+                    <li><a href="https://n.news.naver.com/mnews/ranking/article/003/0012010693?ntype=RANKING" target="_blank">1. "멀쩡히 걸어 나왔는데"…물놀이 후 '마른익사' 날벼락</a></li>
+                    <li><a href="https://n.news.naver.com/mnews/ranking/article/003/0012010453?ntype=RANKING" target="_blank">2. 뉴진스 공연 중 아이폰 '찰칵' vs BTS는 '온리 갤럭시'…한지붕 식구끼리 왜이래?</a></li>
+                    <li><a href="https://n.news.naver.com/mnews/ranking/article/003/0012010649?ntype=RANKING" target="_blank">3. 트뤼도 캐나다 총리 부부, 18년 만에 결별(종합)</a></li>
+                </ol>
+            </article>
+
+            <!-- 
+                 [ 용어정의리스트 : dl ]
+               
+                dl > dt + dd
+                ___________________
+
+                dl : 용어리스트
+                (defines the description list)
+                dt : 용어정의
+                (defines the term)
+                dd : 용어설명
+                (description each term)
+                _____________________
+                주의 - dl은 반드시 자식요소로 dt와 dd를
+                한번이상 사용해야한다!
+                또주의 - dt와 dd는 형제다! dt>dd 아니다!!!
+             -->
+            <!-- 분야별 뉴스 : dl -->
+            <article class="snews nbx">
+                <h3>분야별 뉴스</h3>
+                <dl>
+                    <dt>경제</dt>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/001/0014107084?sid=101" target="_blank">LH 논란에…서울시, SH '무량판 아파트' 9년 전까지 전수조사</a>
+                    </dd>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/366/0000921690?sid=101" target="_blank">IBK證 “美 신용등급 강등에 따른 증시 조정 단기적일 것”</a>
+                    </dd>
+
+                    <dt>사회</dt>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/277/0005295220?sid=102  " target="_blank">서울3호선 연장·경기남부광역철도 사업 본격화…경기도, 3일 용역</a>
+                    </dd>
+                    <dd>
+                        <a href="https://n.news.naver.com/mnews/article/018/0005542565?sid=102" target="_blank">조희연 "교장에게 수업방해 학생 등교정지 권한 부여해야"</a>
+                    </dd>
+
+                    <dt>TV/연예</dt>
+                    <dd>
+                        <a href="https://entertain.naver.com/ranking/read?oid=076&aid=0004039619" target="_blank">임지연, '한예종 전도연' 시절 공개..연진이로 송혜교→김태희 '언니 컬렉터' 등극 ('유퀴즈')[종합]</a>
+                    </dd>
+                    <dd>
+                        <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">성시경, 김종국에게 맞을 뻔한 과거 폭로 "지금은 유재석 됐더라" (옥문아들)[종합]</a>
+                    </dd>
+                </dl>
+            </article>
+
+            <!-- 
+                [ 테이블 요소 : table ]
+                table > tbody > tr > td
+
+                -> tbody는 안써도 브라우저가 그려준다!
+                -> 직계자식으로 선택할 경우
+                table > tr 로 선택하면 적용되지 않는
+                이유가 바로 이것이다!!!(주의!)
+                ___________________
+
+                table : 테이블 박스 부모요소
+                tr : 테이블 행요소(table row)
+                td : 테이블 데이터요소(table data)
+            -->
+
+            <!-- 사진뉴스 : table -->
+            <article class="pnews nbx">
+                <h3>사진뉴스</h3>
+                <!-- 3행3열 구성 테이블 -->
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">새만금잼버리, '곰팡이 달걀'에 '바가지' 논란까지…조직위 "먹은 사람 없다"</a>
+                        </td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">
+                                <img src="./images/pnews1.jpg" alt="사진뉴스1">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">새만금잼버리, '곰팡이 달걀'에 '바가지' 논란까지…조직위 "먹은 사람 없다"</a>
+                        </td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">
+                                <img src="./images/pnews2.jpg" alt="사진뉴스2">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">새만금잼버리, '곰팡이 달걀'에 '바가지' 논란까지…조직위 "먹은 사람 없다"</a>
+                        </td>
+                        <td>
+                            <a href="https://entertain.naver.com/ranking/read?oid=311&aid=0001623391" target="_blank">
+                                <img src="./images/pnews3.png" alt="사진뉴스3">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+
         </main>
         <!-- 3. 하단영역 : 회사정보 -->
         <footer id="info" class="bx">

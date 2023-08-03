@@ -220,12 +220,136 @@ h2.stit {
 
 .desc {
     padding: 25px 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-top: 2px dashed #ccc;
     border-bottom: 2px dashed #ccc;
 }
-.desc h5 {margin-bottom: 20px;}
+.desc h5 {
+    margin-bottom: 20px;
+}
 .desc > div {
     font-size: 16px;
     line-height: 1.8;
+}
+
+/* 오늘의 작품&느낌 */
+.work {
+    text-align: center;
+    /* 배경색 */
+    /* background-color: lightpink; */
+
+    /* 그라데이션 -> 이미지로! bgi */
+    background-image:linear-gradient(45deg, #91ff9f, #ddb9ff, #7adaff);
+    /* 
+    [ 선형 그라데이션 : linear-gradient ]
+    background-image: linear-gradient(방향, 색1, 색2);
+    background-image: linear-gradient(방향, 색1 몇%, 색2 몇%);
+    background-image: linear-gradient(각도, 색1 몇%, 색2 몇%);
+    -옵션
+        1.방향 : to top, to bottom, to left, to :right
+        2.각도 : 각도deg
+        3.콤마로 나열된 색상에 %를 뒤에 쓰면 비율 조정가능!
+
+    */
+
+    /* border: 50px dotted #09a1ff;
+    padding: 50px; */
+
+    /* 
+        배경옵션 추가!!! 
+        background-clip : 배경이 적용되는 범위설정
+        1. border-box -> 보더까지 적용(기본값)
+        2. padding-box -> 패딩까지 적용
+        3. cotent-box -> 내용 영역만 적용(패딩, 보더빠짐)
+    
+    */
+    background-clip: content-box;box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 작품 타이틀 */
+.work h3 {
+    font-family: "Dongle", sans-serif;
+    font-weight: normal;
+    font-size: 45px;
+    color: #333;
+    padding: 30px 0 15px;
+}
+.work img {
+    border: 15px ridge goldenrod; /* ridge액자틀 모양 */
+}
+/* 작품명 */
+.work figcaption {
+    font-size: 20px;
+    font-family: 'Orbit', sans-serif;
+    font-weight: bold;
+    padding: 10px 0 25px;
+}
+/* 작품명 인용구*/
+.work figcaption cite {
+    font-style: normal;
+    color: darkorchid;
+}
+
+/* 뉴스 파트 공통 class */
+.nbx {
+    border-top: 2px dashed #ccc;
+    margin: 20px 0;
+    padding: 20px 0;
+}
+
+/* 뉴스 파트 공통 a요소 */
+.nbx a{
+    font-size: 17px;
+    line-height: 2.5;
+    text-decoration: none;
+    color: #222;
+}
+
+/* 공통 a마우스 오버 */
+.nbx a:hover{
+    color: yellowgreen;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* 뉴스 타이틀 공통 */
+.nbx h3{
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 22px;
+    background-image: linear-gradient(to right, lightblue, transparent);
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+/* 주요뉴스 ul */
+.cnews ul li::before {
+    content: '🔎';
+    margin-right: 8px;
+}
+.cnews ul li::after {
+    content: '📢';
+    margin-left: 8px;
+}
+/* 
+    [ css 가상요소 : before, after ]
+    - 모든 요소는 맨앞과 맨뒤에 가상요소를 사용할 수 있다
+    - 맨앞은 before, 맨뒤는 after
+*/
+.snews dt {
+    border: 3px dashed #fff;
+    background-color: #5bb0cd;
+    display: inline-block;
+    font-family: 'Orbit', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50px;
+    padding: 5px 18px 8px 18px;
+    margin-top: 20px; 
+    color: #fff;
+    box-shadow: 0 0 6px 2px rgba(0,0,0,.2);
+}
+
+/* dd앞에 가상요소로 블릿넣기 */
+.snews dd::before {
+    content: '🎈';
 }
