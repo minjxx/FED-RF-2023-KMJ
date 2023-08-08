@@ -83,6 +83,33 @@
 
                 4. 앱솔루트 끼리는 서로 겹친다!
 
+                5. 앱솔루트는 자식요소는 부모 박스가 overflow:hidden으로 셋팅되어있을때 부모자격이 있어야만 숨겨진다!
+
+                6. 위치설정값과 같은 방향의 마진만 적용됨!
+                예컨데 bottom으로 위치이동하였으면 margin-bottom만 적용된다!
+                (위치이동값이 없는 앱솔루트의 마진은?
+                기본적으로 top,left를 기준하므로 같은방향의 마진만 적용된다!)
+
+                7. 위치이동값의 초기화는?
+                top: 50px -> 초기화는? -> top:auto
+                초기화는 언제하나?
+                기존에 셋팅된 위치이동값을 다른 기준으로 변경할 경우 초기화를 사용한다!
+                예) top:30px
+                -> bottom기준으로 변경할 경우
+                top:auto;
+                bottom:50px;
+
+                8. 위치이동값을 전부 다 쓰는 경우도 있다!
+                -> 부모박스를 가득채우거나 일정위치를 잡고
+                크기가 유동적이어야 할때 사용함!
+
+                예) 부모박스를 채우는 앱솔루트는?
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                (단, width, height값을 설정안함!)
 
                 
             ************************************/
@@ -95,6 +122,11 @@
             position: absolute;
             bottom: 0;
             right: 0;
+
+            /* 위치설정값과 같은 방향의 마진만 적용됨! */
+            margin-bottom: 50px;
+            margin-right: 50px;
+
             /* 부모는? 보이는 화면 (window) */
             background: url(./images/ab1.jpg) no-repeat center/cover;
         }
@@ -221,6 +253,17 @@
             width: 92px;
             height: 115px;
             border: 10px ridge goldenrod;
+            margin: 100px auto;
+
+            /* 박스를 원형으로 만들기 */
+            border-radius: 50%;
+            
+            /* 넘치는 이미지 숨기기 */
+            overflow: hidden;
+
+            /* 박스의 자식으로 앱솔루트가 있을때
+             overflow:hidden은 부모자격이 있는 박스에서만 숨길수 있다!!!*/
+            position: relative;
         }
         .absimg img{
             position: absolute;
@@ -267,7 +310,7 @@
     </div>
 
     <!-- 앱솔루트끼리는 서로 겹친다! -->
-    <div class="absimg">
+    <div class="absimg" title="앱솔루트끼리는 서로 겹친다!">
         <img src="./images/ab3.jpg" alt="토르">
         <img src="./images/ab4.jpg" alt="닥스">
     </div>
