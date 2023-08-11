@@ -2,3 +2,125 @@
 
 /* Robot PJ - 애니메이션 CSS */
 
+/************************ 
+    [ CSS 애니메이션 ]
+    - CSS 속성 변화를 장면으로 구성하여 
+    애니메이션을 화면에 연출해주는 속성
+
+    [ 애니메이션 키프레임 ]
+    - 애니메이션 속성변화를 지정하는 코딩영역
+
+    [ 2장면 코딩법 ]
+    @keyframes 키프레임명 {
+        from{시작CSS}
+        to{끝CSS}
+    }
+
+    또는
+
+    @keyframes 키프레임명 {
+        0%{시작CSS}
+        100%{끝CSS}
+    }
+
+    [ 여러장면 코딩법 ]
+    @keyframes 키프레임명 {
+        0%{시작CSS}
+        10%{중간CSS}
+        20%{중간CSS}
+        ...
+        70%{중간CSS}
+        90%{중간CSS}
+        100%{끝CSS}
+    }
+
+    -> 만약 첫장면이 이미 CSS에 설정되어있으면 
+    from 또는 0%를 생략할 수 있다!
+
+    ----------------------------------------
+
+    [ 애니메이션 연출 시간 계산법 ]
+    - 내가 지정한 %의 장면은 언제 등장하는가?
+    전체시간(초) * 몇% / 100 = 알고싶은시간
+    예) 60초 * 50%/100% = 30초
+
+    [ 설정된 키프레임 호출하는 방법 ]
+    animation: 이시이지반방마
+    (이름 시간 이징 지연 반복 방향 마지막상태)
+
+    1) 이름(animation-name) : keyframe 이름
+    2) 시간(animation-duration) : 애니메이션 동작시간(초단위:s)
+    3) 이징(animation-timing-function) : easing 가속도
+    4) 지연(animation-delay) : 애니메이션 시작지연시간(초단위:s)
+    5) 반복여부(animation-iteration-count) : 애니메이션 반복횟수
+        - 기본값 1, 숫자를 쓰면 반복횟수
+        - 영원히는 infinite(인피니트)
+    6) 방향(animation-direction) : 시작->끝
+        - 대체경로 설정하기 : alternate : 시작->끝,끝->시작
+        - 대체경로는 반복횟수가 2이상 또는 infinite 이여야함
+    7) 마지막상태(animation-fill-mode) : 애니메이션이 끝났을때
+        - 처음상태로 돌아가는 것이 기본!
+        - 마지막 상태를 유지하고 싶을때 forwards(앞쪽에...즉,애니끝장면)
+
+
+
+************************/
+
+/* 로고이동 키프레임 */
+@keyframes logo-ani {
+    /* from{} - 첫상태 이미설정해서 생략! */
+    60%{
+        top:10px;
+        left: 10px;
+        transform: scale(1);
+    }
+    100% {
+        top:10px;
+        left: 10px;
+        /* 처음 회전상태 추가애니 */
+        transform: scale(1) rotate(-25deg);
+    }
+}
+/* 로고이동+오뚜기애니 호출하기 - 대상 : .logo */
+.logo {
+    animation: 
+    /* 이동/스케일 애니 */
+    logo-ani 1.5s ease-in-out 3s forwards,
+    /* 기울기 애니 */
+    swing-ani .5s ease-in-out 4.5s infinite alternate;
+}
+
+/* 오뚜기 애니 키프레임 */
+@keyframes swing-ani {
+    from{
+        transform: rotate(-25deg);
+    }
+    to{
+        transform: rotate(25deg);
+    }
+}
+
+/* 로봇 위치/크기변경 애니 */
+@keyframes robot-ani {
+    to {
+        transform: scale(1) translate(0,0);
+    }
+}
+/* 로봇애니 호출 */
+.box-robot{
+    transform-origin: bottom;
+    animation: robot-ani 5s linear 3s forwards;
+} 
+
+/* 왼쪽다리 애니호출 */
+@keyframes walk-ani {
+    to {
+        transform: scaleY(.9);
+    }
+}
+.leg1{
+    animation: walk-ani .4s ease-in-out 3s infinite alternate;
+}
+.leg2{
+    animation: walk-ani .4s ease-in-out 3s infinite alternate;
+}
