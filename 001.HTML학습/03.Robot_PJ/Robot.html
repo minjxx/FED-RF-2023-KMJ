@@ -5,8 +5,11 @@
         <!-- 뷰포트 필수! meta:vp -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Robot PJ</title>
+        <!-- 메인 css -->
         <link rel="stylesheet" href="./css/robot.css">
+        <!-- 애니메이션 css -->
         <link rel="stylesheet" href="./css/robot_ani.css">
+        <!-- 자바스크립트 코딩구역 -->
     </head>
     <body>
         <!-- 1. 상단영역 -->
@@ -74,6 +77,12 @@
                                     3. xLD8oWRmlAE
                                  -->
                             </div>
+                            <!-- 조작버튼박스 -->
+                            <div class="box-btn">
+                                <button onclick="바꿔()">ch1</button>
+                                <button onclick="바꿔()">ch2</button>
+                                <button onclick="바꿔()">ch3</button>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -86,5 +95,46 @@
                 <!-- 3-1. 회사정보 -->
             </footer>
         </div>
+
+        <script>
+            // 자바스크립트 문법이 적용되는곳
+            // 한줄주석
+            /* 여러줄주석 */
+
+            // JS가 하는일
+            // 1. HTML 변경
+            // 2. CSS 변경
+
+            // JS가 필수로 하는 것은?
+            // 요소 선택하기!
+            // element -> 요소 -> 태그 
+            // 요소들이 모여있는 웹문서 전체구조 -> DOM
+            // Document Object Model
+
+            // 보관장소 = 물건
+            // 변수  = 값
+            // 이퀄(=)은 오른쪽 값이 왼쪽에 들어감(할당!)
+
+            // document 객체를 통하여 하위요소들로 접근!
+            // 여기를 봐~!!! var (변수선언)
+            var 나야나 = 
+            document.getElementById('mv').src;
+            // JS 는 명령어끝에 꼭 세미콜론;
+            // 콘....솔
+            // console
+            // 로....그
+            // log
+
+            console.log("내꺼얌:",나야나);
+            // 콘솔 위치 : F12 개발자모드 -> console탭
+
+            document.getElementById('mv').src = 
+            'https://www.youtube.com/embed/s1g1yVgvd64';
+
+            function 바꿔(){
+                console.log('영상바꿔');
+            }
+        </script>
+
     </body>
 </html>
