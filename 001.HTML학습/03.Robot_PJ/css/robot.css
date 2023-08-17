@@ -12,6 +12,10 @@
     font-family: 'Orbitron', sans-serif;
 */
 
+html {
+    font-size: 10px;
+    /* 상대단위 rem 계산 편의를 위해 변경! */
+}
 /* 초기화 */
 html,body,h1,h2,h3,ul,ol{
     margin: 0;
@@ -25,9 +29,9 @@ body{
 }
 
 /* 공사중표시 */
-body *{
+/* body *{
     outline: 2px dashed yellow;
-}
+} */
 
 /* 공통 클래스 */
 
@@ -47,15 +51,13 @@ body *{
     /* 픽스드 포지션 */
     position: fixed;
     /* 화면정중앙이동! calc()로! */
-    top: calc(50% - 200px/2);
-    left: calc(50% - 200px/2);
-
-    width: 200px;
-    height: 200px;
+    top: calc(50% - 15vw/2);
+    left: calc(50% - 15vw/2);
+    width: 15vw;
+    height: 15vw;
 
     /* 배경이미지 */
-    background: pink url(../images/robot_03.png) no-repeat center/160px;
-
+    background: pink url(../images/robot_03.png) no-repeat center/60%;
     border-radius: 50%;
     border: 2px solid #ccc;
 
@@ -64,7 +66,7 @@ body *{
     /* line-height: 200px; */
     color: aquamarine;
     /* font: 스두크/줄체 */
-    font: 45px/200px 'Orbitron';
+    font: 3vw/15vw 'Orbitron';
     /* 글자그림자 */
     text-shadow: 2px 2px 5px #000;
 
@@ -78,8 +80,6 @@ body *{
 
     /* 트랜스폼 크기조정 */
     transform: scale(2);
-
-
     z-index: 99;
     /* 가장위! */
 }
@@ -170,6 +170,10 @@ body *{
 .body>div{
     position: absolute;
     /* 모든 직계하위요소는 앱솔루트! */
+}
+/* 각 몸에 글로우효과 주기 */
+.ear, .body>div, .body>div>span{
+    box-shadow: 0 0 10px 5px aqua;
 }
 
 /* 눈공통 */
@@ -573,9 +577,112 @@ body *{
     width: 100%;
 }
 
-
-
-
 /* 2-2. 로봇설명박스 */
+.box-text{
+    /* 로봇보다 위 - 포지션 있어야 위에옴 */
+    position: relative;
+    /* 최대크기800px */
+    max-width: 800px;
+    /* 박스중앙 : 마영오 */
+    margin: 0 auto;
+    /* 하단마진 200px */
+    margin-bottom: 200px;
+    /* 반투명 검정배경 */
+    background-color: rgba(0 0 0 / 0.5);
+    /* 글자색 흰색 */
+    color: #fff;
+    /* 글자그림자 */
+    text-shadow: 1px 1px 1px #000;
+    /* 패딩 : 15px 30px */
+    padding: 15px 30px;
+    /* 경계선 : 3px solid #fff */
+    border: 3px solid #fff;
+    /* 둥근모서리 : 20px */
+    border-radius: 20px;
+    /* 박스그림자를 이용한 글로우효과 : 
+    내부만 2개줌 */
+    box-shadow: 
+    inset 0 0 20px blue,
+    inset 0 0 50px 10px cyan;
+    /* 박스그림자: x y blur spread color */
+
+}
+
+/* 2-2-1.제목 */
+.box-text h2{
+    /* 스티키 포지션 */
+    position: sticky;
+    /* top값 설정시 위치고정 */
+    top: 15px;
+    /* 글자 : 35px 'Chakra Petch' */
+    font: 3.5rem 'Chakra Petch';
+    /* 글자색 lime */
+    color: lime;
+    /* 글자중앙정렬 */
+    text-align: center;
+    /* 배경색 흰색 반투명  */
+    background-color: rgba(255, 255, 255, 0.7);
+    /* 둥근모서리 20px */
+    border-radius: 20px;
+}
+/* 2-2-2.출처 */
+.box-text small{
+    /* 글자체 : 'Chakra Petch' */
+    font-family: 'Chakra Petch';
+    /* 글자크기 12px -> rem? */
+    font-size: 1.2rem;
+    /* 줄간격 : 3배 */
+    line-height: 3;
+    /* 글자색 : 노란색 */
+    color: #ff0;
+    /* 블록변경 */
+    display: block;
+    /* 글자중앙 */
+    text-align: center;
+}
+
+/* 2-2-3.내용단락 */
+.desc {
+    /* 글자체 : 'Barlow' */
+    font-family: 'Barlow';
+    /* 글자크기 : 17px -> rem */
+    font-size: 1.7rem;
+    /* 줄간격 1.8배 */
+    line-height: 1.8;
+    /* 자간:1px */
+    letter-spacing: 1px;
+    /* 단어간격:2px */
+    word-spacing: 2px;
+    /* 
+        [ 다단설정하기 ] 
+        - 다중열속성
+        -> column-count : 다중열개수
+        -> column-rule : 다중열구분선
+        -> column-gap : 다중열사이간격
+    */
+    /* 다중열개수 */
+    column-count: 3;
+    /* 다중열구분선 : 두께 종류 색상 */
+    column-rule: 5px dotted lightskyblue;
+    /* 다중열사이간격 */
+    column-gap: 55px;
+
+    /* 양쪽정렬 : taj */
+    text-align: justify;
+    /* 단어 단위로 줄바꿈하므로
+    양쪽정렬시 영어는 단어깨기를 해줘야함!
+    2byte인 한글, 일본어 등은 안깨도 됨! */
+    word-break: break-all;
+
+    /* 들여쓰기 : ti */
+    text-indent: 40px;
+}
+/* 설명문단 첫글자 가상요소로 디자인변경 */
+.desc::first-letter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: lightsalmon;
+}
+
 /******************* 3. 하단영역 *******************/
 /* 3-1. 회사정보 */
