@@ -5,10 +5,14 @@
         <!-- 뷰포트 필수! meta:vp -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Robot PJ</title>
+        <!-- 파비콘 : 탭메뉴 출력아이콘 -->
+        <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png">
         <!-- 메인 CSS -->
         <link rel="stylesheet" href="./css/robot.css" />
         <!-- 애니메이션 CSS -->
         <link rel="stylesheet" href="./css/robot_ani.css" />
+        <!-- 미디어쿼리 CSS : 가장 아래위치해야함! -->
+        <link rel="stylesheet" href="./css/robot_media.css">
     </head>
     <body>
         <!-- 1. 상단영역 -->
@@ -16,8 +20,10 @@
             <header class="top-aria">
                 <!-- 1-1.로고 -->
                 <h1 class="logo">R2D4</h1>
-                <!-- 1-2.링크타이틀 -->
-                <!-- 1-3.탑이동버튼 -->
+                <!-- 1-2.탑이동버튼 -->
+                <button class="btn-top">
+                    <a href="#">TOP</a>
+                </button>
             </header>
         </div>
         <!-- 2. 메인영역 -->
@@ -25,7 +31,11 @@
             <main class="main-aria">
                 <!-- 2-1. 로봇박스 -->
                 <section class="box-robot">
-                    <!-- 2-1-1.머리 -->
+                    <!-- 2-1-1.링크타이틀 : 말풍선모양 -->
+                    <a href="#box-text" class="link-title">
+                        What is Robot?
+                    </a>
+                    <!-- 2-1-2.머리 -->
                     <div class="head">
                         <!-- 왼눈 -->
                         <div class="eye eye1"></div>
@@ -40,7 +50,7 @@
                         <!-- 오른귀 -->
                         <div class="ear ear2"></div>
                     </div>
-                    <!-- 2-1-2.몸통 -->
+                    <!-- 2-1-3.몸통 -->
                     <div class="body metal2">
                         <!-- 목 -->
                         <div class="neck metal2"></div>
@@ -96,10 +106,12 @@
                                 <button onclick="커짐()">▣</button>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+                    
+                    
                 </section>
                 <!-- 2-2. 로봇설명박스 -->
-                <section class="box-text">
+                <section class="box-text" id="box-text">
                     <!-- 2-2-1.제목 -->
                     <h2>Robot</h2>
                     <!-- 2-2-2.출처 -->
@@ -163,6 +175,7 @@
         <div id="bottom-aria">
             <footer class="bottom-aria">
                 <!-- 3-1. 회사정보 -->
+                Robotronics Inc.
             </footer>
         </div>
 

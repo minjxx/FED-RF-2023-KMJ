@@ -12,10 +12,14 @@
     font-family: 'Orbitron', sans-serif;
 */
 
-html {
+html{
     font-size: 10px;
     /* 상대단위 rem 계산 편의를 위해 변경! */
+
+    /* 최상위요소인 html에 부드러운 스크롤적용 */
+    scroll-behavior: smooth;
 }
+
 /* 초기화 */
 html,body,h1,h2,h3,ul,ol{
     margin: 0;
@@ -51,13 +55,13 @@ body{
     /* 픽스드 포지션 */
     position: fixed;
     /* 화면정중앙이동! calc()로! */
-    top: calc(50% - 15vw/2);
-    left: calc(50% - 15vw/2);
-    width: 15vw;
-    height: 15vw;
+    top: calc(50% - 20vw/2);
+    left: calc(50% - 20vw/2);
+    width: 20vw;
+    height: 20vw;
 
     /* 배경이미지 */
-    background: pink url(../images/robot_03.png) no-repeat center/60%;
+    background: pink url(../images/robot_03.png) no-repeat center/77%;
     border-radius: 50%;
     border: 2px solid #ccc;
 
@@ -66,7 +70,7 @@ body{
     /* line-height: 200px; */
     color: aquamarine;
     /* font: 스두크/줄체 */
-    font: 3vw/15vw 'Orbitron';
+    font: 4vw/20vw 'Orbitron';
     /* 글자그림자 */
     text-shadow: 2px 2px 5px #000;
 
@@ -83,10 +87,44 @@ body{
     z-index: 99;
     /* 가장위! */
 }
+/* 1-2.탑이동버튼 */
+.btn-top{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
 
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px outset #fff;
+    background-color: #ccc;
 
-/* 1-2.링크타이틀 */
-/* 1-3.탑이동버튼 */
+    /* 위치상위 */
+    z-index: 10;
+}
+/* 버튼 a요소 */
+.btn-top a{
+    display: block;
+    /* 디자인확장! */
+    width: 100%;
+    height: 100%;
+
+    /* 글자셋팅 */
+    color: blue;
+    font: 30px/90px 'Black Ops One';
+    /* 줄간격은 높이값 100px - 보더10px = 90px */
+    text-decoration: none;
+}
+/* 버튼 마우스 오버시 */
+.btn-top:hover{
+    background-color: #ff0;
+    border-style: inset;
+}
+/* 버튼 오버시 글자색 */
+.btn-top:hover a{
+    color: #f00;
+}
+
 /******************* 2. 메인영역 *******************/
 .main-aria{
     padding-top: 860px;
@@ -577,6 +615,80 @@ body{
     width: 100%;
 }
 
+/* 2-1-3.링크타이틀 : 말풍선모양 */
+.link-title{
+    position: absolute;
+    top: 5vh;
+    right: -100px;
+    color: orangered;
+    font-size: 5vw;
+    background-color: #fff;
+    padding: 5vw 3vw;
+    border-radius: 50%;
+    border: 1vw dashed orangered;
+    text-decoration: none;
+
+    /* 처음에 안보임 */
+    transform: scale(0);
+    /* 트랜스폼 축변경 : 가로 세로 */
+    transform-origin: left bottom;
+}
+/* 가상요소로 삼각형 만들기 */
+.link-title::after{
+    content: '';
+    position: absolute;
+    bottom: -3.8vw;
+    left: -2.7vw;
+    transform: rotate(42deg);
+
+    /* 삼각형만들기 필수
+    - 양쪽방향 보더를 투명으로 한쪽방향 보더에 색
+    - 가로,세로값 0 */
+    width: 0;
+    height: 0;
+    border-left: 1.3vw solid transparent;
+    border-right: 1.3vw solid transparent;
+    border-top: 10vw solid orangered;
+}
+/* 마우스 오버시 배경색 변경 */
+.link-title:hover {
+    background-image: 
+    radial-gradient(darkgreen,darkorange);
+    color: #fff;
+}
+
+/* 
+    [ 원형 그라데이션 ]
+
+    - 기본형, 영역지정형은 박스모양을 따라감!
+
+    1) 기본형: 중앙중심, 모양은 박스크기에 맞춤
+    background-image: 
+        radial-gradient(색1,색2,색3,...);
+    - 시작색으로부터 중앙에서 시작됨
+
+    2) 영역 지정형:
+    background-image: 
+        radial-gradient(색1 몇%,색2 몇%,색3 몇%,...);
+    - 색 뒤에 한칸 띄고 %수치로 영역지정함
+
+    3) 그라데이션 모양을 원형으로 사용할 경우:
+    background-image: 
+        radial-gradient(circle,색1,색2,색3,...);
+    - circle 키워드를 첫번째에 사용함
+
+    4) 영역옵션 지정형: 중심점 변경
+    background-image: 
+        radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색3,...);
+    - 옵션4가지 : closest-side / farthest-side
+                closest-corner / farthest-corner
+                ___________________________________
+                - closest는 중심점으로 좀더 모아진것
+                - farthest는 중심점에서 멀리 퍼진것
+                - side와 corner는 경계선과 끝부분옵션임
+    - 가로위치, 세로위치 (중심점) - 단위는 px / %
+*/
+
 /* 2-2. 로봇설명박스 */
 .box-text{
     /* 로봇보다 위 - 포지션 있어야 위에옴 */
@@ -642,47 +754,86 @@ body{
 }
 
 /* 2-2-3.내용단락 */
-.desc {
+.desc{
     /* 글자체 : 'Barlow' */
     font-family: 'Barlow';
     /* 글자크기 : 17px -> rem */
     font-size: 1.7rem;
-    /* 줄간격 1.8배 */
+    /* 줄간격 : 1.8배 */
     line-height: 1.8;
-    /* 자간:1px */
+    /* 자간 : 1px */
     letter-spacing: 1px;
-    /* 단어간격:2px */
+    /* 단어간격 : 2px */
     word-spacing: 2px;
+
     /* 
-        [ 다단설정하기 ] 
+        [ 다단설정하기] 
         - 다중열속성
         -> column-count : 다중열개수
         -> column-rule : 다중열구분선
         -> column-gap : 다중열사이간격
     */
-    /* 다중열개수 */
+    /* 다중열 개수 */
     column-count: 3;
-    /* 다중열구분선 : 두께 종류 색상 */
-    column-rule: 5px dotted lightskyblue;
-    /* 다중열사이간격 */
+    /* 다중열 구분선 : 두께 종류 색상
+    보더 셋팅과 유사 */
+    column-rule: 5px dotted lightgreen;
+    /* 다중열 사이간격 */
     column-gap: 55px;
 
     /* 양쪽정렬 : taj */
     text-align: justify;
     /* 단어 단위로 줄바꿈하므로
     양쪽정렬시 영어는 단어깨기를 해줘야함!
-    2byte인 한글, 일본어 등은 안깨도 됨! */
+    2byte인 한글,일본어 등은 안깨도 됨! */
     word-break: break-all;
 
     /* 들여쓰기 : ti */
     text-indent: 40px;
+    
 }
 /* 설명문단 첫글자 가상요소로 디자인변경 */
-.desc::first-letter {
+.desc::first-letter{
     font-size: 3rem;
     font-weight: bold;
-    color: lightsalmon;
+    color: orange;
 }
+
 
 /******************* 3. 하단영역 *******************/
 /* 3-1. 회사정보 */
+#bottom-aria{
+    /* 순서가 위에 오도록! */
+    position: relative;
+    /* 글자색 : 흰색 */
+    color: #fff;
+    /* 글자크기 : 30px, 글자체 'Black Ops One' */
+    font: 3rem 'Black Ops One';
+    /* 글자그림자 : 2px 2px 2px #000 */
+    text-shadow: 2px 2px 2px #000;
+
+    /* 배경색 : 검정색 반투명 0.5 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 글자중앙정렬 */
+    text-align: center;
+    /* 패딩 7vmin -> 가로/세로중 작은것 기준 10% */
+    padding: 7vmin;
+    
+}
+/* 속박스 가상요소로 아이콘 모양 넣기 */
+.bottom-aria::before{
+    content: '';
+    /* 디자인도 적용, 한줄에 오도록! */
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: pink url(../images/robot_03.png) no-repeat;
+    background-position: -7px 2px;
+    background-size: 50px;
+
+    /* 인라인요소간 세로정렬 */
+    vertical-align: top;
+
+}
