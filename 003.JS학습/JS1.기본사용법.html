@@ -244,7 +244,7 @@
 
                 2. 한꺼번에 style속성값으로 넣기
                 -> style.cssText = 'css문법'
-                -> 이전에 코딩된 인라인 style 속성값을 무시됨!
+                -> 이전에 코딩된 인라인 style 속성값은 무시됨!
                 -> 백틱(`)을 사용하면 좀 더 가독성있는 코딩가능
 
             ________________________________________
@@ -414,7 +414,7 @@
         멍청이.innerHTML = '<h4>고흐<br>'+헉스+'</h4>';
         // 헉스 - 그림제목값
 
-        // 4-2. 넣은 html h4요소에 css 한번에 넣기
+        // 4-2. 넣은 html h4요소에 CSS 한번에 넣기        
         // 한번에 css를 셋팅하는 방법 : style.cssText 사용!
         // 주의: 상단에 넣었던 style.속성명 은 무시됨!
         // 백틱(`)을 사용하여 엔터를 허용한 문자를 넣어준다
@@ -434,37 +434,39 @@
         // 5. .원이야 클래스 on제거하여 회전애니없애기
         // 대상 : .원이야(해당순번) -> 멍청이 할당!
         멍청이.classList.remove('on');
-        // classList는 선택요소의 클래스를 제어하는 객체
+        // classList 는 선택요소의 클래스를 제어하는 객체
         // add(클래스명) - 넣기
         // remove(클래스명) - 빼기
-        // toggle(쿨래스명) - 넣기/빼기
+        // toggle(클래스명) - 넣기/빼기
 
-    } ///////////// 맘대로해라 함수 ////////////////
 
-    /******************************************* 
-        함수명 : 사각사각
-        기능 : 전체가 사각형으로 화면을 채우며 애니메이션됨
-    *******************************************/
-    function 사각사각() {
+     } ///////////// 맘대로해라 함수 ////////////////
+
+     /****************************************** 
+        함수명: 사각사각
+        기능 : 전체가 사각형으로 화면을 
+                채우며 애니메이션됨
+     ******************************************/
+    function 사각사각(){
         // 1. 호출확인
         console.log("사각사각!");
 
         // 2. 대상선정 : .넌뭐냐
-        var 나야나 = document.querySelector(".넌뭐냐");
+        var 나야나 = document.querySelector('.넌뭐냐');
         // querySelector(선택자) -> 하나만 가져옴!(순번불필요!)
         console.log("나야나:",나야나);
 
-        // 3. 변경내용 : top, 트랜지션, width, height
+        // 3. 변경내용: top, 트랜지션, width, height
         나야나.style.top = '0';
         나야나.style.borderRadius = '0';
         나야나.style.width = '100%';
         나야나.style.height = '100%';
-        나야나.style.transition = '3s 1s, top 1s 0s';
+        나야나.style.transition = '3s 1s,top 1s 0s';
         /* top값 부터 1초간 작동함! */
 
         // 4. 추가변경 : 글자넣기
         // innerText = 글자내용 -> 태그없는 글자 데이터 넣기!
-        나야나.innerText = 'JS입문을 환영합니다!'
+        나야나.innerText = 'JS입문을 환영합니다!';
 
         // 5. 글자관련 CSS변경하기
         나야나.style.fontSize = '70px';
@@ -474,24 +476,31 @@
         나야나.style.lineHeight = window.innerHeight+'px';
         // window.innerHeight : 현재 화면의 높이값을 리턴함!
 
-        //화면높이값
+        // 화면높이값
         console.log("화면높이:",window.innerHeight);
-        
-    }///////////// 사각사각 함수 ////////////////
+
+
+
+
+
+    } /////////////// 사각사각 함수 ///////////////
+
 
     </script>
 
     <!-- CSS코딩구역 -->
     <style>
-        html, body {
+        html,body{
             margin: 0;
             padding: 0;
             height: 100%;
             /* 보이는 화면에 채우기 */
         }
-        body {
+        body{
             overflow: hidden;
         }
+
+
         .pbox{
             position: absolute;
             top: 0;
@@ -550,9 +559,9 @@
             background-image: url(./images/03.png);
         }
 
-        /* .원이야.on 일 경우 애니적용하기!*/
-        .원이야.on {
-            animation: rotate-ani 5s linear infinite ;
+        /* .원이야.on 일 경우 애니적용하기! */
+        .원이야.on{
+            animation: rotate-ani 5s linear infinite;
         }
 
         /* .원이야 회전키프레임 */
@@ -563,7 +572,7 @@
         }
 
         /* 전체 사각형으로 변할 원 */
-        .넌뭐냐 {
+        .넌뭐냐{
             position: absolute;
             top: 40%;
             right: 0;
@@ -575,6 +584,8 @@
             border-radius: 50%;
             background: #bbd3b3 url(./images/prog.jpg) no-repeat center/auto 100%;
         }
+
+
     </style>
 </head>
 
@@ -584,6 +595,7 @@
     <p class="pbox" title="여기를 클릭하세요! 더블클릭하면 우영우가 나옵니다!" onclick="보여줘()" ondblclick="바꿔()">
         나는 요즘 매일 생각한다! <br>
         도대체 <span id="name"></span>
+        
     </p>
 
     <!-- 원모양 박스 -->
@@ -596,9 +608,10 @@
         <div class="원이야 on" 
         onmouseover="맘대로해라(2,'밤의 카페 테라스')"></div>
     </div>
-    
+
     <!-- 사각형으로 변할 전체 마무리 원박스 -->
     <div class="넌뭐냐" title="오른쪽 버튼을 클릭해 주세요!" oncontextmenu="사각사각()"></div>
+
 
 </body>
 
