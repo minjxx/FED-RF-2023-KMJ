@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>if문 연습</title>
+        <!-- 웹폰트 CDN -->
+        <link href="https://fonts.googleapis.com/css?family=Audiowide&amp;display=swap" rel="stylesheet" />
+        <style>
+            /* 타이틀 */
+            .tit {
+                text-align: center;
+                font: bold 72px/100px "Audiowide";
+            }
+
+            /* 스틸컷장면박스 */
+            .photo {
+                text-align: center;
+                /* 인라인요소 가로중앙정렬 */
+                background-color: skyblue;
+                padding: 20px;
+                margin-bottom: 50px;
+            }
+
+            /* 메인이미지 */
+            #scene {
+                height: 290px;
+                /* width는 비율에 맞게 자동임! */
+            }
+
+            /* 선택버튼박스 */
+            .btnbx {
+                text-align: center;
+                /* 버튼요소는 인라인블록이지만 
+            인라인특성이 있으므로 글자중앙정렬적용됨! */
+            }
+
+            /* 버튼공통 */
+            .btns {
+                font-size: 42px;
+            }
+        </style>
+        
+        <!-- JS코드구역 -->
+        <script>
+            // 이벤트까지 JS에서 걸어주면
+            // 코드가 분리된다!
+
+            // html요소를 선택할 경우 실행순서가 중요함
+            // html 본문요소가 모두 로딩후에 선택해야함!
+            // 로딩후 선택법:
+            /* 
+                1. script 코드를 body 태그 하단에 위치
+                2. 로딩 구역을 만들어준다!
+            */
+            // 로딩구역만들기!!!
+            // 선택요소.addEventListener(이벤트,함수)
+            //window.addEventListener();
+
+            // 3. 이벤트 설정하기
+            btns[2].onclick = changeImg;
+            
+            // 소괄호가 있는 함수호출은
+            // 함수호출 명령어를 사용하는 것임!
+            // 그래서 요소에 직접 이벤트속성으로 
+            // 따옴표안에 값을 쓰는것은 아래와
+            // 같이 익명함수구역안에 코드를 쓰는것과 같기때문이다!
+            btns[2].onclick = function(){
+                changeImg();
+            }
+            
+
+            function loadFn(){
+                // 1. 호출확인
+                console.log('로딩완료!');
+                //버튼요소선택
+
+            }
+
+            function changeImg(){
+                //1.호출확인
+                console.log('변경');
+            }
+
+            var btns = document.querySelectorAll('.btns');
+            console.log('버튼들:',btns);
+        </script>
+
+    </head>
+
+    <body>
+        <!-- 전체 타이틀 -->
+        <h1 class="tit">All New Aladin</h1>
+
+        <!-- 스틸컷장면박스 -->
+        <div class="photo">
+            <img id="scene" src="./images/ala1.jpg" alt="알라딘스틸컷" />
+        </div>
+
+        <!-- 선택버튼박스 -->
+        <div class="btnbx">
+            <button class="btns">포스터</button>
+            <button class="btns">장면1</button>
+            <button class="btns" onclick="changeImg()">장면2</button>
+            <button class="btns">장면3</button>
+        </div>
+    </body>
+</html>
