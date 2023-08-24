@@ -6,8 +6,8 @@
 // 1-1. 이벤트 대상 : 미니언즈
 var mini = document.querySelectorAll('.mini');
 
-// 1-2. 출력대상 : 파란박스
-var blue_box = document.querySelector('.Bcase');
+// 1-2. 출력대상 : 파란박스안 미니언즈 박스
+var blue_box = document.querySelector('.mini-space');
 
 console.log('미니언즈:',mini,blue_box);
 
