@@ -42,7 +42,6 @@
 /* GNB메뉴 상위메뉴a */
 .gnb ul>li>a{
     font-size: 1.6rem;
-    font-weight: bold;
     display: block;
     padding: 28px 16px;
     /* 줄바꿈방지 */
@@ -60,7 +59,7 @@
     transform: scale(.5,.3);
     margin-left: 3px;
 }
-************ 2. 메인영역 ************
+/* ************ 2. 메인영역 ************ */
 #main {
     /* 본문영역 최소높이 셋팅! */
     min-height: 800px;
