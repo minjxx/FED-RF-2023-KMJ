@@ -3,132 +3,159 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>for문 연습1 - 파란상자에 미니언즈 집어넣기</title>
+        <title>for문 연습2 - 쇼핑몰 상품 리스트</title>
+        <!-- 외부JS불러오기 -->
+        <script src="./js/for_ex2.js" defer></script>
+        <!-- 스타일시트 구역 -->
         <style>
-            /* 미니언즈 이미지 */
-            .mini {
-                cursor: pointer;
-                /* 손가락모양 */
-                border: 5px dotted #fff;
+            /*****************************  
+                [ CSS에서 변수사용하기! ]
+                1. 정의 : 같은 값을 사용하는 속성에 변수를 사용하여 반복작업을 줄여주기위한 CSS에서만 사용되는 변수
+                
+                2. 사용법 : 
+
+                (1) 변수선언 및 셋팅구역
+                :root{
+                    --변수명:값;
+                    --변수명:값;
+                    --변수명:값;
+                }
+
+                (2) 변수호출
+                    - 사용하고자 하는 속성값에 변수를 아래처럼 호출
+                    var(--변수명)
+
+                    예) 
+                    :root{
+                        --my-color:red;
+                        --my-num:5;
+                    }
+                    #my {
+                        width: calc(1000px/var(--my-num));
+                    }
+                    h1{
+                        color:var(--my-color);
+                    }
+                    .mymy{
+                        background-color:var(--my-color);
+                    }
+            *****************************/
+
+            /* 변수구역 */
+            :root{
+                /* 1. 분할개수 */
+                --sp-num:5;
+                /* 2. 보더색 */
+                --bg-color:gray;
             }
 
-            /* 마우스오버시 보더색 변경 */
-            .mini:hover {
-                border-color: red;
+            /* 초기화 */
+            html,body {
+                margin: 0;
+                padding: 0;
             }
-
-            /* 파란색 가방 */
-            .Bcase {
-                position: relative;
-                border: 20px ridge blue;
-                min-height: 30vh;
-                /* 최소높이를 주면 설정높이를 유지하다가
-            내용이 많아지면 높이값이 늘어남! */
-                border-radius: 20px;
-                width: 80vw;
-                margin: 10vh auto;
+            ul,ol{
+                margin: 0;
+                padding: 0;
+                list-style: none;
             }
-            .Bcase::after {
-                content: '';
-                position: absolute;
-                width: 20vw;
-                height: 100px;
-                border: 30px ridge blue;
-                top: -100px;
-                left: 50%;
-                transform: translateX(-50%);
-                border-radius: 50px;
-                clip-path: polygon(0 0,100% 0,100% 50%,0 50%);
+            body * {
+                outline: 2px dashed var(--bg-color);
             }
-
-            .Bcase img {
-                width: 150px;
-                /* 크기줄임 */
-            }
-            /* 미니언즈 박스 */
-            h1, .mini-box {
+            /* 타이틀 */
+            .tit{
                 text-align: center;
             }
+            /* 쇼핑몰 리스트박스 */
+            .list-box {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+            /* 플렉스박스 */
+            .list-box ul{
+                display: flex;
+                /* 플렉스 랩핑 - 랩핑하면 flex-shrink 값이 자동으로 0으로 전환되어 크기가 강제조정되지 않는다! */
+                flex-wrap: wrap;
+                /* 
+                    [사이간격주기 속성 - gap]
+                    gap : 위아래 양쪽; (2개씀)
+                    gap : 한번에모든방향; (1개씀)
+                    
+                    간격단위는 여러가지 사용가능!
+                */
+                gap: 3vw 2vw;
+                
+            }
+            .list-box li {
+                position: relative;
+                /* 부모자격 - .item-info */
+                /* 사이간격 gap값을 고려한 계산법 */
+                flex-basis: calc((100% - 2vw * (var(--sp-num) - 1)) / var(--sp-num));
+                /* flex-basis: calc((100% - 2vw * 2) / 3); */
+                /* flex-basis: calc((100% - 가로간격*분할수-1)/분할수);
+                -> 사이간격은 분할수 보다 1개 적다! */
 
-
-            /* 미니언즈 정보박스 */
-            .info-box {
+                /* flex-basis: calc(100%/3); */
+                /* 등분할 비율을 %로 줄때 직접 계산하기보다 calc()를 이용하여 분할하자! */
+            }
+            /* 이미지채우기 */
+            .list-box img{
+                width: 100%;
+                /* 등분할된 박스의 가로를 채움, 이미지의 height값은 자동 비율유지 */
+            }
+            /* 상품정보 박스 */
+            .item-info {
                 position: absolute;
-                background-color: rgba(0, 0, 255, 0.5);
-                padding: 15px;
-                border-radius: 0 0 30px 0;
-                font-size: 1.2vw;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
                 color: #fff;
+                background-color: rgba(0, 0, 0, .5);
             }
-            /* 리셋버튼 */
-            .rbtn {
-                background-color: #000;
-                color: #fff;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                font-weight: bold;
+
+            /* 1300이하 미디어쿼리 시작 */
+            @media screen and (max-width:1300px) {
+                /* 분할개수 조정하기 - 변수만 업데이트! */
+                :root{
+                    --sp-num:4;
+                    --bg-color:lightcoral;
+                }
             }
+            /* 1300이하 미디어쿼리 종료 */
+            /* 1100이하 미디어쿼리 시작 */
+            @media screen and (max-width:1100px) {
+                /* 분할개수 조정하기 - 변수만 업데이트! */
+                :root{
+                    --sp-num:3;
+                    --bg-color:lightblue;
+                }
+            }
+            /* 1100이하 미디어쿼리 종료 */
+            /* 700이하 미디어쿼리 시작 */
+            @media screen and (max-width:700px) {
+                /* 분할개수 조정하기 - 변수만 업데이트! */
+                :root{
+                    --sp-num:2;
+                    --bg-color:lightgreen;
+                }
+            }
+            /* 700이하 미디어쿼리 종료 */
+            /* 500이하 미디어쿼리 시작 */
+            @media screen and (max-width:500px) {
+                /* 분할개수 조정하기 - 변수만 업데이트! */
+                :root{
+                    --sp-num:1;
+                    --bg-color:lightpink;
+                }
+            }
+            /* 500이하 미디어쿼리 종료 */
+
         </style>
-        <!-- 외부JS불러오기 -->
-        <script src="./js/for_ex.js" defer></script>
-        <!-- 
-            외부JS호출은 src속성에 외부JS경로를 쓴다!
-        주의: script 사이에 데이터는 작성하지 않는다!
-        defer를 사용하면 defer(지연)된다! 즉, html body
-        내부 요소가 로딩후 실행한다!
-    -->
     </head>
 
     <body>
-        <h1>for문 연습1 - 파란상자에 미니언즈 집어넣기</h1>
-        <!-- data-cnt는 각 미니언즈를 몇개씩 넣을지에 대한 정보값임 -->
-        <div class="mini-box">
-            <img
-                src="./images/Minions.png"
-                alt="미니언즈"
-                class="mini"
-                title="나를 클릭하면 한개씩 가방에 들어갈꼬얌~!"
-                data-cnt="1"
-            />
-            <img
-                src="./images/Minions.png"
-                alt="미니언즈"
-                class="mini"
-                title="나를 클릭하면 다섯개씩 가방에 들어갈꼬얌~!"
-                data-cnt="5"
-            />
-            <img
-                src="./images/Minions.png"
-                alt="미니언즈"
-                class="mini"
-                title="나를 클릭하면 열개씩 가방에 들어갈꼬얌~!"
-                data-cnt="10"
-            />
-        </div>
-
-        <!-- 
-        [ 데이터를 저장하기위한 속성사용하기 ]
-        개발자가 임의로 만들수 있는 속성은 시작할때 data- 로 쓴다!
-        형식:
-        <요소 data-내가만든이름="값">
-     -->
-
-     
-     <!-- 파란상자 -->
-     <div class="Bcase">
-         <!-- 가방정보 및 리셋버튼 박스 -->
-         <div class="info-box">
-                <!-- 현재 미니언즈 개수표시 -->
-                <h2 class="stxt">미니언즈수 : <span>0</span>개</h2>
-           
-                <!-- 리셋을 한다면 이렇게...! -->
-                <button class="rbtn">리셋</button>
-            </div>
-            <!-- 미니언즈 들어가는 박스 -->
-            <div class="mini-space">
-
-            </div>
-        </div>
+        <h1 class="tit">for문 연습2 - 쇼핑몰 상품 리스트</h1>
+        <!-- 쇼핑몰 리스트박스 -->
+        <section class="list-box"></section>
     </body>
 </html>
