@@ -7,34 +7,6 @@
 body {
     font-family: 'Nanum Gothic';
 }
-/* 공통 레이아웃 클래스 */
-/* 속박스 */
-.inbox {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-/* 클리어 설정 가상요소
-        float에 의한 망가짐 방지! */
-.inbox::after,
-.group-part::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-/* 파티션박스 */
-.partbox {
-    /* 옆으로 흐르게 */
-    float: left;
-    /* 보더/패딩 포함박스 */
-    box-sizing: border-box;
-    /* 내부패딩 */
-    padding: 15px;
-    /* 임시 보이게 보더 */
-    border: 2px dotted blue;
-    /* 높이값이 속박스에 있을 경우 
-            채우기셋팅 - 높이값이 파티션박스에 있으면 안씀! */
-    height: 100%;
-}
 
 /* 12 그리드 클래스 : 
         한줄에 합이 12컬럼이 되도록 셋팅! */

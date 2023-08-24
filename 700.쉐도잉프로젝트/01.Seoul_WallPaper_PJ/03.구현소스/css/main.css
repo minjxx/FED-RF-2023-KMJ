@@ -7,12 +7,12 @@
 @import url(./common.css);
 
 /* 공사중표시 */
-body * {
+/* body * {
     outline: 2px dashed #ccc;
 }
 body > div > * {
     outline-color: red;
-}
+} */
 
 
 /* 개별영역 박스 -> 확장형 박스
@@ -21,33 +21,3 @@ body > div > * {
         확장형은 반드시 파트박스에 높이값을 설정한다! */
 
 /************* 2. 캐릭터소개 *************/
-#banner {
-    background-color: lightgreen;
-}
-.banner .partbox {
-    height: 530px;
-}
-/************* 3. 메인영역 : .group-part *************/
-#main {
-    background-color: lightgoldenrodyellow;
-}
-/* 방송편성소개파트 */
-.main .group-part-01 .partbox {
-    height: 455px;
-}
-/* 미리보기파트 */
-.main .group-part-02 .partbox {
-    height: 298px;
-}
-/* 현장포토파트 */
-.main .group-part-03 .partbox {
-    height: 300px;
-}
-/* 대표이미지파트 */
-.main .group-part-04 .partbox {
-    height: 542px;
-}
-/* 최신동영상파트 */
-.main .group-part-05 .partbox {
-    height: 376px;
-}
