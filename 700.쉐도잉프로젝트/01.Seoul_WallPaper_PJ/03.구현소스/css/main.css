@@ -1,23 +1,8 @@
 @charset "utf-8";
-/* 도깨비 PJ : 메인페이지 CSS - main.css */
+/* 메인페이지 CSS - main.css */
 
 /* 리셋,공통 외부 CSS 합치기 */
 @import url(./reset.css);
 @import url(./core.css);
 @import url(./common.css);
 
-/* 공사중표시 */
-/* body * {
-    outline: 2px dashed #ccc;
-}
-body > div > * {
-    outline-color: red;
-} */
-
-
-/* 개별영역 박스 -> 확장형 박스
-        -> 개별영역 중앙속박스에 높이값을 주면
-        파트박스가 늘어날 경우 높이값에 제한을 받게됨!
-        확장형은 반드시 파트박스에 높이값을 설정한다! */
-
-/************* 2. 캐릭터소개 *************/

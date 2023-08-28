@@ -2,62 +2,41 @@
 
 /* 공통 클래스 CSS - core.css */
 
-/* 전체 글자크기 적용 */
-
-body {
-    font-family: 'Nanum Gothic';
+/* 웹폰트 설정 */
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 300;
+    src: url(./fonts/NotoSansKR-Light.woff) format("woff");
+}
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 400;
+    src: url(./fonts/NotoSansKR-Regular.woff) format("woff");
+}
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 500;
+    src: url(./fonts/NotoSansKR-Medium.woff) format("woff");
+}
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    src: url(./fonts/NotoSansKR-Bold.woff) format("woff");
 }
 
-/* 12 그리드 클래스 : 
-        한줄에 합이 12컬럼이 되도록 셋팅! */
-.col-1 {
-    width: 8.33%;
-}
-.col-2 {
-    width: 16.66%;
-}
-.col-3 {
-    width: 25%;
-}
-.col-4 {
-    width: 33.33%;
-}
-.col-5 {
-    width: 41.66%;
-}
-.col-6 {
-    width: 50%;
-}
-.col-7 {
-    width: 58.33%;
-}
-.col-8 {
-    width: 66.66%;
-}
-.col-9 {
-    width: 75%;
-}
-.col-10 {
-    width: 83.33%;
-}
-.col-11 {
-    width: 91.66%;
-}
-.col-12 {
-    width: 100%;
-}
-/* 참고: https://www.w3schools.com/css/css_rwd_grid.asp */
-
-/* 클리어 가상요소 클래스 */
-.clb {
-    content: '';
-    display: block;
-    clear: both;
-}
-/* IR(Images Replacement) - 배경이미지 설명 숨기기 클래스 */
-.ir {
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select {
+    font-family: "Noto Sans KR", sans-serif;
 }

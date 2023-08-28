@@ -1,20 +1,62 @@
 @charset "utf-8";
 
-/* 도깨비 PJ : 공통 모듈 CSS - common.css */
+/* common.css */
 /* 공유기능 요소 셋팅 */
+
 
 /************* 1. 상단영역 *************/
 #header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 25px 60px;
+    box-sizing: border-box;
+}
+#header .logo {
+    width: 183px;
+    margin-right: 5vw;
+}
+#header .logo img {
+    width: 100%;
+}
+#header #gnb > ul {
+    display: flex;
+    align-items: center;
+}
+#header #gnb > ul > li {
+    margin-right: 40px;
+    font-weight: 500;
+}
+#header #gnb > ul > li:last-child {
+    margin-right: 0;
+}
+#header .right-box {
+    position: absolute;
+    top: 0;
+    right: 122px;
+    display: flex;
+    align-items: center;
+}
+#header .right-box > *:not(:last-child) {
+    margin-right: 30px;
+}
+#header .right-box .lang {
+    padding-right:20px;
+    height: 20px;
+    background-image: url('../images/lang-arrow-down.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 9px;
+}
+#header .right-box .lang ul li {}
 
-}
-.header .partbox {
-    
-}
+
 /************* 2. 메인영역 *************/
 #main {
-    
 }
 /************* 3. 하단영역 *************/
 #footer {
-    
 }
