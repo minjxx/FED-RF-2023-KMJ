@@ -20,6 +20,7 @@
             /* 파란색 가방 */
             .Bcase {
                 position: relative;
+                /* 부모자격 */
                 border: 20px ridge blue;
                 min-height: 30vh;
                 /* 최소높이를 주면 설정높이를 유지하다가
@@ -28,17 +29,19 @@
                 width: 80vw;
                 margin: 10vh auto;
             }
-            .Bcase::after {
+            /* 가상요소로 손잡이 */
+            .Bcase::after{
                 content: '';
                 position: absolute;
-                width: 20vw;
-                height: 100px;
-                border: 30px ridge blue;
                 top: -100px;
                 left: 50%;
                 transform: translateX(-50%);
+                width: 20vw;
+                height: 100px;
+                border: 30px ridge blue;
                 border-radius: 50px;
-                clip-path: polygon(0 0,100% 0,100% 50%,0 50%);
+                clip-path: 
+                polygon(0 0,100% 0,100% 50%,0 50%);
             }
 
             .Bcase img {
@@ -46,22 +49,21 @@
                 /* 크기줄임 */
             }
             /* 미니언즈 박스 */
-            h1, .mini-box {
+            h1,.mini-box{
                 text-align: center;
             }
 
-
             /* 미니언즈 정보박스 */
-            .info-box {
+            .info-box{
                 position: absolute;
-                background-color: rgba(0, 0, 255, 0.5);
+                background-color: rgba(0, 0, 255, 0.512);
                 padding: 15px;
                 border-radius: 0 0 30px 0;
                 font-size: 1.2vw;
                 color: #fff;
             }
             /* 리셋버튼 */
-            .rbtn {
+            .rbtn{
                 background-color: #000;
                 color: #fff;
                 width: 50px;
@@ -124,6 +126,7 @@
            
                 <!-- 리셋을 한다면 이렇게...! -->
                 <button class="rbtn">리셋</button>
+
             </div>
             <!-- 미니언즈 들어가는 박스 -->
             <div class="mini-space">
