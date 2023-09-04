@@ -40,7 +40,7 @@ function loadFn(){
 
 
     // [2] 따라다니는 원 셋팅하기
-    // 1. 대상선정 : .mover 
+    // 1. 대상선정 : 
     // (1) 움직일 대상 : .mover
     const mover = qs('.mover');
     // (2) 이벤트 대상 : document.body
@@ -67,7 +67,7 @@ function loadFn(){
     */
 
     // 무버 크기의 절반계산
-    let gap = mover.clientWidth;
+    let gap = mover.clientWidth/2;
     //선택요소의 크기 JS
     //width 는 clientWidth, height는 clientHeight
     console.log('무버width:',gap);
@@ -78,6 +78,8 @@ function loadFn(){
         // 1. 위치값 가져오기 (박스중앙위치로 보정)
         let posx = e.pageX - gap;
         let posy = e.pageY - gap;
+        // let posy = e.clientY - gap;
+        // -> 만약 .mover가 fixed 포지션이면 브라우저 화면에서의 위치인 clientY를 사용한다!
 
         // 2. 무버에 위치값 적용하기
         mover.style.top = posy + 'px';
@@ -90,4 +92,24 @@ function loadFn(){
 
     }; //onmousemove
 
+    // 이벤트 구역을 들어올때만 보이기 / 나가면 숨기기
+    myBody.onmouseenter = () => {
+        mover.style.opacity = 1;
+    }; // mouseenter
+    myBody.onmouseleave = () => {
+        mover.style.opacity = 0;
+    }; // mouseleave
+
+    // [3] a요소에 오버시 원 크게만들기
+    // 대상 : .link
+    const link = qsa('.link');
+    console.log('링크:',link);
+
+    // 한번에 셋팅하기
+    link.forEach(ele=>{
+        // a요소에 마우스 들어올때
+        ele.onmouseenter = () => mover.style.transform = 'scale(2)';
+        // a요소에 마우스 나갈때
+        ele.onmouseleave = () => mover.style.transform = 'scale(1)';
+    }); // forEach
 }// 로드함수
