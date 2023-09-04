@@ -183,5 +183,6 @@ function movePage(dir){ //dir은 방향값(1-아랫쪽, 0- 윗쪽)
     if(pg_num==total_pg) pg_num=total_pg-1;
 
     // 3. 페이지 이동하기
-    window.scrollTo(0,window.innerHeight*pg_num);
+    window.scrollTo(0,qsa('.page')[pg_num].offsetTop);
+    console.log('여기야!',qsa('.page')[pg_num].offsetTop);
 } // movePage함수
