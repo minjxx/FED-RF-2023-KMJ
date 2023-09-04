@@ -28,6 +28,8 @@ body::before{
 html{
     /* rem단위를 위한 root 글자설정! */
     font-size: 10px;
+    /* 부드러운 스크롤 */
+    scroll-behavior: smooth;
 }
 body{
     color: #fff;
@@ -50,6 +52,72 @@ body{
     font-size: 4rem;
 }
 
+/* 첫페이지 타이틀 */
+.t1{
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+
+    font-family: "Monoton", cursive;
+    font-weight: normal;
+    font-size: 70px;
+    transform: translateY(5vh);
+}
+/* 하위 span */
+.t1 span{
+    transform: translateY(200%) scale(0);
+    display: inline-block;
+    transition: .4s ease-in;
+}
+/* 타이틀에 .on일 경우 등장속성변경 */
+.t1.on span{
+    transform: translateY(0) scale(1);
+}
+
+/* 두번째 페이지 타이틀 */
+.t2{
+    position: sticky;
+    top: 15vh;
+    font-family: 'Single Day', cursive;
+}
+
+/* 최외곽박스 공통 */
+.wrap-box{
+    position: relative;
+    /* 부모자격 */
+    height: 100vh;
+}
+
+/* 이동버튼 디자인 */
+.gobtn {
+    position: absolute;
+    right: 3%;
+    /* 부모는? .page */
+    font-size: 30px;
+    z-index: 99999; /* 제일위! */
+}
+/* 가상클래스로 화살표모양 넣기 */
+#pg1 .gobtn::after {
+    content: "👇";
+}
+#pg2 .gobtn::after {
+    content: "👆";
+}
+/* 개별위치 */
+#pg1 .gobtn {
+    bottom: 2%;
+}
+#pg2 .gobtn {
+    top: 2%;
+}
+/* 오버시 a변경 */
+.gobtn:hover {
+    color: hotpink;
+    text-decoration: overline;
+    text-decoration-style: wavy;
+}
+
+
 /********** 개별요소 디자인 **********/
 .avengers-box{
     position: absolute;
@@ -68,6 +136,15 @@ body{
     inset 0 0 30px lightgreen;
 
     background: url(../ab_img/ab0.jpg) no-repeat center/cover;
+
+    /* 트랜스폼 처음에 안보임 */
+    transform: scale(0);
+    /* 트랜지션 */
+    transition: 2s ease-in-out;
+}
+/* 클래스 on을 주면 등장!!! */
+.avengers-box.on{
+    transform: scale(1);
 }
 
 /* 캐릭터 공통 */
@@ -80,7 +157,19 @@ body{
     width: 150px;
     height: 150px;
 
+    /* 처음에 모두 안보임! */
+    opacity: 0;
+
+    /* 트랜지션 */
+    transition: 1s ease-in-out 2s;
+
 }
+
+/* 부모박스 .on 적용시 동시에 보이게함! */
+.avengers-box.on .hero{
+    opacity: 1;
+}
+
 /* 어벤저스 이미지 */
 .hero img{    
     width: 100%;
@@ -123,7 +212,9 @@ body{
     transition: .4s ease-in-out;
 }
 
-/* 상위박스 .hero오버시 설명 보이기 */
+/* 상위박스 .hero오버시 설명 보이기
+어벤저스 박스에 .active가 부여된 후 오버작동함 */
+.avengers-box.active 
 .hero:hover .txt{
     height: 220px;
     transform: translateY(-50%);
@@ -149,23 +240,46 @@ body{
 }
 
 /* .hero 순서별 위치값셋팅 */
-.hero:nth-child(1){
+.avengers-box.on .hero:nth-child(1){
     /* 개별위치이동값 */
-    transform: translate(-170%,-110%);
+    transform: translate(-170%,-110%) rotateY(720deg);
 }
-.hero:nth-child(2){
+.avengers-box.on .hero:nth-child(2){
     /* 개별위치이동값 */
-    transform: translate(-170%,110%);
+    transform: translate(-170%,110%) rotateY(720deg);
 }
-.hero:nth-child(3){
+.avengers-box.on .hero:nth-child(3){
     /* 개별위치이동값 */
-    transform: translate(0%,220%);
+    transform: translate(0%,220%) rotateY(720deg);
 }
-.hero:nth-child(4){
+.avengers-box.on .hero:nth-child(4){
     /* 개별위치이동값 */
-    transform: translate(170%,110%);
+    transform: translate(170%,110%) rotateY(720deg);
 }
-.hero:nth-child(5){
+.avengers-box.on .hero:nth-child(5){
     /* 개별위치이동값 */
-    transform: translate(170%,-110%);
+    transform: translate(170%,-110%) rotateY(720deg);
+}
+
+/* 두번째 페이지 영역 */
+.trailer{
+    position: relative;
+    /* 부모자격 - .trailer-box */
+}
+.trailer-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* 동영상박스 크기 제한줌!(글자가려짐 방지) */
+    width: min(900px,70%);
+    /* 비율설정 - 16 : 9 */
+    aspect-ratio: 16/9;
+    /* 비율설정시 유의사항 - height를 설정하지말것! */
+}
+.trailer-box iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
 }
