@@ -8,7 +8,7 @@
 
 /* 공사중표시 */
 body * {
-    /* outline: 2px dashed #ccc; */
+    outline: 2px dashed #ccc;
 }
 body > div > * {
     outline-color: red;
@@ -35,13 +35,14 @@ body > div > * {
 .cat-box{
     position: absolute;
     bottom: 5%;
+
     /* 플렉스박스 */
     display: flex;
     flex-wrap: wrap;
     /* 진행방향정렬 */
     justify-content: center;
     /* 사이간격 */
-    gap:0 1.2vw;
+    gap: 0 min(1.1vw,5px);
 
     width: 100%;
     margin: 0 auto;
@@ -52,7 +53,7 @@ body > div > * {
     width: calc(95%/4);
     /* 개별박스 비율설정 : height설정안함! */
     aspect-ratio: 2/1.2;
-    /* outline: 2px dashed blue; */
+    outline: 2px dashed blue;
 }
 /* 캐릭터 컨텐츠박스 */
 .cat-content{
@@ -61,7 +62,7 @@ body > div > * {
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: 94%;
+    height: 93%;
     /* 트랜지션 */
     transition: height .4s ease-in-out;
 }
@@ -69,6 +70,7 @@ body > div > * {
 .cat-box article:hover .cat-content{
     height: 200%;
 }
+
 .cat-content .part{
     flex: 1;
     /* 등분할 */
@@ -105,10 +107,12 @@ body > div > * {
 }
 
 /* 캐릭터 설명박스 */
-.desc-box {
+.desc-box{    
     height: 50%;
+    /* 스크롤바 생성 */
     overflow: auto;
-    background: url(../images/eachBG.jpg) no-repeat bottom/cover;
+    background: 
+    url(../images/eachBG.jpg) no-repeat bottom/cover;
     border-radius: 10px 5px 5px 10px;
 }
 /* 캐릭터 타이틀 */
@@ -120,13 +124,13 @@ body > div > * {
     padding: 15px 10px 5px;
     letter-spacing: -1px;
 }
-/* 캐릭터 설명 */
-.desc-box p {
+/* 캐릭터 설명박스 */
+.desc-box p{
     font-family: 'Single Day','ZCOOL KuaiLe';
     font-size: min(1.8rem,1.3vw);
     line-height: 1.6;
     padding: min(1vw,1.5rem);
-    text-align: justify;
+    text-align: justify;/* 양쪽정렬 */
 }
 
 /************* 3. 도깨비메뉴박스 *************/
