@@ -19,7 +19,7 @@ const stage = domFn.qs('.stage-letters');
 console.log('대상:',stage);
 
 // 3. 글자 데이터 변수할당
-const myText = '무궁화꽃이 피었습니다!'
+const myText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, voluptate. Culpa, beatae impedit? Ab facere nemo culpa facilis voluptatum eos maxime unde quae, quas repellat repudiandae illo optio temporibus? Et.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, voluptate. Culpa, beatae impedit? Ab facere nemo culpa facilis voluptatum eos maxime unde quae, quas repellat repudiandae illo optio temporibus? Et.'
 
 // 4. 데이터글자 한글자씩 태그로 싸기
 // for of 사용!
@@ -34,7 +34,7 @@ for(let x of myText){
     if(x==' ')
         hcode += '&nbsp;';
     else
-        hcode += `<span style="transition-delay: ${seqNum*.2}s;">${x}</span>`;
+        hcode += `<span style="transition-delay: ${seqNum*.03}s;">${x}</span>`;
     
     // 순차적인 지연시간 생성을 위한 숫자변수 증가
     seqNum++;
