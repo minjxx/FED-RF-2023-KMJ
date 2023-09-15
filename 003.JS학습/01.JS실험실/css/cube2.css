@@ -14,6 +14,7 @@
 html,body{
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 body{
     background-image: 
@@ -43,7 +44,7 @@ body{
 /* preserve-3d 적용범위박스 + 높이값설정박스 */
 .content{
     position: relative;
-    height: 300vh;
+    height: 100vh;
 
      /* 
         [ 입체로 설정하기 ]
@@ -84,6 +85,8 @@ body{
     /* 하위 span을 위한 3D설정 */
     transform-style: preserve-3d;
    
+    /* 트랜지션 */
+    transition: .3s ease-out;
 
     /* 입체를 잘보이게 하기위해 약간 회전함 */
     /* transform: rotateY(30deg); */
