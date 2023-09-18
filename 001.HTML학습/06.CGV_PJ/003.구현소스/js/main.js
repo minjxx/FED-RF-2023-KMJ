@@ -20,7 +20,7 @@ const pmenu = domFn.qsa('.poster-menu a');
 // 1-2. 변경 대상 : .screen
 const screen = domFn.qs('.screen');
 // 1-3. 포스터 메뉴 리스트
-const mlist = domFn.qsa('.poster-menu li')
+const mlist = domFn.qsa('.poster-menu li');
 
 console.log('대상:',pmenu,screen,mlist);
 
