@@ -2,11 +2,11 @@
 
 // 모듈 불러오기 ///////////////////
 // DOM함수 모듈
-import dFn from './dom.js';
+import dFn from "./dom.js";
 // 부드러운 스크롤 모듈
-import {startSS,setPos} from './smoothScroll23.js';
+import { startSS, setPos } from "./smoothScroll23.js";
 // 데이터 모듈
-import { gridData,gnbData } from './data_drama.js';
+import { gridData, gnbData } from "./data_drama.js";
 
 // 부드러운 스크롤 적용 //////////
 startSS();
@@ -36,28 +36,31 @@ desc_box.forEach((ele) => {
 const liveBox = dFn.qs(".live-box");
 console.log("대상:", liveBox);
 
-// 2. 현장포토 데이터를 기반으로 HTML코드 만들기
-let hcode = "<ul>";
+// 2. 그리드 스타일 데이터 생성하기 함수
+function makeGrid() {
+    // 1. 현장포토 데이터를 기반으로 HTML코드 만들기
+    let hcode = "<ul>";
 
-// 반복코드 만들기 /////
-// 현장포토 데이터 - data_drama.js에서 가져옴
-gridData[0].forEach((val) => {
-    // html변수에 계속 넣기
-    hcode += ` <li>
-            <figure>
-                <img src="images/live_photo/${val.imgName}.jpg" alt="${val.title}">
-                <figcaption>${val.title}</figcaption>
-            </figure>
-        </li>
-    `;
-}); //////// forEach /////////////
+    // 반복코드 만들기 /////
+    // 현장포토 데이터 - data_drama.js에서 가져옴
+    gridData[0].forEach((val) => {
+        // html변수에 계속 넣기
+        hcode += ` <li>
+                <figure>
+                    <img src="images/live_photo/${val.imgName}.jpg" alt="${val.title}">
+                    <figcaption>${val.title}</figcaption>
+                </figure>
+            </li>
+        `;
+    }); //////// forEach /////////////
 
-hcode += "</ul>";
+    hcode += "</ul>";
 
-//   console.log(hcode);
+    // console.log(hcode);
 
-// 3. 대상박스에 html코드 넣기
-liveBox.innerHTML = hcode;
+    // 2. 대상박스에 html코드 넣기
+    liveBox.innerHTML = hcode;
+} // makeGrid 함수 //////////////////////////
 
 //////////////////////////////////////////////
 // [ GNB 서브메뉴 셋팅하기 ]
@@ -117,7 +120,7 @@ const gnb = dFn.qsa(".gnb>ul>li");
 gnb.forEach((ele) => {
     // 서브메뉴가 있을때만 이벤트 설정하기!
     // if문에서 undefined/null 은 false처리됨!
-    if(dFn.qsEl(ele,'.smenu')){
+    if (dFn.qsEl(ele, ".smenu")) {
         dFn.addEvt(ele, "mouseover", overFn);
         dFn.addEvt(ele, "mouseout", outFn);
     }
