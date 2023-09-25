@@ -133,49 +133,50 @@
                 // 2. 각 코드 생성후 개별박스 클릭시
                 // 객체 메서드 호출하여 메시지 창 띄우기!
                 // 대상: .cbx
-                const cbx = qsa('.cbx');
+                const cbx = qsa(".cbx");
                 // 이벤트 설정
-                cbx.forEach((ele,idx)=>{
+                cbx.forEach((ele, idx) => {
                     ele.onclick = () => {
                         alert(mi[idx].함수());
-                    }; ////// click //////
+                    }; ////// click ///////
                 });
                 // 기능구현
 
                 // 코드 생성함수 : 단일객체로 코드 구성함!
                 function makeCode(mvi) {
                     return `
-                    <section class="cbx">
-                        <div class="minfo">
-                            <!-- 1. 포스터 -->
-                            <div class="photo">
-                                <img src="${mvi["포스터"]}" 
-                                alt="${mvi["제목"]}의 포스터">  
-                            </div>
-                            <div class="cont">
-                                <!-- 2. 제목 -->
-                                <h2 class="tit">
-                                    ${mvi["제목"]}</h2>
-                                <!-- 3. 개요 -->
-                                <h3 class="sum">
-                                    ★장르 : ${mvi["개요"]}</h3>
-                                <!-- 4. 감독 -->
-                                <h3 class="dir">
-                                    ★감독 : ${mvi["감독"]}</h3>
-                                <!-- 5. 출연 -->
-                                <h3 class="act">
-                                    ★출연 : ${mvi["출연"]}</h3>
-                            </div>
-                        </div>
+            <section class="cbx">
+                <div class="minfo">
+                    <!-- 1. 포스터 -->
+                    <div class="photo">
+                        <img src="${mvi["포스터"]}" 
+                        alt="${mvi["제목"]}의 포스터">  
+                    </div>
+                    <div class="cont">
+                        <!-- 2. 제목 -->
+                        <h2 class="tit">
+                            ${mvi["제목"]}</h2>
+                        <!-- 3. 개요 -->
+                        <h3 class="sum">
+                            ★장르 : ${mvi["개요"]}</h3>
+                        <!-- 4. 감독 -->
+                        <h3 class="dir">
+                            ★감독 : ${mvi["감독"]}</h3>
+                        <!-- 5. 출연 -->
+                        <h3 class="act">
+                            ★출연 : ${mvi["출연"]}</h3>
+                    </div>
+                </div>
+    
+                <!-- 영화 한마디 -->
+                <h2 class="showtit">♥ 영화한마디!</h2>
+                <!-- 6. 문구 -->
+                <div class="show">
+                    ${wrapSpan(mvi["문구"])}
+                </div>
+            </section>
             
-                        <!-- 영화 한마디 -->
-                        <h2 class="showtit">♥ 영화한마디!</h2>
-                        <!-- 6. 문구 -->
-                        <div class="show">
-                            ${wrapSpan(mvi["문구"])}
-                        </div>
-                    </section>
-                    `;
+            `;
                 } /////// makeCode 함수 ////////////
 
                 // 3. 영화한마디 처리함수 : 한글자씩 span싸기
@@ -189,22 +190,6 @@
                     // 결과리턴 : 만들어진 코드
                     return hcode;
                 } ///////////// wrapSpan 함수 ///////
-
-                /************************************************* 
-                [ 객체를 위한 for in 문 ]
-
-                - 구문: 
-                for(변수 in 객체){코드}
-
-                - 작동원리:
-                객체의 개수만큼 순서대로 속성명과 속성값을 가져옴
-
-                - 변수는 객체의 속성명이다!
-
-                - 객체의 값을 사용하려면 for in 문 안에
-                    객체[변수] 로 쓰면됨!
-
-            *************************************************/
             }); //////////////// 로드구역 ///////////////////////
             /////////////////////////////////////////////////////
         </script>
