@@ -45,8 +45,20 @@
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
         <!-- 4.내가 리액트로 구현한 JS -->
+        <script type="text/babel" src="./js/01.시작하기.jsx"></script>
+        <!-- 
+            type을 반드시 "text/babel"로
+            셋팅한다!
+            그리고 상단에 위치해도 내부적으로
+            defer처리되어 html태그 로딩후 실행됨
+            -> 기본 모듈과 유사함!
+         -->
     </head>
     <body>
-
+        <!-- 리액트 출력 대상요소 -->
+        <div id="mydiv"></div>
+        <!-- 
+            보통 리액트 대상요소를 #root로 만들것을 권고하지만 꼭 그럴필요는 없다!
+         -->
     </body>
 </html>
