@@ -1,7 +1,7 @@
 // 움직이는 폰 + 무한글자이동 JS - iphone.js
 
-// DOM 메서드 
-import dFn from './dom.js';
+// DOM 메서드
+import dFn from "./dom.js";
 
 /******************************************** 
     [ 아이폰 영역오버시 회전기능 ]
@@ -16,31 +16,38 @@ import dFn from './dom.js';
 // 0.데이터 셋팅 : x,y축 회전 각도를 배열에 셋팅!
 const iDeg = [
     // 상단영역
-    [20,60],
-    [20,30],
-    [20,0],
-    [20,-30],
-    [20,-60],
+    [20, -60,"Bart_Simpson.png"],
+    [20, -30,"Lisa_Simpson.png"],
+    [20, 0,"Maggie_Simpson.png"],
+    [20, 30,"Marge_Simpson.png"],
+    [20, 60,"simpson.png"],
     // 하단영역
-    [-20,60],
-    [-20,30],
-    [-20,0],
-    [-20,-30],
-    [-20,-60],
+    [-20, -60,"earth.png"],
+    [-20, -30,"jupiter.png"],
+    [-20, 0,"moon.png"],
+    [-20, 30,"pluto.png"],
+    [-20, 60,"sun.png"],
 ];
 
 // 1. 대상선정
 // 1-1.이벤트 대상: .evt-box div
-const evtBox = dFn.qsa('.evt-box div');
+const evtBox = dFn.qsa(".evt-box div");
 // 1-2.변경대상: .iphone
-const iphone = dFn.qs('.iphone');
+const iphone = dFn.qs(".iphone");
+// 1-3.스크린: #screen
+const screen = dFn.qs('#screen');
 
-console.log('대상:',evtBox,iphone);
+console.log("대상:", evtBox, iphone);
 
-// 2. 이벤트설정
-evtBox.forEach(ele=>dFn.addEvt(ele,'mouseenter',seeMe));
+// 2. 이벤트설정 : 이벤트 종류 - mouseenter(경계선안에들어옴)
+evtBox.forEach((ele, idx) => dFn.addEvt(ele, "mouseenter", () => seeMe(idx)));
 
 // 3. 함수 만들기 ///////////////////////
-function seeMe(){
-    console.log('나를봐!',this);
+function seeMe(seq) {// seq - 순번받기
+    // console.log("나를봐!", event.currentTarget, seq);
+
+    // 1. 변경적용하기 : 대상 - .iphone
+    iphone.style.transform = `rotateX(${iDeg[seq][0]}deg) rotateY(${iDeg[seq][1]}deg)`;
+    // 트랜지션 변경하기
+    iphone.style.transition = '.4s ease-out';
 } ///////// seeMe 함수 /////////
