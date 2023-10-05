@@ -515,7 +515,8 @@ const linkData = {
     corp: {
         "CJ 그룹": ["CJ주식회사"],
         "엔터테인먼트 & 미디어": ["CJ ENM 엔터테인먼트부문", "TVING", "CJ CGV"],
-        "식품 & 식품 서비스": ["CJ제일제당 BIO사업부문", "CJ Feed & Care"],
+        "식품 & 식품 서비스": ["CJ제일제당","CJ푸드빌","CJ프레시웨이"],
+        "생명공학":["CJ제일제당 BIO사업부문","CJ Feed & Care"],
         "물류 & 신유통": [
         "CJ대한통운",
         "CJ대한통운 건설부문",
@@ -528,4 +529,4 @@ const linkData = {
 }; ///////////// linkData ///////////////
 
 // 모듈화 내보내기 ///////////
-export { gridData, gnbData, previewData, clipData };
+export { gridData, gnbData, previewData, clipData,linkData };
