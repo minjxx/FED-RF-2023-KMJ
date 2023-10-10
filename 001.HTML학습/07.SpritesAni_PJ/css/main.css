@@ -114,7 +114,7 @@ body {
     background-size: auto 100%;
 
     /* 애니메이션: 이시이지반방마 */
-    animation: spani1 1s steps(8) infinite ;
+    animation: spani1 1s steps(8) infinite;
 
     /* outline: 5px solid red; */
 }
@@ -179,14 +179,14 @@ body {
     background: url(../images/spAni01.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-   animation: spani2 1s steps(10) infinite;
+    animation: spani2 1s steps(10) infinite;
+   
 }
 
 /* 꼬마 키프레임 */
 @keyframes spani2 {
     to{
         background-position-x: -500px;
-
     }
 }
 /* 키프레임 */
@@ -201,11 +201,14 @@ body {
     background: url(../images/spAni02.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-    animation:spani3X 1s steps(6) infinite, spani3Y 3s steps(3) infinite;
+    animation: 
+    spani3X 1s steps(6) infinite,
+    spani3Y 3s steps(3) infinite;
     /* 
         x축은 6장면을 1초간 작동
         y축은 3줄을 3초간 작동
     */
+    
 }
 
 /* 몬스터 키프레임 X축 */
@@ -238,14 +241,16 @@ body {
     transform: scale(.5);
 
     /* 애니메이션: 이시이지반방마 */
-    animation:spani4X .8s steps(5) infinite, spani4Y 2.4s steps(3) infinite;
+    animation: 
+    spani4X .8s steps(5) infinite,
+    spani4Y 2.4s steps(3) infinite;    
 
 
 }
 /* 웃는여자 키프레임 X축 */
 @keyframes spani4X {
     to{
-        background-position-x: -1280px;
+       background-position-x: -1280px;
     }
 }
 /* 웃는여자 키프레임 Y축 */
