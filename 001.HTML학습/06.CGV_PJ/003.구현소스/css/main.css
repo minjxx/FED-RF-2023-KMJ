@@ -26,26 +26,35 @@ body.on::after {
     background-color: #000;
     opacity: 0.7;
     z-index: 9999;
-    /* 보여줄 요소는 이것보다 숫자가 크면됨 */
+    /* 보여줄 요소는 이것보다 숫자가 크면됨! */
 }
+
 /**************** 1.상단영역 ****************/
 .header{
     position: relative;
+    /* 부모자격 - .gnb */
     height: 80px;
     background: url(../images/curtain.jpg) repeat-x;
+
+    /* 상단영역박스 가장위! */
     z-index: 999;
 }
 /* 1-0.맵버튼박스 */
-.btn-map {
+.btn-map{
     position: absolute;
     top: 0;
     left: 0;
     width: 120px;
     height: 80px;
+    /* outline: 2px dashed yellow; */
+    /* 나간배경 숨기기 */
     overflow: hidden;
+
+    /* 손가락모양 */
+    cursor: pointer;
 }
 /* 맵버튼 가상요소로 무한이동 배경넣기 */
-.btn-map::before {
+.btn-map::before{
     content: '';
     position: absolute;
     left: 0;
@@ -57,12 +66,47 @@ body.on::after {
 }
 /* 무한반복 배경애니 키프레임 */
 @keyframes bg-ani {
-    to {
+    to{
         left: -100%;
     }
-    
 }
-/* 1-1. 로고 */
+
+
+/* 1-0-1.걷는존 */
+.spani1{
+    position: relative;
+    width: 40px;
+    aspect-ratio: 100/176;
+    /* height: 176px; */
+    margin: 0 auto;
+    margin-top: 10px;
+
+    background: url(../images/spAni03.png) no-repeat;
+    background-size: auto 100%;
+
+    /* 애니메이션: 이시이지반방마 */
+    animation: spani1 1s steps(8) infinite;
+
+    /* outline: 5px solid red; */
+}
+
+/* 걷는존 키프레임 */
+@keyframes spani1 {
+    to{
+       background-position-x: calc(40px*-8);
+       /* 한개당 가로크기 * 장면수 */
+    }
+    /* 배경이미지 x축 이동일 경우
+    줄였을때 이미지 전체 가로크기를
+    마이너스 값으로 써주면된다! 
+    */
+}
+
+/* 키프레임 */
+
+
+
+/* 1-1.로고 */
 .tit{
     color: aquamarine;
     font-size: 40px;
@@ -81,121 +125,133 @@ body.on::after {
         text-shadow: 0 0 12px aquamarine;
     }
 }
-
-/* 2-2. GNB */
-.gnb {
+/* 2-2.GNB */
+.gnb{
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     right: 10px;
 }
-.gnb ul {
+.gnb ul{
     /* 플렉스박스 */
     display: flex;
     /* 사이간격 */
-    gap:0 20px;
+    gap: 0 20px;
     font-family: 'Jua';
 
     /* 영사기박스 보다 위 */
     position: relative;
     z-index: 1;
 }
-.gnb ul>li {
+/* 상위메뉴 li */
+.gnb ul>li{
     position: relative;
+    /* 부모자격: .smenu */
 }
-/* 상위메뉴 a*/
-.gnb ul>li>a {
+/* 상위메뉴 a */
+.gnb ul>li>a{
     display: inline-block;
     /* a는 원래 inline인데 트랜스폼이 적용안됨!
     따라서 inline-block로 변경해야 적용됨! */
     font-size: 2rem;
     padding-bottom: 10px;
-    /* 패딩으로 젠틀앱솔루트인 .smenu를 아래쪽으로 밀려서 이동되게함! li에 연결상태유지! */
+    /* 패딩으로 젠틀앱솔루트인 .smenu를 아랫쪽으로
+    밀려서 이동되게함! li에 연결상태유지! */
     /* 트랜지션 */
     transition: .3s;
 }
 /* 상위메뉴 li오버시 a */
-.gnb ul>li:hover>a {
+.gnb ul>li:hover>a{
     color: aquamarine;
     /* 글자확대 */
-    transform: scale(1.15);
+    transform: scale(1.3);
     /* 글자 글로우효과 */
-    text-shadow: 0 0 5px aquamarine;
+    text-shadow: 0 0 4px aquamarine;
     /* 애니메이션 */
     animation: tit-ani .5s ease-in infinite alternate;
 }
 
 /* GNB 서브메뉴 */
-.smenu {
+.smenu{
     position: absolute;
     left: 50%;
+    /* x축방향 중앙이동 */
     transform: translateX(-50%);
     width: 140px;
+    padding: 3px;
+    border-radius: 5px;
     background: url(../images/bg_smenu.png) no-repeat center/cover;
-    /* 필터를 이용한 그림자주기
-    -> box-shadow를 사용하면 본 박스에만 효과가 적용되고 가상요소 삼각형에는 적용안됨. 필터는 내부 구성요소 모두의 외곽선에 그림자효과를 적용함! */
+
+    /* 필터를 이용한 그림자로 글로우효과주기
+    -> box-shadow를 사용하면 본 박스에만 효과가 적용되고
+    가상요소 삼각형에는 적용안됨. 필터는 내부 구성요소
+    모두의 외곽선에 그림자효과를 적용함!  */
     filter: drop-shadow(0 0 5px #fff);
 
     /* 처음에 숨기기 */
     display: none;
 }
-.gnb ul>li:hover .smenu {
+/* 상위메뉴 li에 오버시 서브메뉴 보이기 */
+.gnb ul>li:hover .smenu{
     display: block;
 }
 /* 서브메뉴 가상요소로 삼각형 만들기 */
-.smenu::before {
+.smenu::before{
     content: '';
     position: absolute;
-    top: -10px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 15px;
-    height: 10px;
-    background-color: #383838;
-    clip-path: polygon(0 100%,50% 0,100% 100%);
+    width: 20px;
+    height: 15px;
+    background-color: #373737;
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
 }
-.smenu ol {
+/* 서브메뉴 ol */
+.smenu ol{
     border: 1px solid #ccc;
     padding: 10px;
 }
 /* 서브메뉴 a */
-.smenu a {
+.smenu a{
     font-size: 1.6rem;
     line-height: 1.7;
-    transition: .3s;
 }
-/* 서브메뉴 a오버시 */
-.smenu li:hover a {
+/* 서브메뉴 li오버시 a */
+.smenu li:hover a{
     color: orangered;
 }
-/* 서브메뉴 a오버시 가상요소로 이미지 넣기! */
-.smenu li:hover a::after {
-    content: '🥤';
+/* 서브메뉴 li오버시 a가상요소로 이미지넣기! */
+.smenu li:hover a::after{
+    content: '🎪';
     float: right;
 }
 /* 서브메뉴 li별 이미지변경하기 */
-.gnb ul>li:nth-child(2) .smenu li:hover a::after {
-    content: '🎫';
+.gnb ul>li:nth-child(2) .smenu li:hover  a::after{
+    content: '🎃';
 }
 /* 서브메뉴 li별 이미지변경하기 */
-.gnb ul>li:nth-child(3) .smenu li:hover a::after {
-    content: '🎪';
+.gnb ul>li:nth-child(3) .smenu li:hover  a::after{
+    content: '✨';
 }
 /* 서브메뉴 li별 이미지변경하기 */
-.gnb ul>li:nth-child(4) .smenu li:hover a::after{
-    content: '🎁';
+.gnb ul>li:nth-child(4) .smenu li:hover  a::after{
+    content: '📣';
 }
+
 /* 개별 구분 보더 넣기 클래스 */
-.bd-top {
+.bd-top{
     border-top: 1px solid #ccc;
 }
 
 /* 영사기 박스 */
-.cam {
+.cam{
     position: absolute;
+    /* 부모는? .gnb */
     top: -12px;
     right: -70px;
 }
-.cam>img {
+/* 영사기 이미지 */
+.cam>img{
     position: relative;
     z-index: 1;
     width: 50px;
@@ -204,36 +260,39 @@ body.on::after {
     transition: .3s .2s;
 }
 /* .gnb에 오버시 영상기 돌기 */
-.gnb:hover .cam>img {
+.gnb:hover .cam>img{
     transform: rotate(0);
     /* 트랜지션 딜레이 없음 */
     transition-delay: 0s;
 }
 /* 빔박스 */
-.beam {
+.beam{
     position: absolute;
     top: -16px;
     right: 9px;
     width: 0;
     height: 70px;
-    background: url(../images/bim.png) no-repeat right/auto 100%; /* auto(가로) 100%(세로) */
+    background: url(../images/bim.png) no-repeat right/auto 100%;  
     /* 트랜지션 : 먼저 빔회수하기 */
     transition: width .2s linear;
+
 }
-/* .gnb 오버시 빔박스 빔쏘기 */
-.gnb:hover .beam {
+/* .gnb오버시 빔박스 빔쏘기 */
+.gnb:hover .beam{
     width: 200px;
-    /* 트랜지션 : 영사기 도는 .3초 기다림 */
+    /* 트랜지션 : 영사기 도는 0.3초 기다림 */
     transition-delay: .3s;
     /* 빔떨림애니 호출 */
     animation: beam-ani .01s linear infinite alternate;
 }
+
 /* 빔떨림애니 키프레임 */
 @keyframes beam-ani {
-    to {
-        opacity: .7;
+    to{
+        opacity: 0.5;
     }
 }
+
 
 
 
@@ -347,8 +406,6 @@ body.on::after {
     height: 100%;
     flex-direction: column;
 }
-
-
 /**************** 3.하단영역 ****************/
 .footer{
     display: flex;
@@ -356,42 +413,47 @@ body.on::after {
     height: 100px;
     padding: 0 15px;
 }
-/* 3-1. 로고박스 */
-.logo {
+/* 3-1.로고박스 */
+.logo{
     margin-right: 15px;
 }
-/* 3-2. 회사주소 */
-.co-info address {
+
+/* 3-2.회사주소 */
+.co-info address{
     color: #fff;
     font-family: 'cute font';
     font-size: 1.6rem;
     font-style: normal;
 }
-/* 3-3. SNS박스 */
-.sns-box {
-    margin-left:auto;
-    padding-top: 10px;
+
+/* 3-3.SNS박스 */
+.sns-box{
+    margin-left: auto;
 }
-.sns-box ol {
+.sns-box ol{
     display: flex;
-    gap: 0 5px;
+    gap: 0 15px;
 }
-.sns-box a {
+.sns-box a{
     font-size: 4rem;
 }
-/* 각 sns별 오버시 아이콘색 넣기 */
-.fa-square-facebook:hover {
-    color: lightslategray;
+/* 각 sns별 오버시 아이콘색(글자색)넣기 */
+.fa-square-facebook:hover{
+    color: cornflowerblue;
 }
-.fa-square-twitter:hover {
-    color: lightblue;
+.fa-square-twitter:hover{
+    color: lightskyblue;
 }
-.fa-square-instagram:hover {
-    color: lightcoral;
+.fa-square-instagram:hover{
+    color: orange;
 }
-.fa-square-youtube:hover {
-    color: lightsalmon;
+.fa-square-youtube:hover{
+    color: orangered;
 }
+
+
+
+
 
 
 
@@ -410,7 +472,7 @@ body.on::after {
     border: 20px solid hotpink;
     border-radius: 10px;
 
-    z-index: 99999;
+    z-index: 999999;
     /* 트랜지션: 속시이지 */
     transition: top .8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
