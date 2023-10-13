@@ -4,6 +4,10 @@
 const dFn = {
     qs : x => document.querySelector(x),
     qsa : x => document.querySelectorAll(x),
+    qsEl: (el, x) => el.querySelector(x),
+    qsaEl: (el, x) => el.querySelectorAll(x),
+    addEvt : (ele,evt,fn) => 
+            ele.addEventListener(evt,fn),
     cg : x => console.log(x),
     addZero : x => x < 10 ? '0' + x : x,
     fm : x => `${x.getFullYear()}-${
@@ -43,6 +47,13 @@ function makeDallyeok(){
     // 2. 함수 만들기 ///////////////////
     // (1) 달력 초기화구성 함수 ///////
     const initDallyeok = () => {
+        // 변수초기화
+        // 날짜 배열 초기화 : splice(시작순번,개수)
+        // -> 배열변수.splice(0) 첫배열부터 모두지움!
+        dateSet.splice(0);
+        // html코드 변수 초기화
+        hcode = '';
+
         // 현재년
         let cYr = currDate.getFullYear();
         // 현재달
@@ -121,37 +132,123 @@ function makeDallyeok(){
         } //////////// for //////////////
         
         
-        // 7. 날짜배열로 날짜태그 구성하기
+        // 7. 날짜배열로 날짜태그 구성하기 ///////
         // 7일 * 6주 = 42개
-        for(let i = 0;i<42;i++){
+        for(let i = 0; i < 42; i++){
+
             // 오늘날짜와 같은 경우 클래스"today"넣기
             if(
-                // 년,월,일이 모두 일치하는 오늘만 표시
+                // [년,월,일이 모두 일치하는 오늘만 표시]
                 // (1) 오늘날짜 == 배열값날짜 AND
-                today.getDate() == dateSet[i] && 
+                today.getDate() == dateSet[i] &&
                 // (2) 현재달 == 선택달 AND
                 today.getMonth() == currDate.getMonth() &&
                 // (3) 현재년도 == 선택년도
                 today.getFullYear() == currDate.getFullYear()
             ){
                 hcode += `<div class="date today">${dateSet[i]}</div>`;
-            } ////// if ///////
+            } ///// if //////
             else{
-
                 hcode += `<div class="date">${dateSet[i]}</div>`;
-            }
-        } //////// for /////////////
+            } ///// else /////
 
-        // 8. 날짜태그 출력하기
+
+
+        } /////////// for /////////////////
+
+        // 8. 날짜태그 출력하기 ////////
         dates.innerHTML = hcode;
+
 
         // dates.innerHTML = dateSet.map((v,i)=>
         // i<42?`<div class="date">${v}</div>`:'').join('');
         
         // dFn.cg('날짜배열:'+dateSet.map((v,i)=>
         // i<42?`<div class="date">${v}</div>`:'').join(''));
+
+        // dFn.cg(dateSet);
+        // dFn.cg(hcode);
+
+
+        // 9. 날짜정보를 사용하도록 셋팅하기 ////
+        // (1) 대상선정 : .date -> 위에서 새로 담겼으므로 새로읽음!
+        let newDate = dFn.qsa('.date');
+        // console.log(newDate);
+
+        // (2) 각 날짜 .date요소에 링크설정하기
+        newDate.forEach(ele=>{
+            dFn.addEvt(ele,'click',()=>{
+                // 1. 년도읽기
+                let nowY = yearTit.innerText;
+                // 2. 월읽기
+                let nowM = monthTit.innerText;
+                // 3. 날짜읽기
+                let nowD = ele.innerText;                
+                
+                // 4. 전달/다음달 구분하기
+                let isSpan = dFn.qsEl(ele,'span');
+                console.log('span있니?',isSpan);
+                // span이 있으면 true 처리됨!
+                if(isSpan){
+                    // span의 클래스가 'bm'/'am' 인지구분하기
+                    let isAM = isSpan.classList.contains('am');
+                    if(isAM){ // 다음달이므로 1 더함
+                        nowM++;
+                        if(nowM==13){ 
+                            // 13월은 1월로 처리
+                            nowM = 1; 
+                            // 1월은 다음해로 처리
+                            nowY++;
+                        } ///// if //////
+                    } //// else ////////
+                    else{ /// 'bm'일 경우  즉, 전달!
+                        nowM--;
+                        if(nowM==0){
+                            // 0월은 12월로 처리
+                            nowM = 12;
+                            // 12월은 전해로 처리
+                            nowY--;
+                        } //// if ////
+                    } ////// else //////
+                } ////////// if ///////////
+                
+                // 날짜구성하기 : yyyy-mm-dd
+                let setDate = 
+                `${nowY}-${dFn.addZero(nowM)
+                }-${dFn.addZero(nowD)}`;
+                 
+                // 요일셋팅하기 : 해당날짜의 요일 getDay()
+                let setDay = new Date(setDate).getDay();
+
+                // 날짜요일출력 : yyyy-mm-dd(요일)
+                console.log(setDate+`(${week[setDay]})`);
+
+            }); /////// click 함수 ////////
+
+        }); //////////// forEach /////////////////
+
         
     }; /////// initDallyeok 함수 ////////
+
+
+
+    // (2) 이전/다음달력 출력하기 함수 ////////////////////
+    const chgCalendar = (num) => { 
+        // num(1이면 다음, -1이면 이전)
+        console.log('달력변경 고고!');
+        // 이전/다음달로 변경하여 initDallyeok() 함수호출!
+        // getMonth() 월가져오기 / setMonth() 월 셋팅하기!
+        currDate.setMonth(currDate.getMonth()+num);
+        initDallyeok();
+    }; //////// prevCalendar 함수 ///////////////////
+
+
+    // 3. 이벤트 설정하기 ////////////////////
+    // 이전버튼에 함수연결하기 : 달을 빼기위해 -1전달
+    dFn.addEvt(dFn.qs('.btnL'),'click',()=>chgCalendar(-1));
+    // 다음버튼에 함수연결하기 : 달을 더하기위해 1전달
+    dFn.addEvt(dFn.qs('.btnR'),'click',()=>chgCalendar(1));
+
 
 
     // 초기셋팅함수 호출!
