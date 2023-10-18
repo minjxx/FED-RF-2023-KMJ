@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>달력 구현</title>
+        <link rel="stylesheet" href="./css/calendar.css" />
+        <!-- 메인 JS -->
+        <script src="./js/main.js" type="module"></script>
+        <style>
+            .dalcom {
+                display: flex;
+            }
+            .dalcom > div {
+                flex: 1;
+                height: 50px;
+                border: 3px dotted orangered;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>달력 컴포넌트 활용</h1>
+
+        <div class="dalcom">
+            <!-- 달력 첫번째 영역 -->
+            <div>
+                <input type="text" />
+                <div class="dalcom1"></div>
+            </div>
+            <!-- 달력 두번째 영역 -->
+            <div>
+                <input type="text" />
+                <div class="dalcom2"></div>
+            </div>
+        </div>
+    </body>
+</html>
