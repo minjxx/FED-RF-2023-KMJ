@@ -5,6 +5,9 @@ html,body,h1{
     margin: 0;
     padding: 0;
 }
+body{
+    background-color: #ccc;
+}
 /* 페이지 클래스 */
 .page{
     position: relative;
@@ -135,6 +138,7 @@ ol {
     top: 90%;
     transform: translateY(-50%) scale(.4);
     /*Y축 중앙이동*/
+    z-index: 1;
 }
 
 /*왼쪽버튼*/
@@ -155,6 +159,7 @@ ol {
     bottom: 5px;
     left: 5px;
     transform: scale(.7);
+    z-index: 1;
 }
 
 .indic li {
