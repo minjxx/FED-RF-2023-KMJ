@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>drag and drop 기능</title>
         <style>
+            html, body {
+                overflow-x: hidden;
+            }
             div.draggable {
                 float: left;
                 width: 160px;
@@ -30,7 +33,7 @@
 
             /* 드롭박스 */
             .dropshow {
-                width: 500px;
+                max-width: 500px;
                 height: 400px;
                 text-align: center;
                 background: url(addimg/effect2.jpg) no-repeat center/cover;
@@ -44,7 +47,7 @@
 
             /* 드래그 박스 */
             .dbox {
-                width: 720px;
+                max-width: 720px;
                 height: 170px;
                 margin: 0 auto;
                 border: 2px dashed blue;
@@ -53,6 +56,8 @@
 
         <script src="./js/jquery-3.6.0.min.js"></script>
         <script src="./js/jquery-ui.min.js"></script>
+        <!-- 모바일용 드래그/드롭 이벤트 전환 플러그인JS -->
+        <script src="./js/jquery-touch-punch.min.js"></script>
         <!-- 메인 JS -->
         <script src="./js/main.js"></script>
         <!-- 
@@ -97,5 +102,8 @@
                 <img src="addimg/effect1.jpg" alt="허나투어" />
             </div>
         </div>
+
+        <!-- 유튜브 동영상 추가박스 -->
+        <div class="u-box"></div>
     </body>
 </html>
