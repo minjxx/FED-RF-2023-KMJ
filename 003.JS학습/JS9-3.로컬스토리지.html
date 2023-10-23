@@ -63,6 +63,7 @@
                 background-color: #ccc;
             }
         </style>
+        <script type="module" src="./js/js9-3.local_storage.js"></script>
         
     </head>
     <body>
@@ -81,11 +82,13 @@
                     <li>캐릭터는? : <span class="cat"></span></li>
                 </ol>
 
-                <button onclick="startFn('로칼쓰')">처음</button>
-                <button onclick="showFn('.local')">보여줘</button>
-                <button onclick="delFn('로칼쓰')">전체삭제</button>
-                <button onclick="makeObj()">처리</button>
-                <button onclick="bindData()">업데이트</button>
+                <div class="local-box">
+                    <button>처음</button>
+                    <button>보여줘</button>
+                    <button>전체삭제</button>
+                    <button>처리</button>
+                    <button>업데이트</button>
+                </div>
 
                 <div class="board"></div>
 
@@ -120,11 +123,13 @@
                     <li>캐릭터는? : <span class="cat"></span></li>
                 </ol>
 
-                <button onclick="startFn('세션쓰')">처음</button>
-                <button onclick="showFn('.session')">보여줘</button>
-                <button onclick="delFn('세션쓰')">전체삭제</button>
-                <button onclick="">처리</button>
-                <button onclick="">추가</button>
+                <div class="session-box">
+                    <button>처음</button>
+                    <button>보여줘</button>
+                    <button>전체삭제</button>
+                    <button>처리</button>
+                    <button>추가</button>
+                </div>
             </div>
         </div>
     </body>
