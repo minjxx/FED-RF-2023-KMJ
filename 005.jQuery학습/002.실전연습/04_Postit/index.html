@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>drag and drop 기능</title>
         <style>
-            html, body {
+            html,body{
                 overflow-x: hidden;
             }
             div.draggable {
@@ -34,7 +34,7 @@
             /* 드롭박스 */
             .dropshow {
                 max-width: 500px;
-                height: 400px;
+                min-height: 400px;
                 text-align: center;
                 background: url(addimg/effect2.jpg) no-repeat center/cover;
                 font: bold 36px/400px "맑은 고딕", "굴림";
@@ -48,9 +48,14 @@
             /* 드래그 박스 */
             .dbox {
                 max-width: 720px;
-                height: 170px;
+                min-height: 170px;
                 margin: 0 auto;
                 border: 2px dashed blue;
+            }
+            .dbox::after{
+                content: '';
+                display: block;
+                clear: both;
             }
         </style>
 
