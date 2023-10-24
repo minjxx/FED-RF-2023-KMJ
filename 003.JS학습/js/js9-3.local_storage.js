@@ -93,6 +93,10 @@ function localSFn(){
         localStorage.setItem('lname','이정재');
         localStorage.setItem('lrole','박평호역');
         localStorage.setItem('lcat','조직내 스파이를 색출하는 해외팀 안기부팀장');
+
+        // 로컬스토리지.key(순번) -> 키이름을 리턴함!
+        console.log('두번째(1) 키명은?',localStorage.key(1),
+        '\n전체개수:',localStorage.length);
         
         // console.log('로컬쓰 lname:',
         // localStorage.getItem('lname'));
@@ -115,6 +119,7 @@ function localSFn(){
 
     // -> 객체를 생성하여 로컬 스토리지에 넣기
     else if(btxt = '처리'){
+        // 로컬쓰에 'minfo'가 없으면 makeObj() 호출!
         if(!localStorage.getItem('minfo')) makeObj();
 
         // 바인딩 함수 호출!
@@ -181,8 +186,8 @@ function bindData(){
                 <td>${v.idx}</td>
                 <td>${v.tit}</td>
                 <td>${v.cont}</td>
-                <td>
-                    <a href="#" onclick="delRec(${i})">×</a>
+                <td class="del-link">
+                    <a href="#" data-idx="${i}">×</a>
                 </td>
             </tr>
         `).join(''); // 태그를 연결자없는 배열전체로 저장
@@ -216,12 +221,104 @@ function bindData(){
     // 4. 화면출력 : 대상 - .board
     dFn.qs('.board').innerHTML = hcode;
 
+    // 5. 화면출력 후 지우기 링크 셋팅하기
+    dFn.qsa('.board .del-link a')
+    .forEach(ele=>dFn.addEvt(ele,'click',
+    ()=>delRec(ele.getAttribute('data-idx'))));
+
 } /////////////// bindData 함수 ////////////////
 
+/// 입력 처리함수 호출 이벤트설정하기 ///////
+dFn.addEvt(dFn.qs('#sbtn'),'click',insData);
+
+/// 입력 처리함수 /////////////////////
+function insData(){
+    // 1. 입력항목 읽어오기
+    let tit = dFn.qs('#tit').value;
+    let cont = dFn.qs('#cont').value;
+    
+    // 2. 만약 하나라도 비었다면 돌아가!
+    // trim() 앞뒤공백제거 -> 스페이스바만 쳐도 불통과!
+    if(tit.trim()=="" || cont.trim()==""){
+        alert('입력데이터가 없습니다! 모두 입력하세요!');
+        return;
+    } //////////// if /////////////
+    
+    // 3. 입력처리하기
+    // 3-1.로컬쓰 데이터 가져오기 : minfo
+    let orgData = localStorage.getItem('minfo');
+    // 3-2.제이슨 파싱!
+    orgData = JSON.parse(orgData);
+
+    // 3-3. 자동증가번호 처리하기
+    // 배열을 오름차순으로 정렬하여 맨끝 배열데이터의 idx값을
+    // 읽어온후 숫자화 하여 +1처리함!
+    // 3-3-1. 배열 오름차순처리 : 
+    // -> 배열.sort((a,b)=>{
+    // return a == b ? 0 : a > b ? 1 : -1})
+    // -> 배열.sort((a,b)=>{
+    // return a.idx == b.idx ? 0 : a.idx > b.idx ? 1 : -1})
+    orgData.sort((a,b)=>{
+        return a.idx == b.idx ? 0 : a.idx > b.idx ? 1 : -1
+    }); ///// sort /////
+
+    // 3-3-2. idx값으로 마지막배열값 읽기
+    let lastArr = orgData[orgData.length-1].idx;
+
+    console.log('정렬결과:',orgData,'\n마지막idx값:',lastArr);
+
+
+    // 3-4.입력된 데이터 추가하기 : 배열 push() 메서드
+    // 자동 증가번호는 배열개수+1
+    orgData.push({
+        'idx': lastArr+1,
+        'tit':tit,
+        'cont':cont
+    }); //////// push ///////
+
+    // 3-4. 배열/객체 데이터를 문자화하여 로컬쓰에 넣기
+    // JSON.stringify()
+    localStorage.setItem('minfo',
+    JSON.stringify(orgData));
+
+    console.log('입력처리함~!!',orgData);
+
+    // 4. 리스트 업데이트하기
+    bindData();   
+
+
+} ///////////// insData 함수 //////////////////
 
 /// 삭제 처리함수 /////////////////////
 function delRec(idx){
     console.log('지울순번:',idx);
+    // 1.a요소 기본이동막기
+    event.preventDefault();
+
+    // 2. 로컬쓰 가져오기
+    // 2-1.로컬쓰 데이터 가져오기 : minfo
+    let orgData = localStorage.getItem('minfo');
+    // 2-2.제이슨 파싱!
+    orgData = JSON.parse(orgData);
+
+    // 3. 특정 데이터 배열항목 삭제
+    // splice(순번,개수) -> 특정순번부터 몇개지움
+    // 여기서는 1개삭제 이므로 splice(순번,1)
+    // confirm(메시지)
+    // -> 확인,취소 중 확인 클릭시 true리턴함!(취소는 false)
+    if(confirm('정말정말정말정말로 지우시게요?????')){
+        orgData.splice(idx,1);
+        console.log('제거후배열:',orgData);
+
+        // 4. 배열/객체 데이터를 문자화하여 로컬쓰에 넣기
+        // JSON.stringify()
+        localStorage.setItem('minfo',
+        JSON.stringify(orgData));
+
+        // 5. 리스트 업데이트하기
+        bindData();   
+    } ////////// if ///////////////
+
 
 } ////////// delRec함수 //////////////////
 
