@@ -103,9 +103,14 @@ function localSFn(){
 
     } ///////// if : 처음 /////////
     else if(btxt == '전체삭제'){
-        // 해당 url로 관리되는 로컬쓰를 모두 지움! : clear()
+        // 1.해당 url로 관리되는 로컬쓰를 모두 지움! : 
+        // -> clear()
         localStorage.clear();
         // 개별 로컬쓰로 지우는 방법은 removeItem(키명)
+        // 2. 리스트 바인딩 업데이트
+        bindData();        
+        // 3. 수정 선택박스 업데이트
+        bindMod();
     } /////// else if : 전체삭제 ////////////
     else if(btxt == '보여줘'){
         dFn.qs('.local .nm').innerText = 
@@ -119,11 +124,15 @@ function localSFn(){
 
     // -> 객체를 생성하여 로컬 스토리지에 넣기
     else if(btxt = '처리'){
-        // 로컬쓰에 'minfo'가 없으면 makeObj() 호출!
-        if(!localStorage.getItem('minfo')) makeObj();
+        // 1. 로컬쓰에 'minfo'가 없거나 
+        //'minfo'값이 '[]'배열 초기화값이면 makeObj() 호출!
+        if(!localStorage.getItem('minfo')||
+        localStorage.getItem('minfo')=='[]') makeObj();
 
-        // 바인딩 함수 호출!
+        // 2. 바인딩 함수 호출!
         bindData();
+        // 3. 수정 선택박스 업데이트
+        bindMod();
         
     } //////// else if : 처리 ////////////////
     
@@ -243,10 +252,20 @@ function insData(){
         alert('입력데이터가 없습니다! 모두 입력하세요!');
         return;
     } //////////// if /////////////
+
     
     // 3. 입력처리하기
     // 3-1.로컬쓰 데이터 가져오기 : minfo
     let orgData = localStorage.getItem('minfo');
+
+    // 만약 minfo 로컬쓰가 null이면 빈 배열로 생성하기!
+    if(!orgData){
+        // 빈 배열로 생성하기
+        localStorage.setItem('minfo','[]');
+        // 초기 로컬쓰 재할당!
+        orgData = localStorage.getItem('minfo');
+    } ////////// if /////////////
+
     // 3-2.제이슨 파싱!
     orgData = JSON.parse(orgData);
 
@@ -258,12 +277,18 @@ function insData(){
     // return a == b ? 0 : a > b ? 1 : -1})
     // -> 배열.sort((a,b)=>{
     // return a.idx == b.idx ? 0 : a.idx > b.idx ? 1 : -1})
-    orgData.sort((a,b)=>{
-        return a.idx == b.idx ? 0 : a.idx > b.idx ? 1 : -1
-    }); ///// sort /////
+
+    // 배열값이 있을때만 정렬적용!
+    if(orgData.length != 0){
+        orgData.sort((a,b)=>{
+            return a.idx == b.idx ? 
+            0 : a.idx > b.idx ? 1 : -1
+        }); ///// sort /////
+    }
 
     // 3-3-2. idx값으로 마지막배열값 읽기
-    let lastArr = orgData[orgData.length-1].idx;
+    let lastArr = orgData.length==0?
+     0 : orgData[orgData.length-1].idx;
 
     console.log('정렬결과:',orgData,'\n마지막idx값:',lastArr);
 
@@ -284,7 +309,10 @@ function insData(){
     console.log('입력처리함~!!',orgData);
 
     // 4. 리스트 업데이트하기
-    bindData();   
+    bindData();  
+    
+    // 5. 수정 선택박스 업데이트
+    bindMod();
 
 
 } ///////////// insData 함수 //////////////////
@@ -316,11 +344,59 @@ function delRec(idx){
         JSON.stringify(orgData));
 
         // 5. 리스트 업데이트하기
-        bindData();   
+        bindData();  
+
+        // 6. 수정 선택박스 업데이트
+        bindMod(); 
     } ////////// if ///////////////
 
 
 } ////////// delRec함수 //////////////////
+
+/////////////////////////////////////////////
+//// 데이터 수정하여 반영하기 //////////////////
+//////////////////////////////////////////////
+// 1. 선택박스 대상선정: .sel
+const modSel = dFn.qs('#sel');
+// 2. 데이터 바인딩하기
+// 바인딩 함수 만들어서 사용~!!!
+function bindMod(){
+    // 1. 로컬쓰 가져오기
+    // 1-1.로컬쓰 데이터 가져오기 : minfo
+    let orgData = localStorage.getItem('minfo');
+
+    // 만약 minfo 로컬쓰가 null이면 빈 배열로 생성하기!
+    if(!orgData){
+        // 빈 배열로 생성하기
+        localStorage.setItem('minfo','[]');
+        // 초기 로컬쓰 재할당!
+        orgData = localStorage.getItem('minfo');
+    } ////////// if /////////////
+
+    // 1-2.제이슨 파싱!
+    orgData = JSON.parse(orgData);
+
+    // 2. 선택박스 초기화 : 새로업데이트 될때를 대비
+    modSel.innerHTML = 
+        `<option value="show">항목선택</option>`;
+
+    // 3. idx로 value값을 만들고 제목으로 항목명을 만들기
+    orgData.forEach(v=>{
+        modSel.innerHTML += `
+            <option value="${v.idx}">${v.tit}</option>
+        `
+    })
+
+} //////////// bindMod함수 ///////////
+
+// 최초호출!
+bindMod();
+
+
+
+
+
+
 
 
 
