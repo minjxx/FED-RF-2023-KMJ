@@ -11,6 +11,7 @@ let gname = ["워닝드레스","워스비버든","코코샤스넬라","포코로
 let gprice = ["123000","224000","253000","340000","520000"];
 
 
+
 // 호출시 : rdm[아이템개수]
 let rdm = (x)=> Math.floor(Math.random()*x);
 
@@ -26,4 +27,4 @@ bb += `
     },
 `;
 }
-console.log(bb);
+console.log(bb)

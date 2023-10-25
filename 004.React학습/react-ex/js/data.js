@@ -1,4 +1,4 @@
-// [vans신발 데이터 생성]
+// [vans신발 데이터]
 export default [
     {
         "idx":'1',
