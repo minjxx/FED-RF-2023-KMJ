@@ -60,7 +60,7 @@ $(()=>{
         // title속성으로 넣는다! -> attr('title',값)
         $('.sns a').each((idx,ele)=>{
             // ele - 각a요소
-            $(ele).attr('title',$(ele).text().trim())
+            $(ele).attr('title',$(ele).text().trim());
         }) ////////// each ////////////
         // 위에서 이어서 a요소에 링크 설정하기 ////
         .click(function(){

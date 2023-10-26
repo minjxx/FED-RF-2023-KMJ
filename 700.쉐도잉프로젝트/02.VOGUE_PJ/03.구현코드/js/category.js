@@ -1,13 +1,7 @@
-// 보그 PJ 메인 페이지 JS - main.js
+// 보그 PJ 카테고리 페이지 JS - main.js
 
 // 카테고리 데이터 불러오기 : 어서써 타입 제이슨
 import catData from './data/category_data.json' assert {type:'json'};
-
-// 부드러운 스크롤 모듈
-import { startSS, setPos } from "./smoothScroll23.js";
-
-// 부드러운 스크롤 적용 //////////
-startSS();
 
 ///////////////////////////////////////////
 // 카테고리 페이지 기능구현하기 /////////////
