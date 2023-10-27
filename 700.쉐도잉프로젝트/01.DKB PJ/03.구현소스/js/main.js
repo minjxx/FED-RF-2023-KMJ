@@ -11,36 +11,67 @@ import { gridData, gnbData, previewData, clipData, linkData } from "./data_drama
 // 부드러운 스크롤 적용 //////////
 startSS();
 
-//////////////////////////////////////////////
-// 모바일적용 여부 코드 //////////
+///////////////////////////////
+// 모바일적용 여부 코드 ////////
 let mob = 0; // 0-DT, 1-모바일
+// 모바일 검사함수 /////
 const chkMob = () => {
 if($(window).width()<=1024)mob=1;
-else mob = 0; 
+else mob=0;
 console.log('모바일?',mob);
-} ///////////// chkMob 함수 ////////
+
+// 부가기능 : 모바일일때 서브메뉴 기본 스타일 지우기
+if(mob) $('.smenu').attr('style','');
+
+} /////// chkMob함수 ///////
 
 // 모바일 검사함수 최초호출
 chkMob();
 // 화면 리사이즈 시 모바일 검사함수 호출
 $(window).resize(chkMob);
-//////////////////////////////////////////////
+//////////////////////////////////////
 
-//////////////////////////////////////////////
-// 모바일시 기능구현 ///////////////////////////
-//////////////////////////////////////////////
+///////////////////////////////////
+// 모바일시 기능구현 ///////////////
+///////////////////////////////////
 // 1. 햄버거 버튼 클릭시 메뉴 보이기/숨기기
-// 대상: .ham
+// 대상: .ham / .header
+const hEle = $('.header');
 $('.ham').click(()=>{
-  $('.header').toggleClass('on');
-})
+  hEle.toggleClass('on');
 
-// 2. 메뉴 클릭시 하위메뉴 보이기 ///////////////
+  // is() 메서드 : 선택요소의 이름확인!
+  console.log('지금.header에 .on있니?',hEle.is('.on'));
+  // 만약 .header.on 이면 body에 스크롤바 숨기기
+  if(hEle.is('.on')) 
+    $('html,body').css({overflow:'hidden'});
+  // 아니면 넣었던 스타일 지우기
+  else $('html,body').attr('style','');
+
+}); //////// click ////////////
+
+
+// 2. 메뉴 클릭시 하위메뉴 보이기 //////
 // 대상: .gnb>li
 $('.gnb li').click(function(){
-  if(!mob) return; // 모바일 아니면 나가!
+  if(!mob) return;//모바일 아니면 나가!
   console.log('나클릭?');
-}); /////////// click //////////////
+  // 서브메뉴 슬라이드 애니로 보이기/숨기기
+  // 대상: .smenu
+  $(this).find('.smenu') // 클릭된li 하위 .smenu
+  .slideToggle(300,'easeInOutQuad') // 열거나 닫거나함
+  .parent() // 부모로 올라감 li
+  .siblings().find('.smenu') // 다른 li들 하위 .smenu
+  .slideUp(300,'easeInOutQuad') // 스르륵 닫힘! 모두
+
+}); //////////// click ////////////////
+
+// 3. 스티키 메뉴 박스 드래그 하여 움직여보기
+// 대상: .dokebi-menu ul
+$('.dokebi-menu ul')
+.draggable({
+  axis:'x', // x축고정
+})
 
 
 
@@ -196,6 +227,7 @@ function overFn() {
 } //////////// overFn 함수 ////////////
 
 function outFn() {
+  if(mob)return; // 모바일이면 나감!
   // // // console.log('아웃',this);
   // 서브메뉴 박스 높이값 0만들기!
   dFn.qsEl(this, ".smenu").style.height = "0px";
