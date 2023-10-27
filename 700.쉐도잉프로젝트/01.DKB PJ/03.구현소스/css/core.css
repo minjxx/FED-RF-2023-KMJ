@@ -47,13 +47,21 @@ body{
     clear: both;
 }
 /* 그룹파트박스 */
-.group-part {
+.group-part{
+    /* 상하패딩 넣기 */
     padding: 60px 0;
 }
+
+/* 플렉스박스 클래스 */
+.fx-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /* 파트박스 */
 .partbox {
     /* 옆으로 흐르게 */
-    float: left;
+    /* float: left; */
     /* 보더/패딩 포함박스 */
     box-sizing: border-box;
     /* 내부패딩 */
@@ -66,7 +74,7 @@ body{
 }
 
 /* 공통 서브타이틀 */
-.stit {
+.stit{
     padding-bottom: 32px;
     font-size: 3.8rem;
 }
@@ -150,4 +158,3 @@ body{
     background-color: #ddd;
     border-radius: 5px;
 }
-
