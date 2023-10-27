@@ -11,6 +11,39 @@ import { gridData, gnbData, previewData, clipData, linkData } from "./data_drama
 // 부드러운 스크롤 적용 //////////
 startSS();
 
+//////////////////////////////////////////////
+// 모바일적용 여부 코드 //////////
+let mob = 0; // 0-DT, 1-모바일
+const chkMob = () => {
+if($(window).width()<=1024)mob=1;
+else mob = 0; 
+console.log('모바일?',mob);
+} ///////////// chkMob 함수 ////////
+
+// 모바일 검사함수 최초호출
+chkMob();
+// 화면 리사이즈 시 모바일 검사함수 호출
+$(window).resize(chkMob);
+//////////////////////////////////////////////
+
+//////////////////////////////////////////////
+// 모바일시 기능구현 ///////////////////////////
+//////////////////////////////////////////////
+// 1. 햄버거 버튼 클릭시 메뉴 보이기/숨기기
+// 대상: .ham
+$('.ham').click(()=>{
+  $('.header').toggleClass('on');
+})
+
+// 2. 메뉴 클릭시 하위메뉴 보이기 ///////////////
+// 대상: .gnb>li
+$('.gnb li').click(function(){
+  if(!mob) return; // 모바일 아니면 나가!
+  console.log('나클릭?');
+}); /////////// click //////////////
+
+
+
 // 0. 새로고치면 스크롤바 위치캐싱후 맨위로 이동
 setTimeout(() => {
   // 윈도우 스크롤 맨위로!
@@ -153,7 +186,8 @@ gnb.forEach((ele) => {
 
 // 3.함수만들기
 function overFn() {
-  // // // console.log('오버',this);
+  if(mob)return; // 모바일이면 나감!
+  // console.log('오버',this);
   // 1.하위 .smbx 높이값 알아오기
   let hv = dFn.qsEl(this, ".smbx").clientHeight;
   // // console.log("높이:", hv);
