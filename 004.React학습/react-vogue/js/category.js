@@ -1,92 +1,190 @@
-// 보그 PJ 카테고리 페이지 JS - main.js
+// 보그 PJ 카테고리 페이지 JS - category.js
 
-// 카테고리 데이터 불러오기 : 어서써 타입 제이슨
-import catData from './data/category_data.json' assert {type:'json'};
+// 링크 시스템 JS 가져오기 //////
+import { makeLink } from "./linksys2.js";
 
-///////////////////////////////////////////
-// 카테고리 페이지 기능구현하기 /////////////
-// 요구사항: url로 전달된 키값을 읽어서
-// 페이지의 데이터를 셋팅한다!
-///////////////////////////////////////////
+/////////// 상단영역 컴포넌트 /////////////
+/******************************************* 
+  컴포넌트명 : TopArea
+  기능 : 상단영역 메뉴, 로그 등 요소 구성
+*******************************************/
+function TopArea() {
 
-// 1. 전체 url 읽기
-let pm = location.href;
-console.log(pm);
+  // 컴포넌트 요소 랜더링 직전 호출구역
+  // -> 컴포넌트는 모두 만들어진 후 화면뿌리기 직전(가랜더랭)
+  React.useLayoutEffect(makeLink);
 
-// 값처리함수 호출하기
-setValue();
+  return (
+    <React.Fragment>
+      {/* 1-1.상단메뉴 */}
+      <div className="tmenu">
+        {/* 1-1-1.sns박스 */}
+        <div className="sns">
+          <a href="#" className="fi fi-instagram">
+            <span className="ir">인스타그램</span>
+          </a>
+          <a href="#" className="fi fi-facebook">
+            <span className="ir">페이스북</span>
+          </a>
+          <a href="#" className="fi fi-twitter">
+            <span className="ir">트위터</span>
+          </a>
+          <a href="#" className="fi fi-youtube-play">
+            <span className="ir">유튜브</span>
+          </a>
+          <a href="#" className="fi cas">
+            <span className="ir">카카오스토리</span>
+          </a>
+        </div>
+        {/* 1-1-2.사이드메뉴 */}
+        <div className="sideMenu">
+          <ul className="smbx">
+            <li>
+              <a href="#">SIDE MENU</a>
+              {/* 서브메뉴 */}
+              <ol className="smsub">
+                <li>
+                  <a href="#">회사 소개</a>
+                </li>
+                <li>
+                  <a href="#">광고 및 제휴</a>
+                </li>
+                <li>
+                  <a href="#">개인정보 처리방침</a>
+                </li>
+              </ol>
+            </li>
+            <li>
+              <a href="#">SUBSCRIBE</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/* 1-2.로고박스 */}
+      <h1 className="logo">
+        <a href="#">
+          <img src="./images/mlogo.png" alt="메인로고" />
+        </a>
+      </h1>
+      {/* 1-3.GNB박스 */}
+      <nav className="gnb">
+        <ul>
+          <li>
+            <a href="#">FASHION</a>
+          </li>
+          <li>
+            <a href="#">BEAUTY</a>
+          </li>
+          <li>
+            <a href="#">LIVING</a>
+          </li>
+          <li>
+            <a href="#">PEOPLE</a>
+          </li>
+          <li>
+            <a href="#">VIDEO</a>
+          </li>
+          <li>
+            <a href="#">RUNWAY</a>
+          </li>
+          <li>
+            <a href="#">TIME &amp; GEM</a>
+          </li>
+          <li>
+            <a href="#">SHOPPING</a>
+          </li>
+          <li>
+            {/* 돋보기 검색버튼 */}
+            <i href="#" className="fi fi-search">
+              <span className="ir">search</span>
+            </i>
+          </li>
+        </ul>
+      </nav>
+    </React.Fragment>
+  );
+} //////////// TopArea 컴포넌트 /////////////
 
+// 상단영역 출력하기 /////////////////
+ReactDOM.render(<TopArea />, 
+document.querySelector(".top-area"));
+/////////////////////////////////////
 
-// 값셋팅하기 함수 ////////
-function setValue(){
-    // 2. url에서 키값분리하기
-    // ?(물음표)가 Get방식의 시그널이므로
-    // 이것의 존재여부로 문자자르기를 실행한다!
-    // =(이퀄)기호도 같이 확인함
-    try{
-        if(pm.indexOf('?')==-1||
-            pm.indexOf('=')==-1){
-            throw '잘못된 접근입니다!';
-        } ///// if //////
-    
-    } //////// try ////////////
-    catch(err){ // err 메시지 받기
-        // 에러메시지 띄우기
-        alert(err);
-        // 메인 페이지로 보내기
-        location.href='index.html';        
-    } ///////// catch //////////
+//////////////////////////////////////////////////////
 
-    // 3. url키값 추출하기
-    pm = pm.split('?')[1].split('=')[1];
-    // 특수문자 변환하기 : time & gem 때문
-    pm = decodeURIComponent(pm);
-    console.log('최종키값:',pm);
+////// 카테고리 페이지 메인 컴포넌트 ///////
+/******************************************* 
+  컴포넌트명 : MainCategory
+  기능 : 아이템 페이지 타이틀 + 리스트 요소구성
+*******************************************/
+function MainCategory() {
 
-    // 4. 카테고리 데이터 매칭하기
-    // 제이슨 파일 객체 데이터에서 속성으로 선택함
-    const selData = catData[pm];
-    console.log('선택데이터:',selData);
+  return(
+    <React.Fragment>
+      <SubTitle />
+      <ItemList />
+    </React.Fragment>
+  );
 
-    // 5. 데이터 바인딩하기
-    // 5-1. 배경이미지 셋팅을 위한 main요소에 클래스넣기
-    // pm에 담아놓은 이름으로 넣어준다!
-    // 대상: .main-area
-    // ' & ' -> '-'로 변경하기 : time-gem 로 변경
-    $('.main-area').addClass(pm.replace(' & ','-'));
+} ///////// MainCategory 컴포넌트 /////////////
 
-    // 5-2. 카테고리 타이틀 변경하기
-    $('.cat-tit').text(selData.제목);
+// 메인영역 출력하기 ////////////////////
+ReactDOM.render(<MainCategory />, 
+document.querySelector(".main-area"));
+///////////////////////////////////////
 
-    // 5-3. 메뉴 변경하기
-    // 5-3-1.대상: .lnb
-    let lnb = $('.lnb');
-    // 5-3-2.메뉴데이터: selData.메뉴
-    let mData = selData.메뉴;
-    // 5-3-3.메뉴리턴함수
-    const retMenu = () => 
-    mData.map(v=>`<li><a href="#">${v}</a></li>`).join('');
+////// 메인 컴포넌트 하위 서브타이틀 컴포넌트 /////
+/******************************************* 
+  컴포넌트명 : SubTitle
+  기능 : 서브 타이틀 요소구성
+*******************************************/
+function SubTitle(){
 
-    // 5-3-4.메뉴 없음에 따라 분기하기 ////
-    if(mData=='없음'){ // lnb없애기
-        lnb.remove();
-    } /////// if //////
-    else{ // 메뉴 만들기
-        lnb.html(`<ul>${retMenu()}</ul>`);
-    } ///// else //////
+  return(
+        // 2-1. 카테고리 페이지 상단영역
+        <header className="cat-top-area">
+          {/* 2-1-1. 서브타이틀 */}
+          <h2 className="cat-tit">Fashion</h2>
+          {/* 2-1-2. 서브메뉴(LNB:Local Navigation Bar) */}
+          <nav className="lnb"></nav>
+        </header>
+  );
 
-    // 5-4. 서브 섹션 타이틀 넣기 
-    // $(선택자).each((순번,요소)=>{구현부})
-    // 대상: .cat-cont-area h2
-    $('.cat-cont-area h2').each((idx,ele)=>{
-        $(ele).html(selData.타이틀[idx]);
-    }); ////////////// each /////////////
+} /////////////// SubTitle 컴포넌트 //////////////
 
-    // 5-5. 탭메뉴 타이틀 변경하기
-    // 형식: 카테고리명 | 보그 코리아 (Vogue Korea) 2023
-    // 제이쿼리 prepend() 메서드 사용!
-    // -> 자식요소 또는 내용의 맨앞에 넣기!
-    $('title').prepend(pm.toUpperCase() +' | ');
-    // toUpperCase() - 대문자로 변경
+////// 메인 컴포넌트 하위 리스트 컴포넌트 /////
+/******************************************* 
+  컴포넌트명 : ItemList
+  기능 : 카테고리 아이템별 리스트요소구성
+*******************************************/
+function ItemList(){
 
-} ////////////// setValue 함수 ///////////
+  return(
+    // 2-2. 카테고리 페이지 컨텐츠영역
+    <div className="cat-cont-area">
+      <section className="pt2">
+        <div className="cbx bgi bg1-1">
+          <h2></h2>
+        </div>
+        <div className="cbx bgi bg1-2">
+          <h2></h2>
+        </div>
+        <div className="cbx bgi bg1-3">
+          <h2></h2>
+        </div>
+      </section>
+      <section className="pt2">
+        <div className="cbx bgi bg2-1">
+          <h2></h2>
+        </div>
+        <div className="cbx bgi bg2-2">
+          <h2></h2>
+        </div>
+        <div className="cbx bgi bg2-3">
+          <h2></h2>
+        </div>
+      </section>
+    </div>
+  );
+
+} /////////////// ItemList 컴포넌트 //////////////
