@@ -95,3 +95,23 @@ export default function TopArea() {
         </React.Fragment>
     );
 } //////////// TopArea 컴포넌트 /////////////
+
+
+/********************************************** 
+ * 컴포넌트명 : MobBtns
+ * 기능 : 모바일용 버튼 컴포넌트
+**********************************************/
+function MobBtns(){
+    return(
+        <React.Fragment>
+            {/* 모바일용 햄버거버튼 */}
+            <a href="#" class="mobtn hbtn fi fi-nav-icon">
+                <span class="ir">GNB button</span>
+            </a>
+            {/* 모바일용 검색버튼 */}
+            <a href="#" class="mobtn sbtn fi fi-search">
+                <span class="ir">search</span>
+            </a>
+        </React.Fragment>
+    );
+} //////// MobBtns 컴포넌트 ////////////////
