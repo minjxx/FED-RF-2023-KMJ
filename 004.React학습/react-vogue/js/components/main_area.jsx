@@ -100,6 +100,8 @@ function ItemList(props) {
         } /////// else ///////
     }; ////////// makeCode함수 ////////////
 
+    console.log('메인영역실행!')
+
     return (
         // 2-2. 카테고리 페이지 컨텐츠영역
         // html출력일 경우 dangerouslySetInnerHTML을 사용함!
