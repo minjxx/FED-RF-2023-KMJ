@@ -1,9 +1,11 @@
 // 상단영역 컴포넌트
 // GNB 데이터
-import { Logo } from "./Logo";
-import { menu } from "./data/gnb";
 
-export function TopArea(){
+import { Logo } from "../contents/Logo";
+import { menu } from "../data/gnb";
+
+export function TopArea(props){
+    // csuf
     return(
         <>
         {/* 1.상단영역 */}
@@ -17,7 +19,9 @@ export function TopArea(){
                     {
                         menu.map((v,i)=>
                             <li key={i}>
-                                <a href="#">{v.txt}</a>
+                                <a href="#" onClick={props.chgFn(
+                                    v.txt=="HOME" ? "main" : v.txt)}
+                                >{v.txt}</a>
                             </li>
                             /*
                             map()을 사용하여 태그를 생성할때
