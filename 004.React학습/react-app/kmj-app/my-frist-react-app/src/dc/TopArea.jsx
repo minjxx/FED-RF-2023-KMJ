@@ -3,7 +3,7 @@
 import { Logo } from "./Logo";
 import { menu } from "./data/gnb";
 
-function TopArea(){
+export function TopArea(){
     return(
         <>
         {/* 1.상단영역 */}
@@ -11,10 +11,12 @@ function TopArea(){
             {/* 네비게이션 GNB파트 */}
             <nav className="gnb">
                 <ul>
-                    <li><Logo /></li>
+                    <li>
+                        <Logo />
+                    </li>
                 </ul>
             </nav>
         </header>
         </>
-    );
+    )
 }

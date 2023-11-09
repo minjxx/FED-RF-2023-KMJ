@@ -14,7 +14,9 @@ export const Logo = () => {
     // 코드 리턴
     return (
         <h1 style={myStyle}>
-            <img src={isrc.logo} alt="DC logo" style={{width:'81px'}} />
+            <img src={isrc.logo} alt="DC logo"
+            style={{width:'81px'}} />
         </h1>
     )
-}; ////////// Logo ////////////
+
+}; ////////////// Logo ///////////////
