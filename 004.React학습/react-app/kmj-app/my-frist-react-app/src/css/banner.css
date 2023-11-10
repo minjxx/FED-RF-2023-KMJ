@@ -12,10 +12,11 @@
     padding-left: 10vw;
     color: #fff;
     text-shadow: 0 0 3px #000;
+
     text-align: left;
     width: 30%;
 }
-.bantit button {
+.bantit button{
     margin-top: 20px;
 }
 /* 배너슬라이드 */
@@ -37,14 +38,16 @@
     padding: 10px;
     background-color: transparent;
     color: #fff;
-    border: 1px solid #fff;
-    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #fff;    
+    background-color: rgb(0 0 0 / .5);
 }
 .banner button:hover{
     background-color: #0074e8;
 }
-.banimg{
+.banner img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* 이동버튼 */
