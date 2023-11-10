@@ -1,6 +1,6 @@
 /* index.css */
 @import url(./reset.css);
-@import url(./layout.css);
+@import url(./Layout.css);
 /* div{
   border: 1px solid #000;
   background-image: url(../../public/images/dcm1.jpg);
