@@ -2,11 +2,13 @@
 
 import { Banner } from "./Banner";
 
-export function Movies(props){
+export function Movies(){
     return(
         <>
-            <h1 style={{textAlign:'center'}}>무비 페이지</h1>
-            <Banner category={props.cat} />
+            <h1 style={{textAlign:'center'}}>
+                무비 페이지</h1>
+            <Banner category="MOVIES" />
         </>
     )
-} /////////// Movies 컴포넌트 ///////////
+
+} ////////////  Comics 컴포넌트 ///////////
