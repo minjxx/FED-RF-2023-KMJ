@@ -13,6 +13,7 @@ import "jquery-ui-dist/jquery-ui";
 /// 슬라이드 기능 구현 함수 ///////////
 function slideFn() {
   // 1. 대상선정
+  // (1) 슬라이드
   const sldBox = $(".slider");
   // (6) 슬라이드 블릿
   const indic = $('.indic li');
@@ -31,7 +32,7 @@ function slideFn() {
   const sCnt = sldBox.find('li').length;
   // console.log('슬라이드개수:',sCnt);
 
-  // 2. 이벤트설정 및 기능구현
+  // 3. 이벤트설정 및 기능구현
   // 이동버튼 클릭시
   $(".abtn").click(function () {
     // 0. 광클금지 ////////////////////
@@ -104,7 +105,7 @@ export function Banner(props) {
         {/* 배너이미지 */}
         <img src={v.src} alt="ㅎㅎ" />
         {/* 배너 정보 */}
-        <section class="bantit">
+        <section className="bantit">
           <h3>{v.tit1}</h3>
           <h2>{v.tit2}</h2>
           <p>{v.cont}</p>
