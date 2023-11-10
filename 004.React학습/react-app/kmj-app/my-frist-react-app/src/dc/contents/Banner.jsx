@@ -36,7 +36,7 @@ function slideFn() {
   $(".abtn").click(function () {
     // 0. 광클금지 ////////////////////
     if(cSts) return; // 1) 처음에 0값 들어오면 fasle니까 반환되서 아래 문장실행
-    cSts=1;//잠금 // 2) cSts값 1로 지정
+    cSts=1;//잠금 // 2) cSts값 1로 지정 , true로 변경됨
     setTimeout(()=>cSts=0,A_TM); // 3) 0.6초 뒤에 cSts값 0으로 만들어줌, 0.6초안에는 계속 1 값으로 됨, 1은 true값이니까 return 안됨
     /////////////////////////////////
 
@@ -101,7 +101,15 @@ export function Banner(props) {
     console.log(data);
     return data.map((v, i) => (
       <li key={i}>
+        {/* 배너이미지 */}
         <img src={v.src} alt="ㅎㅎ" />
+        {/* 배너 정보 */}
+        <section class="bantit">
+          <h3>{v.tit1}</h3>
+          <h2>{v.tit2}</h2>
+          <p>{v.cont}</p>
+          <button>{v.btn}</button>
+        </section>
       </li>
     ));
   };
