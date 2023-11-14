@@ -1,7 +1,7 @@
 /* Pilot PJ 리셋 CSS - reset.css */
 
 /* html (ROOT) 의 글자크기설정(rem,em,% 상대단위의 기준) */
-html {
+html{
     font-size: 10px;
 }
 
@@ -23,8 +23,7 @@ a {
     color: #222;
 }
 
-ul,
-ol {
+ul,ol {
     margin: 0;
     padding: 0;
     list-style: none;
