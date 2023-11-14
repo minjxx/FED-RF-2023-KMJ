@@ -7,13 +7,13 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { Layout } from "./dc/layout/Layout";
-import { Main } from "./dc/contents/Main";
-import { Character } from "./dc/contents/Character";
-import { Comics } from "./dc/contents/Comics";
-import { Movies } from "./dc/contents/Movies";
-import { Games } from "./dc/contents/Games";
-import { News } from "./dc/contents/News";
-import { Video } from "./dc/contents/Video";
+import { Main } from "./dc/contents/pages/Main";
+import { Character } from "./dc/contents/pages/Character";
+import { Comics } from "./dc/contents/pages/Comics";
+import { Movies } from "./dc/contents/pages/Movies";
+import { Games } from "./dc/contents/pages/Games";
+import { News } from "./dc/contents/pages/News";
+import { Video } from "./dc/contents/pages/Video";
 import { SwiperApp } from "./dc/plugin/SwiperApp";
 
 /********************************************* 

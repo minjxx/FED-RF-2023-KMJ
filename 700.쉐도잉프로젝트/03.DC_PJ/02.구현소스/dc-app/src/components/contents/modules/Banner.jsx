@@ -1,10 +1,10 @@
 // DC.com 배너 컴포넌트
 
 // 배너데이터
-import { banData } from "../data/banner";
+import { banData } from "../../data/banner";
 
 // 배너CSS
-import "../../css/banner.css";
+import "../../../css/banner.css";
 import { useEffect } from "react";
 // 제이쿼리 + 제이쿼리UI (따로 내가 타이핑해서 불러들여야함)
 import $ from "jquery";
