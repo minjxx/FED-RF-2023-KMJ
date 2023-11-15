@@ -2,12 +2,6 @@
 
 // 로딩구역없이 함수로 구현함! /////
 
-// 제이쿼리 호출
-import $ from 'jquery';
-window.jQuery = $;
-require('jquery-ui-dist/jquery-ui');
-require('jquery-ui-touch-punch/jquery.ui.touch-punch');
-
 
 export function autoScroll() {
   /****************************************** 
