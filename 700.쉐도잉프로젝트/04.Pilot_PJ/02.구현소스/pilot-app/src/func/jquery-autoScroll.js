@@ -2,18 +2,24 @@
 
 // 로딩구역없이 함수로 구현함! /////
 
+// 제이쿼리 호출
+import $ from 'jquery';
+window.jQuery = $;
+require('jquery-ui-dist/jquery-ui');
+require('jquery-ui-touch-punch/jquery.ui.touch-punch');
+
 
 export function autoScroll() {
   /****************************************** 
     대상 변수할당하기
-    ******************************************/
+  ******************************************/
   // 전체 페이지번호
   let pno = 0;
   // 페이지 요소
   const pg = $(".page");
   // 전체 페이지개수
   const pgcnt = pg.length;
-  // console.log("페이지개수:", pgcnt, pg);
+  console.log("페이지개수:", pgcnt, pg);
   // 광실행금지변수
   let prot = [];
   // 광스크롤금지
@@ -27,14 +33,28 @@ export function autoScroll() {
 
   /****************************************** 
     이벤트 등록하기
-    ******************************************/
+    ->>> 리액트에서 제이쿼리로 이벤트설정시
+    리액트와 충돌되는 문제가 생길 수 있다
+    예컨데 현재 휠이벤트는 설정되지만
+    휠델타값이 안찍힘! -> 해결은?
+    순수한 JS 로 이벤트를 설정한다!
+    왜? 제이쿼리로 이벤트를 설정하면
+    제이쿼리 나름의 객체가 생성되어 처리되므로
+    이것을 단순화하여 이벤트를 걸면 휠델타값이
+    처리된다! 
+  ******************************************/
   // 윈도우 휠이벤트 발생시
-  $(window).on("wheel", wheelFn);
+  // $(window).on("wheel", wheelFn); -> 제이쿼리 이벤트X
+  window.addEventListener('wheel',wheelFn);
 
   // 키보드 이벤트발생시 업데이트
   // 1. Page Up(33) / Up Arrow (38)
   // 2. Page Down(34) / Down Arrow (40)
   $(document).keydown((e) => {
+    // 광휠금지
+    if (prot[0]) return;
+    chkCrazy(0);
+
     // 이전페이지이동
     if (e.keyCode === 33 || e.keyCode === 38) {
       pno--;
