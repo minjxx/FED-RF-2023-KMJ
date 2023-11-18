@@ -56,7 +56,6 @@ export function TopArea() {
               {/* 검색기능링크 - 클릭시 검색창보이기 */}
               <a href="#">
               <FontAwesomeIcon icon={faSearch} />
-                {/* <FontAwesomeIcon icon={faCamera} /> */}
               </a>
             </li>
             {/* 회원가입, 로그인은 로그인 아닌 상태일때 나옴 */}

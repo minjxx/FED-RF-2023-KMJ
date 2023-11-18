@@ -4,7 +4,8 @@
     - 모듈명: Banner (JS/CSS)
     (1) 구조정의 : 
         Root > div.banner 
-        > (ul.slider
+        > 
+        (ul.slider 
             > li 
             > img 
             + section.bantit 
@@ -12,7 +13,7 @@
         
         + button.abtn 
         + ol.indic
-
+        
     (2) 객체화 :
         {
             "src": 배너이미지경로
@@ -62,12 +63,12 @@
             "desc":"설명",
             "link":"관련링크",
         }
-
+        
         [ 데이터조건 ]
         link 속성 값 셋팅시 하나의 링크만 셋팅할것!
         링크가 있을 경우 sum 또는 desc 속성값에
         단 하나의 *표시만 어디든지 넣는다!
-        
+
     (3) 기능정의 : 
         1) 동영상영역 클릭시 동영상 재생/멈춤
         2) 관련링크 새창열기
@@ -78,12 +79,11 @@
     (1) 구조정의 :
         스와이퍼모듈 + 비디오재생모듈
         Root>
-        section.vidswbox>
-        ( h2.tit + <SwiperVid /> ) + 
-        ( section.vidbx >
-            div.playvid >
-                h2.ifrtit + iframe + button )
-        
+        section.vidswbox >
+            ( h2.tit + <SwiperVid />) +
+            ( section.vidbx > 
+                div.playvid >
+                    h2.ifrtit + iframe + button )
     (2) 객체화 :
         {
             isrc:"",

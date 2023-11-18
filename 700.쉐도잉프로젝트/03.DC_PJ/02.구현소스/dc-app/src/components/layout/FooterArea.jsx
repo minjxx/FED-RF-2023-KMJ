@@ -8,4 +8,5 @@ export function FooterArea(){
             All rights reserved.
         </footer>
     )
-} //////// FooterArea 컴포넌트 //////
+
+} ///////// FooterArea 컴포넌트 /////////

@@ -1,6 +1,6 @@
 // index.js는 public/index.html 페이지에 적용되는 컴포넌트다!->루트 컴포넌트
 
-// 메인페이지 css 불러오기
+// 메인페이지 CSS 불러오기
 import "./css/index.css";
 
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import ReactDOM from "react-dom/client";
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { Layout } from "./components/layout/Layout";
 import { Main } from "./components/pages/Main";
-import { Character } from "./components/pages/Character";
+import { Character } from "./components/pages/Charactor";
 import { Comics } from "./components/pages/Comics";
 import { Movies } from "./components/pages/Movies";
 import { Games } from "./components/pages/Games";
@@ -43,6 +43,7 @@ import { SwiperApp } from "./components/plugin/SwiperApp";
     2. Layout.jsx 레이아웃 컴포넌트를 루트로 선택
     3. 상단영역 GNB에 <Link to> 셋팅
     4. 메인영역에 <Outlet /> 셋팅
+    
 *********************************************/
 
 // 라우터구성 컴포넌트 : 스스로 내보내기 셋팅 필수!

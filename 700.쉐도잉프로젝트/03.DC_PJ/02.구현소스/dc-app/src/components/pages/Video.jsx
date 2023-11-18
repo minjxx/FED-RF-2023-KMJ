@@ -6,9 +6,9 @@ import { VidIntro } from "../modules/VidIntro";
 
 export function Video(){
     return(
-        <>
+        <>            
             <VidIntro cat="VIDEO" cls="on" />
-            {/* <iframe src={isrc.video} /> */}
         </>
     )
-} /////////// Video 컴포넌트 ///////////
+
+} ////////////  Video 컴포넌트 ///////////
