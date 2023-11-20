@@ -6,6 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 /* 제이쿼리 넣기 */
 import $ from "jquery";
 
+// SwiperVid 사용 데이터 가져오기
+import { swVidData } from "../data/swiper_vid";
+
 // Import Swiper styles
 import "swiper/css";
 // 양쪽 이동버튼만 필요함!
@@ -23,8 +26,10 @@ import "./css/swiper_vid.css";
 // (여기서는 페이지네이션,네비게이션,자동넘김)
 import { Navigation } from "swiper/modules";
 
-export function SwiperApp() {
+export function SwiperVid() {
   
+  // 선택 데이터 : 여기서는 그대로 가져옴
+  const selData = swVidData;
 
   return (
     <>
@@ -42,17 +47,22 @@ export function SwiperApp() {
                 <section className="sw-inbox">
                   {/* 동영상이미지박스 */}
                   <div className="vid-img">
-                    <img src={v.src} alt={v.tit} />
+                    <img src={v.isrc} alt={v.tit} />
                     {/* 폰트어썸 아이콘 */}
                     <FontAwesomeIcon
                       icon={faPlayCircle}
                       style={{
-                        poisition:'absolute',
+                        position:'absolute',
                         bottom: '55%',
                         left:'10%',
                         color:'#fff',
                         fontSize:'50px'
                       }} />
+                  </div>
+                  {/* 동영상 타이틀 박스 */}
+                  <div className="vid-tit">
+                    <h4>{v.cat}</h4>
+                    <h3>{v.tit}</h3>
                   </div>
                 </section>
             </SwiperSlide>)

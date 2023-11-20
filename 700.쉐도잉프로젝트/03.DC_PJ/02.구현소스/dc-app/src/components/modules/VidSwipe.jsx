@@ -12,6 +12,7 @@ section.vidswbox >
 
 // 비디오스와이프 CSS 불러오기
 import "../../css/vid_swipe.css"
+import { SwiperVid } from "../plugin/SwiperVid";
 
 export function VidSwipe(){
 
@@ -23,7 +24,8 @@ export function VidSwipe(){
             {/* 1. 모듈타이틀 */}
             <h2 className="tit">
                 LATEST TRAILERS, CLIPS & MORE</h2>
-            {/* 2. 스와이퍼 컴포넌트 */}
+            {/* 2. 스와이퍼 컴포넌트 : SwiperVid */}
+            <SwiperVid />
 
             {/* 3. 비디오 재생창 */}
             <section className="vidbx">
