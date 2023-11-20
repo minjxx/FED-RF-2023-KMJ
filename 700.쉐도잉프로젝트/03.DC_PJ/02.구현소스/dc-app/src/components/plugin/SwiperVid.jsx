@@ -15,7 +15,7 @@ import "swiper/css";
 import 'swiper/css/navigation';
 
 /* 폰트어썸 임포트 */
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // 스와이퍼 CSS
@@ -27,30 +27,80 @@ import "./css/swiper_vid.css";
 import { Navigation } from "swiper/modules";
 
 export function SwiperVid() {
-  
-  // 선택 데이터 : 여기서는 그대로 가져옴
-  const selData = swVidData;
 
+  // 선택 데이터 : 여기서는 그대로 가져옴!
+  const selData = swVidData;  
+
+  // 비디오 보이기 함수 ////
+  const showVid = (src, tit) => {
+    // src - 비디오경로, tit - 비디오제목
+    console.log(src, tit);
+    // 1. 대상선정
+    // 1-1. 아이프레임 : .play-vid iframe
+    const ifr = $('.play-vid iframe');
+    // 1-2. 전체 박스 : .vid-bx
+    const vbx = $('.vid-bx');
+    // 1-3. 타이틀 박스 : .ifr-tit
+    const itit = $('.ifr-tit');
+    // 1-4. 닫기 버튼 : .cbtn
+    const cbtn = $('.cbtn');
+
+    // 2. 변경하기
+    // 2-1. 아이프레임 src경로 넣기
+    ifr.attr('src',src+"?autoplay=1");
+    // 2-2. 비디오 타이틀 넣기
+    itit.text(tit);
+    // 2-3. 전체박스 나타나기
+    vbx.fadeIn(300);
+    // 2-4. 닫기버튼 셋팅
+    cbtn.click(()=>{
+      // 전체박스 사라지기
+      vbx.fadeOut(300);
+      // 기존 동영상 플레이 멈추기(src삭제)
+      ifr.attr('src','');
+    }); //// click ////////
+
+  }; ////////// showVid 함수 ////////////////
+
+  // 리턴코드 ////////////////////
   return (
     <>
       <Swiper
-        slidesPerView={4}
+        // slidesPerView={4}
         spaceBetween={20}
         navigation={true}
         /* 사용할 모듈을 여기에 적용시킨다 */
         modules={[Navigation]}
+        // 스와이퍼 사이즈별 슬라이드수 변경!
+        breakpoints={{
+          200: {
+              slidesPerView: 1,
+          },
+          500: {
+              slidesPerView: 2,
+          },
+          1000: {
+              slidesPerView: 3,
+          },
+          1200: {
+              slidesPerView: 4,
+          },
+        }}
         className="mySwiper"
       >
         {
             selData.map((v,i)=>
             <SwiperSlide key={i}>
-                <section className="sw-inbox">
+                <section className="sw-inbox" 
+                /* 비디오보이기 함수 호출
+                (비디오경로,비디오제목을 보내줌!) */
+                onClick={()=>showVid(v.vsrc,v.tit)}>
                   {/* 동영상이미지박스 */}
                   <div className="vid-img">
                     <img src={v.isrc} alt={v.tit} />
                     {/* 폰트어썸 아이콘 */}
                     <FontAwesomeIcon
-                      icon={faPlayCircle}
+                      icon={faCirclePlay}
                       style={{
                         position:'absolute',
                         bottom: '55%',
