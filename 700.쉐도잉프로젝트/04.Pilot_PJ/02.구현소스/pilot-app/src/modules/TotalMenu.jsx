@@ -1,6 +1,23 @@
 // Pilot PJ 전체메뉴 컴포넌트
 
+// 컨텍스트 API 불러오기
+import { useContext } from "react";
+import { pCon } from "./PilotContext";
+
 export function TotalMenu() {
+
+  // 컨텍스트 사용
+  const myCon = useContext(pCon);
+  // pCon에 Provider value 속성에 공개한 변수/함수를 사용함!
+
+  // 메뉴 이동 처리함수 ///
+  const goPage = (txt) => {
+    myCon.chgPgName(txt);
+    // 전체박스 숨기기
+    document.querySelector('.ham').click();
+  } //////// goPage 메서드 ///////////
+
+  // 코드 리턴 //////////////////////
   return (
     <>
       <div className="mbox">
@@ -13,7 +30,8 @@ export function TotalMenu() {
         <nav className="mlist">
           <dl>
             <dt>
-              <a href="#">MEN</a>
+              <a href="#" 
+              onClick={()=>goPage('men')}>MEN</a>
             </dt>
             <dd>
               <a href="#">T-SHIRT</a>
@@ -30,7 +48,8 @@ export function TotalMenu() {
           </dl>
           <dl>
             <dt>
-              <a href="#">WOMEN</a>
+              <a href="#" 
+              onClick={()=>goPage('women')}>WOMEN</a>
             </dt>
             <dd>
               <a href="#">T-SHIRT</a>
@@ -47,7 +66,8 @@ export function TotalMenu() {
           </dl>
           <dl>
             <dt>
-              <a href="#">STYLE</a>
+              <a href="#" 
+              onClick={()=>goPage('style')}>STYLE</a>
             </dt>
             <dd>
               <a href="#">COLLECTION</a>
