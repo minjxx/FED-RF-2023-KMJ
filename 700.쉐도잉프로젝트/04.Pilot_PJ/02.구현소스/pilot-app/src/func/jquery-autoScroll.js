@@ -25,12 +25,6 @@ let pgcnt;
 let prot = [];
 // 광스크롤금지
 prot[0] = 0;
-// GNB 메뉴 li
-let gnb;
-// indic 메뉴 li
-let indic;
-// 각 페이지별 등장요소
-let minfo;
 
 // 요소를 할당한 경우 로딩구역에서 할당
 $(()=>{
@@ -38,13 +32,6 @@ $(()=>{
   pg = $(".page");
   // 전체 페이지개수
   pgcnt = pg.length;
-
-  gnb = $(".gnb li");
-  // indic 메뉴 li
-  indic = $(".indic li");
-  // 각 페이지별 등장요소
-  minfo = $(".minfo");
-  
 
 }); /////////// load ///////////////
 
@@ -139,9 +126,9 @@ function movePg() {
 // 메뉴클릭시 + 마우스휠 이동시에도 모두 이 함수 호출!
 const addOn = () => {
   // 클릭된 메뉴에 class 'on' 넣기
-  gnb.eq(pno).addClass("on").siblings().removeClass("on");
+  $(".gnb li").eq(pno).addClass("on").siblings().removeClass("on");
 
-  indic.eq(pno).addClass("on").siblings().removeClass("on");
+  $(".indic li").eq(pno).addClass("on").siblings().removeClass("on");
 }; //////////// addOn함수 ////////////
 
 /******************************************** 
