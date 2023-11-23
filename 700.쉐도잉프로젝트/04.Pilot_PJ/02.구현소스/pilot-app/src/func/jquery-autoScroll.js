@@ -9,27 +9,47 @@ require('jquery-ui-dist/jquery-ui');
 require('jquery-ui-touch-punch/jquery.ui.touch-punch');
 
 
-export function autoScroll() {
+// export function autoScroll() {
   /****************************************** 
     대상 변수할당하기
   ******************************************/
   // 전체 페이지번호
   let pno = 0;
+  // 전체 페이지번호 초기화함수
+  const zeroPno = () => {pno=0};
   // 페이지 요소
-  const pg = $(".page");
+  let pg;
   // 전체 페이지개수
-  const pgcnt = pg.length;
+  let pgcnt;
   // console.log("페이지개수:", pgcnt, pg);
   // 광실행금지변수
   let prot = [];
   // 광스크롤금지
   prot[0] = 0;
   // GNB 메뉴 li
-  const gnb = $(".gnb li");
+  let gnb;
   // indic 메뉴 li
-  const indic = $(".indic li");
+  let indic;
   // 각 페이지별 등장요소
-  const minfo = $(".minfo");
+  let minfo;
+
+  // 요소를 할당한 경우 로딩구역에서 할당
+  $(()=>{
+    // 페이지 요소
+    pg = $(".page");
+    // 전체 페이지개수
+    pgcnt = pg.length;
+    // GNB 메뉴 li
+    gnb = $(".gnb li");
+    // indic 메뉴 li
+    indic = $(".indic li");
+    // 각 페이지별 등장요소
+    minfo = $(".minfo");
+
+    // 최초호출! -> 로드구역에서!
+    initSet();
+
+  }); ////////// load //////////////
 
   /****************************************** 
     이벤트 등록하기
@@ -45,29 +65,8 @@ export function autoScroll() {
   ******************************************/
   // 윈도우 휠이벤트 발생시
   // $(window).on("wheel", wheelFn); -> 제이쿼리 이벤트X
-  window.addEventListener('wheel',wheelFn);
+  // window.addEventListener('wheel',wheelFn);
 
-  // 키보드 이벤트발생시 업데이트
-  // 1. Page Up(33) / Up Arrow (38)
-  // 2. Page Down(34) / Down Arrow (40)
-  $(document).keydown((e) => {
-    // 광휠금지
-    if (prot[0]) return;
-    chkCrazy(0);
-
-    // 이전페이지이동
-    if (e.keyCode === 33 || e.keyCode === 38) {
-      pno--;
-      if (pno === -1) pno = 0;
-      movePg();
-    }
-    // 다음페이지이동
-    else if (e.keyCode === 34 || e.keyCode === 40) {
-      pno++;
-      if (pno === pgcnt) pno = pgcnt - 1;
-      movePg();
-    }
-  }); ///////////// keydown ////////////////
 
   // 새로고침시 스크롤위치 캐싱 변경하기(맨위로!)
   $("html,body").animate({ scrollTop: "0px" });
@@ -137,21 +136,7 @@ export function autoScroll() {
   } ///////////////// movePg ////////////////
 
 
-  /////////////////////////////////////////////
-  // GNB 메뉴 + 사이드 인디케이터 클릭 이동기능 //
-  /////////////////////////////////////////////
-  $('.gnb li, .indic li').click(function(){
-    // 1. 순번변수
-    let idx = $(this).index();
-    // console.log('나야나~!',idx);
-
-    // 2. 순번을 페이지번호에 할당(일치시킴!)
-    pno = idx;
-
-    // 3. 페이지 이동
-    movePg();
-
-  }); ///// click //////////
+  
   
   /////////////////////////////////////////////////////
   // GNB + 사이드 인티케이터 해당 페이지에 'on'넣기 함수//
@@ -211,9 +196,6 @@ export function autoScroll() {
 
  } /////////// initSet 함수 ///////////////
 
- // 최초호출!
- initSet();
-
  /***************************************** 
   함수명: actPage
   기능: 페이지 도착후 등장 애니메이션
@@ -236,18 +218,59 @@ function actPage(){
 
 } ///////// actPage 함수 //////////////////
 
-// 메인 페이지 상단로고 클릭시 맨위로 이동하기!
-$('#logo a').click(e=>{
-  e.preventDefault();
-  pno = 0;
-  movePg();
-}); //////// click ////////
 
 
 
+// 이벤트 설정함수 //////
+function evtFn(){
+  /////////////////////////////////////////////
+  // GNB 메뉴 + 사이드 인디케이터 클릭 이동기능 //
+  /////////////////////////////////////////////
+  $('.gnb li, .indic li').click(function(){
+    // 1. 순번변수
+    let idx = $(this).index();
+    // console.log('나야나~!',idx);
+
+    // 2. 순번을 페이지번호에 할당(일치시킴!)
+    pno = idx;
+
+    // 3. 페이지 이동
+    movePg();
+
+  }); ///// click /////////
+  
+  // 키보드 이벤트발생시 업데이트
+  // 1. Page Up(33) / Up Arrow (38)
+  // 2. Page Down(34) / Down Arrow (40)
+  $(document).keydown((e) => {
+    // 광휠금지
+    if (prot[0]) return;
+    chkCrazy(0);
+
+    // 이전페이지이동
+    if (e.keyCode === 33 || e.keyCode === 38) {
+      pno--;
+      if (pno === -1) pno = 0;
+      movePg();
+    }
+    // 다음페이지이동
+    else if (e.keyCode === 34 || e.keyCode === 40) {
+      pno++;
+      if (pno === pgcnt) pno = pgcnt - 1;
+      movePg();
+    }
+  }); ///////////// keydown ////////////////
+
+  // 메인 페이지 상단로고 클릭시 맨위로 이동하기!
+  $('#logo a').click(e=>{
+    e.preventDefault();
+    pno = 0;
+    movePg();
+  }); //////// click ////////
+} //////// evtFn 함수 ////////////
 
 
+// 사용할 함수만 내보냄
+export {wheelFn, evtFn, initSet, zeroPno};
 
-
-
-} ///////////// autoScroll 함수 //////////
+// } ///////////// autoScroll 함수 //////////
