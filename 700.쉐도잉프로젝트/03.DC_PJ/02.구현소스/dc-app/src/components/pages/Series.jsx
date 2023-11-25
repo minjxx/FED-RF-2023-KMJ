@@ -9,11 +9,11 @@ export function Series(){
         <>
             {/* 1. 시리즈페이지 배너 */}
             <Banner category="SERIES" />
-            {/* 2. 시리즈 페이지 비디오소개 */}
+            {/* 2. 시리즈페이지 비디오소개 */}
             <VidIntro cat="MOVIES" cls="on" />
-            {/* 3. 시리즈 페이지 비디오스와이프 */}
+            {/* 3. 시리즈페이지 비디오스와이프 */}
             <VidSwipe cat="movies" />
         </>
     )
 
-} ////////////  Comics 컴포넌트 ///////////
+} ////////////  Series 컴포넌트 ///////////

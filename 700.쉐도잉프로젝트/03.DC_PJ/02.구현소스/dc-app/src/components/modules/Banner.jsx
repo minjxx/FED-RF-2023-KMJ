@@ -5,8 +5,9 @@ import { banData } from "../data/banner";
 
 // 배너CSS
 import "../../css/banner.css";
+
 import { useEffect } from "react";
-// 제이쿼리 + 제이쿼리UI (따로 내가 타이핑해서 불러들여야함)
+// 제이쿼리 + 제이쿼리UI
 import $ from "jquery";
 import "jquery-ui-dist/jquery-ui";
 
@@ -20,7 +21,7 @@ export function Banner(props) {
     // (2) 애니이징
     const A_ES = "easeInOutQuint";
     // (3) 광클상태변수(1-불허용,0-허용)
-    let cSts = 0; // 0일때 false & 1일때 true
+    let cSts = 0;
     // (4) 슬라이드순번
     let sNum = 0;
   
@@ -43,11 +44,11 @@ export function Banner(props) {
     // console.log('슬라이드개수:',sCnt);
   
     // 3. 기능구현
-      // 0. 광클금지 ////////////////////
-      if (cSts) return; // 1) 처음에 0값 들어오면 fasle니까 반환되서 아래 문장실행
-      cSts = 1; //잠금 // 2) cSts값 1로 지정 , true로 변경됨
-      setTimeout(() => (cSts = 0), A_TM); // 3) 0.6초 뒤에 cSts값 0으로 만들어줌, 0.6초안에는 계속 1 값으로 됨, 1은 true값이니까 return 안됨
-      /////////////////////////////////
+      // 0. 광클금지 /////////////
+      if(cSts) return;
+      cSts=1;//잠금
+      setTimeout(()=>cSts=0,A_TM);
+      ////////////////////////////
   
       // 1. 오른쪽버튼 여부
       let isR = $(tg).is(".rb");
