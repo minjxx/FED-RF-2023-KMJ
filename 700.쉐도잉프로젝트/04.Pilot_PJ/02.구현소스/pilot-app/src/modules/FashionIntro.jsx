@@ -1,4 +1,4 @@
-// Pilot PJ - 패션인트로 컴포넌트 /////////
+// Pilot PJ - 패션인트로 컴포넌트 ////////
 
 // 컨텍스트 API 불러오기
 import { useContext } from "react";
@@ -25,21 +25,27 @@ export function FashionIntro(props) {
   // 'women'일 경우 값을 셋팅
   if (props.cat == "women") newStyle.flexDirection = "row-reverse";
 
+  // 리턴 코드 ////////////////////////////
   return (
     <div id={props.cat} className="fs-page">
-      <ul className="pgc" style={newStyle}>
-        {/* 아래처럼 써도 가능! */}
-        {/* <ul className="pgc" style={props.cat=='women'?{flexDirection:'row-reverse'}:{}}> */}
-
+      <ul
+        className="pgc"
+        style={newStyle}
+        //   style={props.cat=='women'?{flexDirection:'row-reverse'}:{}}
+      >
         {/* 스타일일때 이미지경로는 배열! */}
         <li className="imgc">
-          <img src={props.cat == "style" ? selData.isrc[0] : selData.isrc} alt={props.cat == "style" ? selData.ialt[0] : selData.ialt} />
+          <img
+            src={props.cat == "style" ? selData.isrc[0] : selData.isrc}
+            alt={props.cat == "style" ? selData.ialt[0] : selData.ialt}
+          />
         </li>
         {/* 스타일이면 타이틀2개, 아니면 1개 */}
         <li className="txtc">
           {props.cat != "style" && (
             <h2>
-              <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+              <a href="#" 
+              onClick={()=>myCon.chgPgName(props.cat)}>
                 {selData.tit[0]} <br />
                 {selData.tit[1]}
               </a>
@@ -48,13 +54,15 @@ export function FashionIntro(props) {
           {props.cat == "style" && (
             <>
               <h2 className="tm">
-              <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+                <a href="#" 
+                onClick={()=>myCon.chgPgName(props.cat)}>
                   {selData.tit[0][0]} <br />
                   {selData.tit[0][1]}
                 </a>
               </h2>
               <h2 className="tw">
-              <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+                <a href="#" 
+                onClick={()=>myCon.chgPgName(props.cat)}>
                   {selData.tit[1][0]} <br />
                   {selData.tit[1][1]}
                 </a>
@@ -71,4 +79,4 @@ export function FashionIntro(props) {
       </ul>
     </div>
   );
-} //////////// FashionIntro 컴포넌트 ////////////
+} //////////// FashionIntro 컴포넌트 ////////

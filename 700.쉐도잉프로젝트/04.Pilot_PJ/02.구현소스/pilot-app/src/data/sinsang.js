@@ -1,6 +1,6 @@
-// Pilot PJ : 신상품 정보 데이터 
+// Pilot PJ : 신상품 정보 데이터
 
-export const sinsangData = {
+export const sinsangData = {   
   "men":{
     "m1": "[남성]카모전판프린트 PQ 티셔츠^DMTS7K731-MG^99,000원",
     "m2": "[남성]빅로고 컬러 블럭 PQ 티셔츠^DMTS7G731-BK ^89,000원",
@@ -31,4 +31,5 @@ export const sinsangData = {
     "m7": "[스타일]블럭형 풀집업 래쉬가드^DMSW21731-KA ^99,000원",
     "m8": "[스타일]베이직 솔리드 래쉬가드^DMSW15731-BK ^49,000원",
     "m9": "[스타일]루즈핏 슬리브리스^DMSL6C731-MG ^59,000원"},
+   
 }

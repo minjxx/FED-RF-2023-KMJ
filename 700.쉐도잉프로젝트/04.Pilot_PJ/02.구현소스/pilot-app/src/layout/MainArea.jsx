@@ -9,7 +9,7 @@ export function MainArea(props){
     return(
         <>
             {
-                // main이 아니면 서브 Fashion 이동
+                // main이 아니면 서브 Fashion이동
                 props.page=='main'?<MainCont />:
                 <Fashion cat={props.page} />
             }

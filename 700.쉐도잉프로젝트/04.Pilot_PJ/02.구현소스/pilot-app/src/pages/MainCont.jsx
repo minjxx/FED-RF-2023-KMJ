@@ -56,6 +56,7 @@ export function MainCont() {
       $(".gnb li").off('click').removeClass('on');
       $(document).off('keydown');
 
+
     });////////// 소멸자 return //////
   }, []); /////// useEffect ///////////
 

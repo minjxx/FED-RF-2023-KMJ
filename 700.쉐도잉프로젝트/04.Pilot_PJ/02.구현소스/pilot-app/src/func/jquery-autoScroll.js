@@ -31,7 +31,7 @@ $(()=>{
   // 페이지 요소
   pg = $(".page");
   // 전체 페이지개수
-  pgcnt = pg.length;
+  pgcnt = pg.length;  
 
 }); /////////// load ///////////////
 

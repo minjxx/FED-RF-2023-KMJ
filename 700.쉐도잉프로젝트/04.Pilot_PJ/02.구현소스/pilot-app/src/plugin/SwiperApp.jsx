@@ -17,21 +17,23 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useRef, useState } from "react";
 
 export function SwiperApp(props) {
-  // 리스트만들기 함수 /////
+  // 리스트만들기 함수 ////
   const makeList = (num) => {
     // num
     let temp = [];
     for (let x = 0; x < num; x++) {
       temp[x] = (
         <SwiperSlide key={x}>
-          <img src={"./images/sub/" + props.cat + "/banner/ban" + (x + 1) + ".png"} />
+          <img
+            src={"./images/sub/" + props.cat + "/banner/ban" + (x + 1) + ".png"}
+          />
         </SwiperSlide>
       );
-    } ///////// for /////////////
+    } /////////// for /////////////
 
     // 배열을 리턴
     return temp;
-  }; ////////// makeList 함수 ////////////
+  }; ///////////// makeList 함수 //////////
 
   // 리턴코드 ///////////////////
   return (
