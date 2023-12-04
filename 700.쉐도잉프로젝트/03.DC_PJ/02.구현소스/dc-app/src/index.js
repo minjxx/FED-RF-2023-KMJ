@@ -56,8 +56,8 @@ import { Member } from "./components/pages/Member";
 export default function App() {
   return (
     /* basename속성은 package.json의 "homepage"속성값 읽어옴 */
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-    {/* <BrowserRouter> */}
+    // <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! */}
         <Route path="/" element={<Layout />}>
