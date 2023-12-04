@@ -55,7 +55,9 @@ import { Member } from "./components/pages/Member";
 // 출력해야하기 때문에 스스로 내보내기를 셋팅해야하는 것!
 export default function App() {
   return (
-    <BrowserRouter>
+    /* basename속성은 package.json의 "homepage"속성값 읽어옴 */
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    {/* <BrowserRouter> */}
       <Routes>
         {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! */}
         <Route path="/" element={<Layout />}>
