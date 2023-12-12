@@ -13,7 +13,7 @@ import $ from 'jquery';
 // 폰트어썸 불러오기
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { memo, useContext } from "react";
+import { memo, useContext, useState } from "react";
 
 /******************************************************* 
   [ 리액트 라우터와 연결하여 사용되는 라우터 컴포넌트 ]
@@ -29,15 +29,16 @@ import { memo, useContext } from "react";
 // -> 그.러.나... 단순히 적용하면 효과가 없음!
 // 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
 // 매번 새롭게 리랜더링 됨으로 인해 메모이제이션 갱신을
-// 하게끔 하기에 효과가 없는것!!!
+// 하게끔 하기에 효가가 없는것!!!
 // ->>> 방법은? 컨텍스트API를 사용하지 말고
 // props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!
 // -> React.memo는 전달속성이 변경됨을 기준하여
-// 메모이제이션 기능을 제공하기 때문이다!
+// 메모이제이션 기능를 제공하기 때문이다!
 // -> 전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!!!
 
 // export function TopArea() {
-export const TopArea = memo(({chgPageFn}) => {
+export const TopArea = memo(
+  ({chgPageFn, logSts, logMsg, logOut}) => {
   // 보통 props 등 전달변수만 쓰면 하위 속성명으로
   // 값을 전달하지만 중괄호{}를 사용하면 속성명을
   // 직접사용할 수 있다!
@@ -47,6 +48,7 @@ export const TopArea = memo(({chgPageFn}) => {
 
   // 컨텍스트 API사용
   // const myCon = useContext(dcCon);
+
 
   // 검색 관련 함수들 ////////////
   // 1. 검색창 보이기함수
@@ -90,6 +92,8 @@ export const TopArea = memo(({chgPageFn}) => {
     <>
       {/* 1.상단영역 */}
       <header className="top-area">
+        {/* 로그인 환영메시지 박스 */}
+        <div className="logmsg">{logMsg}</div>
         {/* 네비게이션 GNB파트 */}
         <nav className="gnb">
           <ul>
@@ -149,13 +153,28 @@ export const TopArea = memo(({chgPageFn}) => {
                 <FontAwesomeIcon icon={faSearch} />
               </a>
             </li>
-            {/* 회원가입, 로그인은 로그인 아닌 상태일때 나옴 */}
-            <li>
-              <Link to="/member">JOIN US</Link>
-            </li>
-            <li>
-              <Link to="/login">LOGIN</Link>
-            </li>
+            {
+              /* 회원가입, 로그인은 
+              로그인 아닌 상태일때 나옴 */
+              logSts === null &&
+              <>
+                <li>
+                  <Link to="/member">JOIN US</Link>
+                </li>
+                <li>
+                  <Link to="/login">LOGIN</Link>
+                </li>
+              </>
+            }
+            {
+              /* 로그인상태일때 로그아웃버튼만 보임 */
+              logSts !== null &&
+              <>
+                <li>
+                  <a href="#" onClick={logOut}>LOGOUT</a>
+                </li>
+              </>
+            }
           </ul>
           {/* 모바일용 햄버거 버튼 */}
           <button className="hambtn"></button>
