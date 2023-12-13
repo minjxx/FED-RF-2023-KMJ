@@ -1,27 +1,51 @@
 // Pilot PJ 장바구니 리스트 컴포넌트
 
 // 장바구니 리스트 CSS 불러오기
-import { memo, useEffect } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import "../css/cartlist.css";
 
 // 제이쿼리
 import $ from "jquery";
 
 // 전달값이 변경되면 리랜더링하기 위해 메모이제이션을 적용!
-export const CartList = memo(({ selData }) => {
-  // 로컬 스토리지 데이터를 props로 전달 받는다!
+export const CartList = memo(({ selData, flag }) => {
+  // selData - 현재 반영된 데이터
+  // flag - 상태값 체크변수(true/false) -> 업데이트 여부결정!
+  console.log('업뎃상태값:',flag.current);
+
+  
+  // 상태관리변수 설정 /////////////
+  // 1. 변경 데이터 변수 : 전달된 데이터로 초기셋팅
+  const [cartData,setCartData] = useState(selData);
+  
+  console.log(
+    '받은 데이터',selData,
+  '\n기존 데이터',cartData);
+
+
+  // 카트 컴포넌트의 데이터가 상태관리되고 있으므로
+  // 외부에서 전달되는 데이터와 다를때 업데이트해야
+  // 외부에서 들어오는 데이터가 반영되어 리랜더링 된다!
+  // 삭제버튼도 작동하게 하려면??? -> 상태변수로 제어한다!!!
+  // 외부데이터업데이트는 flag.current값이 true까지 돼야한다!
+  if(cartData!==selData&&flag.current) {
+      setCartData(selData);
+    console.log(3333)
+  }
+
+
 
   // 선택 데이터 : 로컬스토리지 데이터를 객체변환! -> 주석처리
   // const selData = JSON.parse(localStorage.getItem("cart"));
 
   // 데이터개수
-  const cntData = selData.length;
+  const cntData = cartData.length;
 
-  console.log(selData, cntData + "개");
+  console.log(cartData, cntData + "개");
 
   // 전체합계 구하기
   let totalCnt = 0;
-  selData.forEach((v) => {
+  cartData.forEach((v) => {
     totalCnt += v.ginfo[3] * v.num;
   }); ////////// forEach ///////////
 
@@ -57,17 +81,30 @@ export const CartList = memo(({ selData }) => {
     $("#cartlist").animate({ right: "-60%" }, 600);
   }; //////////// hideList ////////////
 
-  //리스트삭제함수////////////
+  // 리스트 삭제 함수 ////////////////
   const deleteItem = (e) => {
-    const selIdx = $(e.target).attr('data-idx');
-    console.log('지울아이:',selIdx);
+    // 삭제기능만 작동하게 하기위해 부모의 useRef값인 flag값을 
+    // false로 변경하면 상단의 조건업데이트값이 작동하지 않는다!
+    // 삭제기능만 작동한다!
+    flag.current = false;
+
+    const selIdx = $(e.target).attr("data-idx");
+    console.log("지울아이:", selIdx);
 
     // 해당 데이터 순번 알아내기
-    const sidx = selData.filter((v,i)=>{
-      if(v.idx !== selIdx) return true;
+    const newData = cartData.filter((v) => {
+      if (v.idx !== selIdx) return true;
     });
 
-  }; ///////////deleteItem함수/////////////
+    console.log('제거후리스트:',newData);
+
+    // 로컬스 데이터 업데이트!!!
+    localStorage.setItem('cart',JSON.stringify(newData));
+
+    // 전체 데이터 업데이트 하면 모두 리랜더링되게 하자!
+    setCartData(newData);
+
+  }; ////////// deleteItem 함수 //////////
 
   /// 리턴 코드 ///////////////////////
   return (
@@ -92,11 +129,14 @@ export const CartList = memo(({ selData }) => {
               <th>삭제</th>
             </tr>
 
-            {selData.map((v, i) => (
+            {cartData.map((v, i) => (
               <tr key={i}>
                 {/* 상품이미지 */}
                 <td>
-                  <img src={"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="item" />
+                  <img
+                    src={"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"}
+                    alt="item"
+                  />
                 </td>
                 {/* 리스트순번 */}
                 <td>{i + 1}</td>
