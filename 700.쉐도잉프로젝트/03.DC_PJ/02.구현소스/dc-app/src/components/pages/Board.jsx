@@ -1,8 +1,11 @@
 // OPINION 의견 게시판 컴포넌트
 
 // 게시판용 CSS
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useRef, useState } from "react";
 import "../../css/board.css";
+
+// 제이쿼리
+import $ from "jquery";
 
 // 기본 데이터 제이슨 불러오기
 import baseData from "../data/board.json";
@@ -25,8 +28,7 @@ if (localStorage.getItem("bdata"))
 else orgData = baseData;
 // else orgData = [];
 
-
-// console.log(org);
+// // console.log(org);
 
 // ******* Borad 컴포넌트 ******* //
 export function Board() {
@@ -35,7 +37,7 @@ export function Board() {
   const pgBlock = 7;
   // 2. 전체 레코드수 : 배열데이터 총개수
   const totNum = orgData.length;
-  console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
+  // console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
 
   // [ 상태관리 변수 셋팅 ] ////////
 
@@ -55,7 +57,7 @@ export function Board() {
     기능 : 페이지별 리스트를 생성하여 바인딩함
   *************************************/
   const bindList = () => {
-    console.log("다시바인딩!", pgNum);
+    // console.log("다시바인딩!", pgNum);
     // 데이터 선별하기
     const tempData = [];
 
@@ -65,7 +67,7 @@ export function Board() {
     let limitNum = pgBlock * pgNum;
 
     // 블록단위가 7일 경우 첫페이지는 0~7, 7~14,...
-    console.log("시작값:", initNum, "\n한계값:", limitNum);
+    // console.log("시작값:", initNum, "\n한계값:", limitNum);
 
     // 데이터 선별용 for문 : 원본데이터(orgData)로부터 생성
     for (let i = initNum; i < limitNum; i++) {
@@ -75,7 +77,7 @@ export function Board() {
       tempData.push(orgData[i]);
     } ///// for /////
 
-    console.log("결과셋:", tempData);
+    // console.log("결과셋:", tempData);
 
     // 데이터가 없는 경우 출력 ///
     if (orgData.length === 0) {
@@ -93,7 +95,7 @@ export function Board() {
         <td>{i + 1 + initNum}</td>
         {/* 2. 글제목 */}
         <td>
-          <a href="#" datatype={v.idx}>
+          <a href="#" data-idx={v.idx} onClick={chgMode}>
             {v.tit}
           </a>
         </td>
@@ -123,14 +125,14 @@ export function Board() {
     // 최종 한계수 -> 여분레코드 존재에 따라 1더하기
     const limit = blockCnt + (blockPad === 0 ? 0 : 1);
 
-    console.log(
-      "블록개수:",
-      blockCnt,
-      "\n블록나머지:",
-      blockPad,
-      "\n최종한계수:",
-      limit
-    );
+    // console.log(
+    //   "블록개수:",
+    //   blockCnt,
+    //   "\n블록나머지:",
+    //   blockPad,
+    //   "\n최종한계수:",
+    //   limit
+    // );
 
     // 리액트에서는 jsx문법 코드를 배열에 넣고
     // 출력하면 바로 코드로 변환된다!!!
@@ -163,13 +165,133 @@ export function Board() {
   *************************************/
   const chgList = (e) => {
     let currNum = e.target.innerText;
-    console.log("번호:", currNum);
+    // console.log("번호:", currNum);
     // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
     setPgNum(currNum);
     // 바인드 리스트 호출 불필요!!!
     // 왜? pgNum을 bindList()에서 사용하기때문에
     // 리랜더링이 자동으로 일어남!!!
   }; ///////// chgList 함수 //////////////
+
+  // 선택된 데이터 셋팅을 위한 참조변수
+  const cData = useRef(null);
+
+  /************************************* 
+    함수명 : chgMode
+    기능 : 게시판 옵션 모드를 변경함
+  *************************************/
+  const chgMode = (e) => {
+    // 기본막기
+    e.preventDefault();
+
+    // 1. 해당 버튼의 텍스트 읽어오기
+    let btxt = $(e.target).text();
+    console.log(btxt);
+
+    // 2. 텍스트별 모드 연결하기
+    let modeTxt;
+    
+    switch(btxt) {
+      case "List": modeTxt="L"; break;
+      case "Write": modeTxt="C"; break;
+      case "Modify": modeTxt="U"; break;
+      case "Submit": modeTxt="S"; break;
+      case "Delete": modeTxt="D"; break;
+      default: modeTxt="R";
+    };
+
+    console.log("버튼명:",btxt,"모드명:",modeTxt);
+
+    // 3. 모드별 분기하기 //////
+    // 3-1. 읽기 모드
+    if(modeTxt==="R"){
+
+      
+      // 1. a링크의 'data-idx'값 읽어오기
+      let cidx = $(e.target).attr('data-idx');
+      console.log("읽기처리",cidx);
+      
+      // 2. 해당정보 가져오기 : orgData에서 조회함
+      // 전역 참조변수에 저장하여 리랜더링시 리턴코드에
+      // 이값이 적용되게 해준다!!!
+      cData.current = orgData.find(v=>{
+        if(v.idx===cidx)return true;
+      });
+      
+      console.log('현재Data:',cData.current);
+      
+      setBdMode('R');
+
+      // -> 아래의 방식은 스크립트로 DOM에 셋팅하는 방법
+      // ->>> 리액트는 가상돔에 데이터를 셋팅하도록 해야함!
+      // cData를 참조변수로 만들어서 미리 데이터를 셋팅했음!
+
+      // 3. 읽기모드 입력창에 데이터 매칭하여 넣기
+      // $(()=>{ // DOM그린후 실행함!
+      //   // (1) 글쓴이
+      //   $(".readone .name").val(cData.writer);
+      //   // (2) 글제목
+      //   $(".readone .subject").val(cData.tit);
+      //   // (3) 글내용
+      //   $(".readone .content").val(cData.cont);
+      // });
+
+    } ////// if ///////
+
+    // 3-2. 리스트 이동하기 ///////
+    else if(modeTxt==="L"){
+      setBdMode('L');
+    } ////// else if ///////
+
+    // 3-3. 쓰기 모드 //////////////
+    else if(modeTxt==="C"){
+      setBdMode('C');
+
+      // 1. 글쓴이와 이메일은 로그인상태값에서 읽어와서
+      // 본 읽기전용 입력창에 넣어준다!
+      // 지금은 임시로 tomtom / tom@gmail.com
+      $(()=>{// DOM 그려진 후 실행
+        // (1) 글쓴이
+        $(".writeone .name").val("tomtom");
+        // (2) 이메일
+        $(".writeone .email").val("tom@gmail.com");
+      });
+
+    } ////// else if ///////
+
+    // 3-4. 글쓰기 서브밋 /////////
+    else if(modeTxt==="S"&&bdMode==="C"){
+      console.log('글쓰기 서브밋');
+
+      // 1. 제목, 내용 필수입력 체크
+      
+
+    } ////// else if ///////
+
+    // 3-5. 수정모드 /////////
+    else if(modeTxt==="U"){
+      console.log('수정모드');
+
+      setBdMode('U');
+      
+
+    } ////// else if ///////
+    
+    // 4-2. 쓰기 모드 : 모드변경없이 처리후 리스트보내기
+    // else if(modeTxt==="C" && btxt==="Submit"){
+    //   console.log("쓰기처리");
+    // } ////// else if ///////
+    // 4-3. 수정하기 모드 : 모드변경없이 처리후 리스트보내기
+    // else if(modeTxt==="U" && btxt==="Submit"){
+    //   console.log("수정처리");
+    // } ////// else if ///////
+    // 4-4. 삭제하기 모드 : 모드변경없이 처리후 리스트보내기
+    // else if(modeTxt==="U" && btxt==="Delete"){
+    //   console.log("삭제처리");
+    // } ////// else if ///////
+
+
+  }; //////// chgMode 함수 ///////////
 
   // 리턴코드 ////////////////////
   return (
@@ -248,13 +370,15 @@ export function Board() {
               <tr>
                 <td>Name</td>
                 <td>
-                  <input type="text" className="name" size="20" readOnly />
+                  <input type="text" className="name" size="20" readOnly 
+                  value={cData.current.writer} />
                 </td>
               </tr>
               <tr>
                 <td>Title</td>
                 <td>
-                  <input type="text" className="subject" size="60" readOnly />
+                  <input type="text" className="subject" size="60" readOnly 
+                  value={cData.current.tit} />
                 </td>
               </tr>
               <tr>
@@ -265,6 +389,7 @@ export function Board() {
                     cols="60"
                     rows="10"
                     readOnly
+                    value={cData.current.cont}
                   ></textarea>
                 </td>
               </tr>
@@ -281,19 +406,25 @@ export function Board() {
               <tr>
                 <td>Name</td>
                 <td>
-                  <input type="text" className="name" size="20" readOnly />
+                  <input type="text" className="name" size="20" readOnly 
+                  value={cData.current.writer}/>
+                  {/* value는 수정불가! */}
                 </td>
               </tr>
               <tr>
                 <td>Title</td>
                 <td>
-                  <input type="text" className="subject" size="60" />
+                  <input type="text" className="subject" size="60" 
+                  defaultValue={cData.current.tit}/>
+                  {/* defaultValue로 써야 수정가능! */}
                 </td>
               </tr>
               <tr>
                 <td>Content</td>
                 <td>
-                  <textarea className="content" cols="60" rows="10"></textarea>
+                  <textarea className="content" cols="60" rows="10"
+                  defaultValue={cData.current.cont}></textarea>
+                  {/* defaultValue로 써야 수정가능! */}
                 </td>
               </tr>
             </tbody>
@@ -310,8 +441,10 @@ export function Board() {
               {
                 // 리스트 모드(L)
                 bdMode === "L" && (
-                  <button>
-                    <a href="#">Write</a>
+                  <button onClick={chgMode}>
+                    <a href="#">
+                      Write
+                    </a>
                   </button>
                 )
               }
@@ -319,11 +452,15 @@ export function Board() {
                 // 글쓰기 모드(C)
                 bdMode === "C" && (
                   <>
-                    <button>
-                      <a href="#">Submit</a>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        Submit
+                      </a>
                     </button>
-                    <button>
-                      <a href="#">List</a>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        List
+                      </a>
                     </button>
                   </>
                 )
@@ -331,30 +468,42 @@ export function Board() {
               {
                 // 읽기 모드(R)
                 bdMode === "R" && (
-                  <button>
-                    <a href="#">List</a>
-                  </button>
+                  <>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        List
+                      </a>
+                    </button>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        Modify
+                      </a>
+                    </button>
+                  </>
                 )
               }
               {
                 // 수정 모드(U)
                 bdMode === "U" && (
                   <>
-                    <button>
-                      <a href="#">Submit</a>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        Submit
+                      </a>
                     </button>
-                    <button>
-                      <a href="#">Delete</a>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        Delete
+                      </a>
                     </button>
-                    <button>
-                      <a href="#">List</a>
+                    <button onClick={chgMode}>
+                      <a href="#">
+                        List
+                      </a>
                     </button>
                   </>
                 )
               }
-              {/* <button>
-                <a href="#">Modify</a>
-              </button> */}
             </td>
           </tr>
         </tbody>
