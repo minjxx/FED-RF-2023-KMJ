@@ -420,18 +420,79 @@ export function Board() {
       setBdMode("U");
     } ////// else if ///////
 
-    // 4-2. 쓰기 모드 : 모드변경없이 처리후 리스트보내기
-    // else if(modeTxt==="C" && btxt==="Submit"){
-    //   console.log("쓰기처리");
-    // } ////// else if ///////
-    // 4-3. 수정하기 모드 : 모드변경없이 처리후 리스트보내기
-    // else if(modeTxt==="U" && btxt==="Submit"){
-    //   console.log("수정처리");
-    // } ////// else if ///////
-    // 4-4. 삭제하기 모드 : 모드변경없이 처리후 리스트보내기
-    // else if(modeTxt==="U" && btxt==="Delete"){
-    //   console.log("삭제처리");
-    // } ////// else if ///////
+    // 3-6. 수정하기 서브밋 /////////
+    else if (modeTxt === "S" && bdMode === "U") {
+      console.log("수정하기 서브밋");
+
+      // 제목,내용 입력요소
+      const subEle = $(".updateone .subject");
+      const contEle = $(".updateone .content");
+
+      // console.log(subEle.val().trim(),contEle.val().trim());
+
+      // 1. 제목, 내용 필수입력 체크
+      // 리랜더링 없는 DOM상태 기능구현!!
+      if (subEle.val().trim() === "" || contEle.val().trim() === "") {
+        window.alert("제목과 내용은 필수입력입니다!");
+      } /////// if /////////
+
+      // 2. 통과시 실제 데이터 입력하기
+      else {
+        
+        // 2. 원본 데이터 변수할당
+        let orgTemp = orgData;
+
+        // 3. 원본에 해당 데이터 찾아서 업데이트하기
+        orgTemp.some(v=>{
+          if(Number(cData.current.idx)===Number(v.idx)){
+            // 제목과 내용 업데이트하기
+            v.tit = subEle.val().trim();
+            v.cont = contEle.val().trim();
+
+            // 이코드를 만나면 여기시 순회종료!
+            return true;
+          } ///// if ////
+        }); /////// Array some /////        
+
+        // 4. 로컬스에 반영하기
+        localStorage.setItem('bdata',
+        JSON.stringify(orgTemp))
+
+        // 5. 리스트 페이지로 이동하기
+        setBdMode('L');
+
+      } //////// else //////////
+    
+    } ////// else if ///////
+
+    // 3-7. 삭제하기 /////////
+    else if(modeTxt === "D" && bdMode === "U"){
+
+      if(window.confirm('정말로 글을 삭제하시겠습니까?')){
+        // 1. 데이터 순회하다가 해당데이터 이면 
+        // 순번으로 splice(순번,1)사용 삭제
+        orgData.some((v,i)=>{
+          if(Number(cData.current.idx)===Number(v.idx)){
+            // 해당 데이터의 순번으로 삭제
+            orgData.splice(i,1);
+
+            // 이코드를 만나면 여기시 순회종료!
+            return true;
+          } ///// if ////
+        }); /////// Array some /////   
+        
+        // 2. 로컬스에 반영하기
+        localStorage.setItem('bdata',
+        JSON.stringify(orgData))
+
+        // 3. 리스트 페이지로 이동하기
+        setBdMode('L');        
+
+      } ///// if //////
+
+    } ////// else if ///////
+
+
   }; //////// chgMode 함수 ///////////
 
   // 사용자 비교함수 //////////
@@ -460,9 +521,15 @@ export function Board() {
 
       // 3. 로그인사용자 정보와 조회하기
       // 아이디로 조회함!
-      const currUsr = JSON.parse(myCon.logSts);
-      if (currUsr.uid === cUser.uid) setBtnSts(true);
-      else setBtnSts(false);
+      if(cUser){ 
+        // 할당안되면 undefined 이므로 할당되었을때만 if문처리
+        const currUsr = JSON.parse(myCon.logSts);
+        if (currUsr.uid === cUser.uid) setBtnSts(true);
+        else setBtnSts(false);
+      } //// if /////
+      else{ // 사용자비교값이 없는 경우
+        setBtnSts(false);
+      } //// else ////
     } /////// if ////////////
     else {
       // 로그인 안한 상태 ////
@@ -610,7 +677,7 @@ export function Board() {
                     className="name"
                     size="20"
                     readOnly
-                    value={cData.current.writer}
+                    value={cData.current.unm}
                   />
                   {/* value는 수정불가! */}
                 </td>
