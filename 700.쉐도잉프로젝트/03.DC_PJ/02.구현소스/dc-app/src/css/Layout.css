@@ -4,7 +4,7 @@
 main.cont{
     /* 최소높이 상단,하단제외 채우기
     - 하단 여백이 생기는 일이 없어짐! */
-    min-height: calc(100vh - 58px - 209px);
+    min-height: calc(100vh - 58px - 210px);
 }
 .top-area{
     position: fixed;
@@ -187,8 +187,8 @@ ol.bmenu{
         overflow-x: hidden;
     }
     body{
-        /* 첫번째 컨텐츠 가려짐방지 패딩 */
         padding-top: 58px;
+        /* 첫번째 컨텐츠 가려짐방지 패딩 */
     }
     .top-area{
         /* 보이는 화면고정 */

@@ -16,7 +16,7 @@ import $ from "jquery";
 export function Login() {
 
   // 컨텍스트 API 사용하기
-  const myCon = useContext(dcCon);
+  const myCon = useContext(dcCon);  
 
   // [ 상태관리변수 ] /////////
   // [1] 입력요소 상태변수 /////////
@@ -138,30 +138,32 @@ export function Login() {
           // 비번에러 상태값 업데이트
           setPwdError(false);
 
-          // **** [ 로그인후 셋팅작업 ] ****
+          // **** [ 로그인후 셋팅작업 ] **** //
           // 1. 로그인한 회원정보를 로컬스에 셋팅!
           // -> 서버의 세션을 대신하여 사용함!
-          localStorage.setItem('minfo',JSON.stringify(findD));
+          localStorage
+          .setItem('minfo',JSON.stringify(findD));
 
-          // 2. 컨텍스트 API에 공개된 로그인상태 업데이트하기
+          // 2. 컨텍스트 API에 공개된 로그인상태 업데이트하기!
           myCon.setLogSts(localStorage.getItem('minfo'));
 
           // 유저아이콘
-          const usrIcon = ["🎅","👼","🤹‍♀️","💜","💗"];
+          const usrIcon = ["🙍‍♂️","🧏‍♀️","🦸‍♂","👨‍🎤","🦸‍♀"];
 
           // 3. 컨텍스트 API에 공개된 로그인 메시지 업데이트하기!
-          myCon.setLogMsg("Welcome "+findD.unm+usrIcon[Math.floor(Math.random()*5)]);
+          myCon.setLogMsg("Welcome "+
+          findD.unm+usrIcon[Math.floor(Math.random()*5)]);
 
           // 버튼에 메시지(재미로...)
           $('.sbtn').text('넌 로그인된거야~!');
 
-          // 4. 라우팅페이지 이동하기(useNavigate)
+          // 3. 라우팅 페이지 이동하기(useNavigate)
           // 컨텍스트 API 함수호출!
-          setTimeout(()=>myCon.chgPage('/',{}),1000) // -> 1초뒤에 메인페이지로 이동됨
+          setTimeout(()=>
+          myCon.chgPage('/',{}),1000);
+          
 
-          // myCon.chgPage('/',{}) // -> 이것만 쓰면 그냥 바로 메인페이지로 이동됨
-
-        } ///// if ////
+        } /////////// if //////////
         else {
           /// 비번 불일치!
           // console.log("비번달라요~!");
@@ -169,8 +171,8 @@ export function Login() {
           setPwdMsg(msgPwd[1]);
           // 비번에러 상태 업데이트
           setPwdError(true);
-        } ///// else //////
-      } ///////// if /////////
+        } ////////// else /////////
+      } //////////// if /////////////////
       else { // 같은 아이디가 없는 경우 /////
         // console.log("아이디 달라요~!");
         // 아이디가 다를때 메시지 보이기
@@ -214,12 +216,13 @@ export function Login() {
       //   // 아이디 에러 상태 업데이트
       //   setUserIdError(true);
       // } //////// if ///////////
-      
+
     } ///// if ///////
+    
     // 4-3. 유효성검사 불통과시 - 특별히 필요없음 /////
-    /* else {
-      // console.log("실패!");
-    } */ ////// else ///////
+    // else {
+    //   console.log("실패!");
+    // } ////// else ///////
   }; //////////// onSubmit 함수 ///////////
 
   // 리턴코드 ///////////////////////////

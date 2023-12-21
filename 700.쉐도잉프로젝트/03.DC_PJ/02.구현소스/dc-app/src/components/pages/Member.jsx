@@ -245,13 +245,14 @@ export function Member() {
       localStorage.setItem("mem-data", JSON.stringify(memData));
 
       // 6. 버튼 텍스트변경(재미로...)
-      document.querySelector(".sbtn").innerText = "넌 이제 회원인거야~!";
+      document.querySelector(".sbtn").innerText = 
+      "넌 이제 회원인거야~!";
 
       // 7. 페이지 이동 : 로그인페이지로!
       setTimeout(()=>
         myCon.chgPage('login',{})
       ,1000);
-      // myCon.chgPage('login',{})
+
     } ///////// if ////////
     // 3. 불통과시
     else {
