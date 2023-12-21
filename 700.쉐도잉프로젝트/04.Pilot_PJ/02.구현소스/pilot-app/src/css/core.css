@@ -2,12 +2,12 @@
 /******** 웹폰트 **********/
 /* 나눔고딕체 */
 @font-face {
-  font-family: NG;
+  font-family: 'Nanum Gothic';
   src: url(../static/fonts/NanumGothic.woff) format("woff");
 }
 /* Ubuntu체 */
 @font-face {
-  font-family: UB;
+  font-family: 'Ubuntu';
   src: url(../static/fonts/UbuntuCondensed-Regular.woff) format("woff");
 }
 
