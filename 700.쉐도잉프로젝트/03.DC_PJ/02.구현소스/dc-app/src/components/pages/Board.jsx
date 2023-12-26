@@ -646,7 +646,7 @@ export function Board() {
             <h1 className="tit">OPINION</h1>
             
             {/* 검색옵션박스 */}
-            <div class="selbx">
+            <div className="selbx">
               <select name="cta" id="cta" className="cta">
                 <option value="tit">Title</option>
                 <option value="cont">Contents</option>
@@ -657,8 +657,8 @@ export function Board() {
                 <option value="1">Ascending</option>
                 <option value="2">Descending</option>
               </select>
-              <input id="stxt" type="text" maxlength="50" />
-              <button class="sbtn">Search</button>
+              <input id="stxt" type="text" maxLength="50" />
+              <button className="sbtn">Search</button>
             </div>
 
             {/* 리스트 테이블 */}
