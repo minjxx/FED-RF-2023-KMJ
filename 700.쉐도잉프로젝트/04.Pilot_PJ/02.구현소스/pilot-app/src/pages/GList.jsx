@@ -329,6 +329,7 @@ export function GList() {
 
       // 결과처리하기 : 삭제처리된 temp를 참조변수에 할당!
       transData.current = temp;
+      
     } /////////// else ///////////
 
     // 6. 검색결과 리스트 업데이트 하기
