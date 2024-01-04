@@ -299,10 +299,14 @@ export function Board() {
           ""
         ) : (
           <Fragment key={-1}>
+            <a href="#" 
+            title="맨앞으로"
+            style={{marginRight:'10px'}}>«</a>
             <a href="#" onClick={(e)=>{
               e.preventDefault();
               goPaging(-1);
-            }}>◀</a>
+            }} 
+            style={{marginRight:'10px'}}>◀</a>
           </Fragment>
         )
       );
@@ -315,10 +319,14 @@ export function Board() {
           ""
         ) : (
           <Fragment key={-2}>
-            <a href="#" onClick={(e)=>{
+            &nbsp;&nbsp;<a href="#" onClick={(e)=>{
               e.preventDefault();
               goPaging(1);
-            }}>▶</a>
+            }}
+            style={{marginLeft:'10px'}}>▶</a>
+            <a href="#" 
+            title="뒤로"
+            style={{marginLeft:'10px'}}>»</a>
           </Fragment>
         )
       );
