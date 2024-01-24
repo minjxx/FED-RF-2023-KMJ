@@ -50,10 +50,31 @@
 .glist li {
   position: relative;
 }
+/* 이미지li 배경색 */
+.glist li:first-child {
+  background-image: linear-gradient(to bottom,#e5c6f3,#c3def8);
+}
 /* 상품이미지 */
 .glist img {
   width: 100%;
+  transition: opacity .3s;
 }
+/* 오버시 이미지셋팅 */
+.glist img:last-child{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  opacity: 0;
+}
+/* 오버시 설정하기 */
+.glist li:hover img:first-child{
+  opacity: 0;
+}
+.glist li:hover img:last-child{
+  opacity: 1;
+}
+/*  */
 @media screen and (max-width: 1024px) {
   .glist {
     width: 30%;
